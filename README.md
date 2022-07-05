@@ -1,92 +1,158 @@
-# TEMPLATE_p_mf_airline
+<h2>Описание проекта "Авиакомпания"</h2>
 
-Реализуем функционал авиакомпании на базе прототипа
+- [Summary](#summary)
+- [Stack](#stack)
+- [MVP](#mvp)
+- [Backlog](#backlog)
+- [Структура проекта](#структура-проекта)
+    - [Бэкенд](#бэкенд)
+    - [Фронтенд](#фронтенд)
+- [Работа на проекте](#работа-на-проекте)
+    - [С чего начинать](#с-чего-начинать)
+    - [О таскборде](#о-таскборде)
+    - [Как выполнять задачи](#как-выполнять-задачи)
+    - [Проверка задач](#проверка-задач)
+    - [Требования к коду](#требования-к-коду)
+    - [Созвоны по проекту](#созвоны-по-проекту)
 
-## Getting started
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+### Summary
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+Реализуем функционал авиакомпании на основе прототипа - [S7 Airlines](https://s7.ru/ru).
 
-## Add your files
+Проект рассчитан на студентов, успешно завершивших этап Pre-Project в Kata Academy.
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+### Stack
 
-```
-cd existing_repo
-git remote add origin https://gitlab.com/devs_hub/template_p_mf_airline.git
-git branch -M main
-git push -uf origin main
-```
+Проект пишется на базе `Java 11`, `Spring Boot 2`, `Maven` и архитектуре REST. Работаем с базой данных `MySQL` через `Hibernate`.
 
-## Integrate with your tools
+Чтобы не писать boilerplate-код, используем на проекте [Lombok](https://projectlombok.org/features/all).
 
-- [ ] [Set up project integrations](https://gitlab.com/devs_hub/template_p_mf_airline/-/settings/integrations)
+Все контроллеры и их методы нужно сразу описывать аннотациями [Swagger](https://docs.swagger.io/swagger-core/v1.5.0/apidocs/allclasses-noframe.html).
+Swagger UI при запущенном приложении крутится [здесь](http://localhost:8888/swagger-ui.html).
 
-## Collaborate with your team
+Таск-борд находится прямо на [Gitlab](https://gitlab.com/devs_hub/airline_project/-/boards).
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+Dev-stand будем поднимать и разворачивать через Docker, а настраивать CI/CD - через Gitlab.
 
-## Test and Deploy
+### MVP
 
-Use the built-in continuous integration in GitLab.
+[MVP](https://ru.wikipedia.org/wiki/%D0%9C%D0%B8%D0%BD%D0%B8%D0%BC%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE_%D0%B6%D0%B8%D0%B7%D0%BD%D0%B5%D1%81%D0%BF%D0%BE%D1%81%D0%BE%D0%B1%D0%BD%D1%8B%D0%B9_%D0%BF%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82) - API (полностью описанное в Swagger), которое будет уметь продавать, менять, возвращать авиабилеты.
+Работать с таким API можно будет через веб-интерфейс Swagger и Postman.
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+### Backlog
 
-***
+Фичи:
+<ul>
+<li>диверсификация перевозок (багаж, животные, oversized-вещи, грузы)</li>
+<li>создание личного кабинета пассажира, добавление аутентификации через логин/пароль, Google, социальные сети</li>
+<li>реализация функционала обратной связи с пассажиром через e-mail и Telegram</li>
+<li>создание личного кабинета администратора</li>
+<li>внедрение бонусной системы (мили), кэшбека и акций</li>
+<li>внедрение проверок пассажиров по стоп-листам - общение с микросервисом "МВД"</li>
+<li>добавление смежных сервисов - подбора гостиниц, аренды квартир, тренферов, каршеринга, экскурсий. Все - микросервисы.</li>
+</ul>
 
-# Editing this README
+Импрувменты:
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
+<ul>
+<li>логирование через Slf4j + log4j2</li>
+<li>юнит-тесты и интеграционные тесты</li>
+<li>анализ качества кода через SonarQube</li>
+</ul>
 
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
 
-## Name
-Choose a self-explaining name for your project.
+## Структура проекта
+### Бэкенд
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+Проект основан на архетипе webapp.
+Слои:
+<ul>
+<li><code>config</code> конфигурационные классы, в т.ч. Spring Security, инструменты аутентификации</li>
+<li><code>entities</code> сущности базы данных</li>
+<li><code>repositories</code> dao-слой приложения, реализуем в виде интерфейсов Spring Data, имплементирующих JpaRepository.</li>
+<li><code>services</code> бизнес-логика приложения, реализуем в виде интерфейсов и имплементирующих их классов.</li>
+<li><code>controllers</code> обычные и rest-контроллеры приложения.</li>
+<li><code>util</code> пакет для утилитных классов: валидаторов, шаблонов, хэндлеров.</li>
+</ul>
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+### Фронтенд
+Вьюшки будем писать на html и js (AJAX/FetchJS). Красоту наводить - с помощью Bootstrap или (если будет настроение) - Material UI.
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+## Работа на проекте
+### С чего начинать
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+0. Доступы. Если ты читаешь это, значит доступ к проекту у тебя уже есть :)
+<ol>
+<li>загрузи проект себе в среду разработки</li>
+<li>изучи весь проект - начни с pom, properties файлов и конфигурационных классов</li>
+<li>создай локальную базу данных с названием <code>airline_db</code></li>
+<li>добейся успешного запуска проекта. <a href="http://localhost:8888/"> Проверить</a>.</li>
+<li>изучи <a href="https://gitlab.com/devs_hub/airline_project/-/boards">таск-борд</a>
+</ol>
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+### О таскборде
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+Таск-борд строится по принципу Kanban - он разделён на столбцы, каждый из которых соответствует определённому этапу работы с задачей:
+<ul>
+<li><code>Backlog / Future</code> задачи на <b>новый функционал</b>, выполнение которых отложено на более отдалённый срок</li>
+<li><code>Postponed</code> НЕ БРАТЬ. Это задачи, которые будут перенесены в TODO позже. Они технически и/или хронологически зависят от выполнения каких-то задач, которые сейчас в TODO.</li>
+<li><code>TODO</code> задачи, требующие выполнения</li>
+<li><code>In Progress</code> выполняемые в данный момент задачи</li>
+<li><code>Cross-review </code> задачи на этапе перекрёстной проверки студентами</li>
+<li><code>Final Review</code> задачи на проверке у техлида</li>
+<li><code>In Reworking</code> задачи, направленные на доработку</li>
+<li><code>Done</code> выполненные задачи</li>
+</ul>
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+### Как выполнять задачи
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+<ul>
+<li>в графе <code>TODO</code> на таск-борде выбери карточку с задачей и назначь её себе для исполнения</li>
+<li>загрузи себе последнюю версию ветки <code>dev</code></li>
+<li>создай от <code>dev</code> свою собственную ветку для выполнения взятой задачи. Свою ветку назови так, чтобы было понятно, чему посвящена задача. В начале имени ветки проставь номер задачи с Gitlab. Например, <code>313_adding_new_html_pages</code></li>
+<li>выполни задачу, оттестируй и, если всё ок, залей её в репозиторий проекта</li>
+<li>создай на своей ветке merge request, в теле реквеста укажи <code><i>Closes #здесь-номер-таски"</i></code>. Например, <code>Closes #313</code></li>
+<li>перенеси задачу в столбец <code>Cross-review</code></li>
+</ul>
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+### Проверка задач
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+На этапе кросс-ревью студенты проверяют задачи, выполненные друг другом.
+В случае, если к коду есть замечания, проверяющий как можно более подробно описывает их в комментарии к карточке задачи и переносит её в столбец `In Reworking`.
+Если к коду претензий нет, проверяющий студент ставит к карточке лайк.
 
-## License
-For open source projects, say how it is licensed.
+**Каждая карточка (студенческая задача) должна быть проверена как минимум 2 другими студентами и одобрена ими (т.е. собрать не менее 2 лайков).**
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+Только после этого карточку можно переносить в столбец `Final Review`.
+
+Затем код проверяет техлид (ментор) и в случае обнаружения ошибок переносит её в столбец `In Reworking`.
+Если всё ок - merge request принимается, ветка студента сливается с основной веткой проекта, а карточка переносится в столбец `Done`.
+
+### Требования к коду
+
+- сделайте себе понятные никнеймы (имя + фамилия) в Git. Не хочу гадать, кто, где и что писал.
+- для каждого класса и его содержимого пишите комментарии в формате <b>Javadoc</b>:
+    - над классом: что это за класс, зачем нужен. Описывайте поля.
+    - над методом: что делает, какие параметры принимает (и что это такое), что возвращает.
+- свободно создавайте собственные вспомогательные классы в пакете Util - типа утилиток для страховки от null и типа того.
+- в REST-контроллерах пользоваться аннотациями Swagger - причём как сами контроллеры в целом, так и их отдельные методы.
+- на полях сущностей можно и нужно расставлять констрейнты для проверки формата, длины введённых значений, проверки чисел на положительность и т.д.
+- пишите Commit message как можно более подробно! Желательно на анлгийском, но если никак - можно и на русском.
+
+Если в процессе разработки вы пришли к пониманию того, что требуется создать какую-то ещё сущность - создавайте карточку и вперёд)
+
+### Созвоны по проекту
+
+Созвоны проходят по вторникам и четвергам оговорённое время.
+Регламент:
+- длительность до 15 минут
+- формат: доклады по 3 пунктам:
+    - что сделано с прошлого созвона
+    - какие были/есть трудности
+    - что будешь делать до следующего созвона
+- техлид (ментор) на созвонах код не ревьюит
+
+Любые другие рабочие созвоны команда проводит без ограничений, т.е. в любое время без участия техлида. 
+Договаривайтесь сами :) 
