@@ -31,7 +31,7 @@
 Все контроллеры и их методы нужно сразу описывать аннотациями [Swagger](https://docs.swagger.io/swagger-core/v1.5.0/apidocs/allclasses-noframe.html).
 Swagger UI при запущенном приложении крутится [здесь](http://localhost:8888/swagger-ui.html).
 
-Таск-борд находится прямо на [Gitlab](https://gitlab.com/devs_hub/airline_project/-/boards).
+Таск-борд находится прямо на [Gitlab](https://gitlab.com/devs_hub/p_mf_airline_2/-/boards/4500816).
 
 Dev-stand будем поднимать и разворачивать через Docker, а настраивать CI/CD - через Gitlab.
 
@@ -88,7 +88,7 @@ Dev-stand будем поднимать и разворачивать через
 <li>изучи весь проект - начни с pom, properties файлов и конфигурационных классов</li>
 <li>создай локальную базу данных с названием <code>airline_db</code></li>
 <li>добейся успешного запуска проекта. <a href="http://localhost:8888/"> Проверить</a>.</li>
-<li>изучи <a href="https://gitlab.com/devs_hub/airline_project/-/boards">таск-борд</a>
+<li>изучи <a href="https://gitlab.com/devs_hub/p_mf_airline_2/-/boards/4500816">таск-борд</a>
 </ol>
 
 ### О таскборде
