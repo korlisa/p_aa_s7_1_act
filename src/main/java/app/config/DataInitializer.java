@@ -2,12 +2,11 @@ package app.config;
 
 import app.entities.Role;
 import app.entities.User;
-import app.services.RoleService;
-import app.services.UserService;
+import app.services.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-
 import javax.annotation.PostConstruct;
+
 
 /**
  * В этом классе инициализируются тестовые данные для базы.
@@ -19,11 +18,14 @@ import javax.annotation.PostConstruct;
 public class DataInitializer {
     private final RoleService roleService;
     private final UserService userService;
+    private final AircraftService aircraftService;
+
 
     @PostConstruct
     public void init() {
         initRoles();
         createUserForSpringSecurity();
+        createAircraft();
 
         System.out.println("DataInitializer сработал!");
     }
@@ -50,4 +52,19 @@ public class DataInitializer {
         user.addRoleToCollection(roleService.findRoleByName("ROLE_ADMIN"));
         userService.saveUser(user);
     }
+
+    /**
+     * Create 3 Aircraft in the database
+     *
+     * @author Eugene Kolyshev
+     */
+
+    public void createAircraft() {
+
+        aircraftService.save(new Fleet().createBoeing737());
+        aircraftService.save(new Fleet().createAirbusA321());
+        aircraftService.save(new Fleet().createEmbraer170());
+
+    }
+
 }
