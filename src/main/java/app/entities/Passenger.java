@@ -52,7 +52,7 @@ public class Passenger extends User {
             this.firstName = firstName;
             this.lastName = lastName;
             this.phoneNumber = phoneNumber;
-            this.email = email;
+            this.setEmail(email);
             this.middleName = middleName;
             this.dateOfBirth = dateOfBirth;
             this.passport = passport;
