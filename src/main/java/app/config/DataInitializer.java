@@ -1,5 +1,7 @@
 package app.config;
 
+
+import app.entities.Destination;
 import app.entities.Role;
 import app.entities.User;
 import app.services.*;
@@ -8,16 +10,12 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 
 
-/**
- * В этом классе инициализируются тестовые данные для базы.
- * Эти данные будут каждый раз создаваться заново при поднятии SessionFactory и удаляться из БД при её остановке.
- * Инжектьте и используйте здесь соответствующие сервисы ваших сущностей."
- */
 @AllArgsConstructor
 @Component
 public class DataInitializer {
     private final RoleService roleService;
     private final UserService userService;
+    private final DestinationService destinationService;
     private final AircraftService aircraftService;
 
 
@@ -25,9 +23,22 @@ public class DataInitializer {
     public void init() {
         initRoles();
         createUserForSpringSecurity();
+        createDestination();
         createAircraft();
-
         System.out.println("DataInitializer сработал!");
+    }
+
+    /**
+     * Method for initialization destination
+     */
+    public void createDestination() {
+        Destination destination = new Destination("New York", "United States", "America");
+        Destination destination2 = new Destination("Cairo", "Egypt", "Africa");
+        Destination destination3 = new Destination("Stockholm", "Sweden", "Europe");
+
+        destinationService.saveDestination(destination);
+        destinationService.saveDestination(destination2);
+        destinationService.saveDestination(destination3);
     }
 
     /**
