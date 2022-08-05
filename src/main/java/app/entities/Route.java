@@ -1,5 +1,6 @@
 package app.entities;
 
+import app.util.Category;
 import lombok.*;
 import org.springframework.stereotype.Component;
 
