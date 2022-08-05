@@ -1,7 +1,7 @@
 package app.services;
 
 import app.entities.Destination;
-import app.repositories.DestinationReposirory;
+import app.repositories.DestinationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,11 +13,11 @@ import java.util.Optional;
 @Transactional
 public class DestinationServiceImpl implements DestinationService {
 
-    private final DestinationReposirory destinationReposirory;
+    private final DestinationRepository destinationReposirory;
 
     @Autowired
-    public DestinationServiceImpl(DestinationReposirory destinationReposirory) {
-        this.destinationReposirory = destinationReposirory;
+    public DestinationServiceImpl(DestinationRepository destinationRepository) {
+        this.destinationReposirory = destinationRepository;
     }
     @Override
     public List<Destination> getAllDestinations() {

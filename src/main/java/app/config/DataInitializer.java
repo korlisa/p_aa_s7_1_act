@@ -2,6 +2,7 @@ package app.config;
 
 
 import app.entities.Destination;
+import app.entities.Flight;
 import app.entities.Role;
 import app.entities.User;
 import app.services.*;
@@ -10,6 +11,11 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 
 
+/**
+ * В этом классе инициализируются тестовые данные для базы.
+ * Эти данные будут каждый раз создаваться заново при поднятии SessionFactory и удаляться из БД при её остановке.
+ * Инжектьте и используйте здесь соответствующие сервисы ваших сущностей."
+ */
 @AllArgsConstructor
 @Component
 public class DataInitializer {
@@ -17,6 +23,7 @@ public class DataInitializer {
     private final UserService userService;
     private final DestinationService destinationService;
     private final AircraftService aircraftService;
+    private final FlightService flightService;
 
 
     @PostConstruct
@@ -25,6 +32,8 @@ public class DataInitializer {
         createUserForSpringSecurity();
         createDestination();
         createAircraft();
+        createFlight();
+
         System.out.println("DataInitializer сработал!");
     }
 
@@ -65,9 +74,8 @@ public class DataInitializer {
     }
 
     /**
-     * Create 3 Aircraft in the database
+     * Create 3 Aircraft in DB
      *
-     * @author Eugene Kolyshev
      */
 
     public void createAircraft() {
@@ -77,5 +85,14 @@ public class DataInitializer {
         aircraftService.save(new Fleet().createEmbraer170());
 
     }
+
+    public void createFlight() {
+
+        Flight flight = new Flight();
+        flight.setAircraft(aircraftService.getById(1L));
+        flightService.save(flight);
+
+    }
+
 
 }

@@ -124,7 +124,7 @@ public class FlightRestController {
                   responseContainer = "List",
                   tags = {"flight"})
     @GetMapping("/allFreeBusiness")
-        public ResponseEntity<List<Seat>> findAllFreeSeatsOnFlightByEconomy(@RequestBody Flight flight) {
+        public ResponseEntity<List<Seat>> findAllFreeSeatsOnFlightByBusiness(@RequestBody Flight flight) {
         List<Seat> listSeatByBusiness = flightService.findAllFreeSeatsOnFlightByBusiness(flight);
         if (listSeatByBusiness == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

@@ -21,7 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 //Тесты REST-контроллера для пассажира (тестовые пассажиры удаляются из БД в конце каждого метода)
 @SpringBootTest
-@AutoConfigureMockMvc
+@AutoConfigureMockMvc(addFilters = false) // added (addFilters = false)
 public class PassengerRESTControllerTests {
 
     @Autowired
