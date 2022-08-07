@@ -34,19 +34,19 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "flight")
+@Table(name = "flights")
 public class Flight {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "destination_from_id")
+    @JoinColumn(name = "destination_id_from")
     @NonNull
     private Destination from;
 
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "destination_to_id")
+    @JoinColumn(name = "destination_id_to")
     @NonNull
     private Destination to;
 

@@ -1,14 +1,13 @@
 package app.config;
 
 
-import app.entities.Destination;
-import app.entities.Flight;
-import app.entities.Role;
-import app.entities.User;
+import app.entities.*;
 import app.services.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
+import java.time.LocalDate;
+import java.time.Month;
 
 
 /**
@@ -24,6 +23,7 @@ public class DataInitializer {
     private final DestinationService destinationService;
     private final AircraftService aircraftService;
     private final FlightService flightService;
+    private final PassengerService passengerService;
 
 
     @PostConstruct
@@ -33,6 +33,7 @@ public class DataInitializer {
         createDestination();
         createAircraft();
         createFlight();
+        createTestPassenger();
 
         System.out.println("DataInitializer сработал!");
     }
@@ -53,10 +54,10 @@ public class DataInitializer {
     /**
      * Метод для инициализации ролей
      */
-    public void initRoles () {
-        Role admin =new Role(1L,"ROLE_ADMIN");
-        Role manager =new Role(2L,"ROLE_MANAGER");
-        Role passenger =new Role(3L,"ROLE_PASSENGER");
+    public void initRoles() {
+        Role admin = new Role(1L,"ROLE_ADMIN");
+        Role manager = new Role(2L,"ROLE_MANAGER");
+        Role passenger = new Role(3L,"ROLE_PASSENGER");
         roleService.saveRole(admin);
         roleService.saveRole(manager);
         roleService.saveRole(passenger);
@@ -92,6 +93,20 @@ public class DataInitializer {
         flight.setAircraft(aircraftService.getById(1L));
         flightService.save(flight);
 
+    }
+
+    public void createTestPassenger() {
+        Passenger passenger = new Passenger();
+        passenger.setEmail("pass@gmail.com");
+        passenger.setPassword("pass");
+        passenger.setFirstName("Morgan");
+        passenger.setLastName("Freeman");
+        passenger.setMiddleName("Freemanovich");
+        passenger.setPhoneNumber("+7-913-937-77-77");
+        passenger.setDateOfBirth(LocalDate.of(1937, Month.JUNE, 1));
+        passenger.setPassport(new Passport("1234 567890", "2022-11-22", "Russian"));
+        passenger.addRoleToCollection(roleService.findRoleByName("ROLE_PASSENGER"));
+        passengerService.savePassenger(passenger);
     }
 
 

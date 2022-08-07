@@ -5,6 +5,9 @@ import app.services.PassengerService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
+import app.services.UserService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -24,9 +27,11 @@ public class PassengerRESTController {
      */
 
     private final PassengerService passengerService;
+    private final UserService userService;
 
-    public PassengerRESTController(PassengerService passengerService) {
+    public PassengerRESTController(PassengerService passengerService, UserService userService) {
         this.passengerService = passengerService;
+        this.userService = userService;
     }
 
     //Получить всех пассажиров
@@ -65,7 +70,7 @@ public class PassengerRESTController {
     /**
      * Method addNewPassenger() to create a new Passenger
      *
-     * @see app.services.PassengerServiceImpl#savePassenger(Passenger) 
+     * @see app.services.PassengerServiceImpl#savePassenger(Passenger)
      */
 
     @ApiOperation(value = "Create Passenger")
@@ -108,6 +113,18 @@ public class PassengerRESTController {
         return passenger;
     }
 
+    /**
+     * getting current User (Passenger)
+     *
+     * @author Alexander Plekhov
+     */
+    @ApiOperation(value = "getting current User")
+    @GetMapping("/current")
+    public ResponseEntity<Passenger> getCurrentUser() {
+        String passengerEmail = SecurityContextHolder.getContext().getAuthentication().getName();
+        Passenger passenger = userService.findPassengerByEmail(passengerEmail);
+        return ResponseEntity.ok(passenger);
+    }
 
   /*  @DeleteMapping("/deleteAll")
     public void deleteAll() {
