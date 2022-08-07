@@ -8,15 +8,15 @@ import java.util.List;
 
 public interface PassengerService {
 
-    public List<Passenger> getAllPassengers();
+    List<Passenger> getAllPassengers();
 
-    public void savePassenger(Passenger passenger);
+    void savePassenger(Passenger passenger);
 
-    public Passenger getPassenger(long id);
+    Passenger getPassenger(long id);
 
-    public void deletePassenger(long id);
+    void deletePassenger(long id);
 
-    public Passenger update(Passenger passenger);
+    Passenger update(Passenger passenger);
 
     void deleteAll();
 }

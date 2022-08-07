@@ -58,6 +58,7 @@ public class FLightServiceImpl implements FlightService {
 
 
     @Override
+    @Transactional(readOnly = true)
     public List<Seat> findAllFreeSeatsOnFlight(Flight flight) {
         return flight.getAircraft().getSeats().stream()
                 .filter(s -> s.getIsRegistered().equals(false) && s.getIsSold().equals(false)) //changed methods
@@ -65,6 +66,7 @@ public class FLightServiceImpl implements FlightService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Seat> findAllFreeSeatsOnFlightByEconomy(Flight flight) {
         return flight.getAircraft().getSeats().stream()
                 .filter(s -> s.getCategory().toString().equals("Economy"))
@@ -73,6 +75,7 @@ public class FLightServiceImpl implements FlightService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Seat> findAllFreeSeatsOnFlightByBusiness(Flight flight) {
         return flight.getAircraft().getSeats().stream()
                 .filter(s -> s.getCategory().toString().equals("Business"))

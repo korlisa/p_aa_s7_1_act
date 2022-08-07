@@ -1,6 +1,8 @@
 package app.services;
 
+import app.entities.Passenger;
 import app.entities.User;
+import app.repositories.PassengerRepository;
 import app.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,12 +21,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
+    private final PassengerRepository passengerRepository;
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(12);
 
     /**
      *  Метод сохранения юзера в бд
      */
-    public void saveUser (User user){
+    public void saveUser (User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
@@ -42,5 +45,8 @@ public class UserService implements UserDetailsService {
                 user.getRoles());
 
     }
-
+    public Passenger findPassengerByEmail(String email) {
+        User user = userRepository.findByEmail(email);
+        return passengerRepository.findPassengerById(user.getId());
+    }
 }
