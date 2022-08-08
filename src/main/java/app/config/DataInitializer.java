@@ -9,7 +9,6 @@ import javax.annotation.PostConstruct;
 import java.time.LocalDate;
 import java.time.Month;
 
-
 /**
  * В этом классе инициализируются тестовые данные для базы.
  * Эти данные будут каждый раз создаваться заново при поднятии SessionFactory и удаляться из БД при её остановке.
@@ -67,11 +66,19 @@ public class DataInitializer {
      * Метод для создания юзера для SpringSecurity
      */
     public void createUserForSpringSecurity(){
-        User user = new User();
-        user.setEmail("admin@email.com");
-        user.setPassword("admin");
-        user.addRoleToCollection(roleService.findRoleByName("ROLE_ADMIN"));
-        userService.saveUser(user);
+        User admin = new Admin();
+        admin.setEmail("admin@email.com");
+        admin.setPassword("admin");
+        admin.addRoleToCollection(roleService.findRoleByName("ROLE_ADMIN"));
+        userService.saveUser(admin);
+
+        User manager = new AirlineManager();
+        manager.setEmail("manager@email.com");
+        manager.setPassword("manager");
+        manager.addRoleToCollection(roleService.findRoleByName("ROLE_MANAGER"));
+        userService.saveUser(manager);
+
+
     }
 
     /**

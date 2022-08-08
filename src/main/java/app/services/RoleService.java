@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * В этом классе сервис для сущности Роль
  *
@@ -23,4 +25,10 @@ public class RoleService {
     public void saveRole (Role role) {
         roleRepository.save(role);
     }
+    public List<Role> findAll() {
+        return roleRepository.findAll();
+    }
+    public Role findRoleById(Long id) {return roleRepository.findRoleById(id);}
+    public void deleteRoleById(Long id) {roleRepository.deleteById(id);}
+    public void deleteAll() {roleRepository.deleteAll();}
 }
