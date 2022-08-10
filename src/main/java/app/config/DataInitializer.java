@@ -24,6 +24,8 @@ public class DataInitializer {
     private final FlightService flightService;
     private final PassengerService passengerService;
 
+    private final TicketService ticketService;
+    private final SeatService seatService;
 
     @PostConstruct
     public void init() {
@@ -33,7 +35,7 @@ public class DataInitializer {
         createAircraft();
         createFlight();
         createTestPassenger();
-
+        createTicket();
         System.out.println("DataInitializer сработал!");
     }
 
@@ -116,5 +118,56 @@ public class DataInitializer {
         passengerService.savePassenger(passenger);
     }
 
+    public void createTicket() {
+        Passenger p1 = new Passenger("Alina", "Lisova", "89772666342", "lisova@mail.ru",
+                "Evgenevna", LocalDate.of(1996, 12, 22), new Passport("34567875",
+                "22.12.2040", "usa"));
+        Passenger p2 =  new Passenger("Vika", "Rodina", "89772666342", "rodina@mail.ru",
+                "Vladimirovna", LocalDate.of(1995, 07, 24), new Passport("8646473",
+                "22.12.2040", "usa"));
+        Passenger p3 =  new Passenger("Vika", "Kim", "89772666232", "rodina2323@mail.ru",
+                "Vladimirovna", LocalDate.of(1992, 07, 24), new Passport("433345",
+                "22.12.2030", "korea"));
+        passengerService.savePassenger(p1);
+        passengerService.savePassenger(p2);
+        passengerService.savePassenger(p3);
+
+        Flight flight = new Flight();
+        Flight flight2 = new Flight();
+
+        flightService.save(flight);
+        flightService.save(flight2);
+
+        Seat seat = new Seat();
+        Seat seat2 = new Seat();
+        Seat seat3 = new Seat();
+
+        seatService.save(seat);
+        seatService.save(seat2);
+        seatService.save(seat3);
+
+        Ticket ticket = new Ticket();
+
+        ticket.setFlight(flight);
+        ticket.setPassenger(p1);
+        ticket.setSeat(seat);
+        ticket.setSubcategory(Ticket.Subcategory.BASIC);
+
+        Ticket ticket2 = new Ticket();
+        ticket2.setFlight(flight2);
+        ticket2.setPassenger(p2);
+        ticket2.setSeat(seat2);
+        ticket2.setSubcategory(Ticket.Subcategory.BASIC);
+
+        Ticket ticket3 = new Ticket();
+        ticket3.setFlight(flight);
+        ticket3.setPassenger(p3);
+        ticket3.setSeat(seat3);
+        ticket3.setSubcategory(Ticket.Subcategory.BASIC);
+
+        ticketService.saveTicket(ticket);
+        ticketService.saveTicket(ticket2);
+        ticketService.saveTicket(ticket3);
+    }
 
 }
