@@ -1,19 +1,21 @@
 package app.config;
 
-
 import app.entities.*;
+import app.repositories.DestinationRepository;
 import app.services.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.LocalDateTime;
 
 /**
  * В этом классе инициализируются тестовые данные для базы.
  * Эти данные будут каждый раз создаваться заново при поднятии SessionFactory и удаляться из БД при её остановке.
  * Инжектьте и используйте здесь соответствующие сервисы ваших сущностей."
  */
+
 @AllArgsConstructor
 @Component
 public class DataInitializer {
@@ -23,9 +25,9 @@ public class DataInitializer {
     private final AircraftService aircraftService;
     private final FlightService flightService;
     private final PassengerService passengerService;
-
-    private final TicketService ticketService;
     private final SeatService seatService;
+    private final TicketService ticketService;
+    private final DestinationRepository destinationRepository;
 
     @PostConstruct
     public void init() {
@@ -35,7 +37,10 @@ public class DataInitializer {
         createAircraft();
         createFlight();
         createTestPassenger();
-        createTicket();
+        createTestTicket();
+//        createTickets();
+
+
         System.out.println("DataInitializer сработал!");
     }
 
@@ -56,9 +61,9 @@ public class DataInitializer {
      * Метод для инициализации ролей
      */
     public void initRoles() {
-        Role admin = new Role(1L,"ROLE_ADMIN");
-        Role manager = new Role(2L,"ROLE_MANAGER");
-        Role passenger = new Role(3L,"ROLE_PASSENGER");
+        Role admin = new Role("ROLE_ADMIN");
+        Role manager = new Role("ROLE_MANAGER");
+        Role passenger = new Role("ROLE_PASSENGER");
         roleService.saveRole(admin);
         roleService.saveRole(manager);
         roleService.saveRole(passenger);
@@ -97,16 +102,22 @@ public class DataInitializer {
     }
 
     public void createFlight() {
-
         Flight flight = new Flight();
-        flight.setAircraft(aircraftService.getById(1L));
-        flightService.save(flight);
+        LocalDateTime localDateTimeDepart = LocalDateTime.of(2022, Month.AUGUST, 14, 4, 15, 0);
+        LocalDateTime localDateTimeArrive = localDateTimeDepart.plusHours(15);
 
+        flight.setFrom(destinationRepository.findDestinationByCity("New York").get());
+        flight.setTo(destinationRepository.findDestinationByCity("Stockholm").get());
+        flight.setDepartureDateTime(localDateTimeDepart);
+        flight.setArrivalDateTime(localDateTimeArrive);
+        flight.setAircraft(aircraftService.getById(2L));
+        flight.setFlightStatus(Flight.FlightStatus.ON_TIME);
+        flightService.save(flight);
     }
 
     public void createTestPassenger() {
         Passenger passenger = new Passenger();
-        passenger.setEmail("pass@gmail.com");
+        passenger.setEmail("plekhov.a.dm@gmail.com");
         passenger.setPassword("pass");
         passenger.setFirstName("Morgan");
         passenger.setLastName("Freeman");
@@ -118,56 +129,12 @@ public class DataInitializer {
         passengerService.savePassenger(passenger);
     }
 
-    public void createTicket() {
-        Passenger p1 = new Passenger("Alina", "Lisova", "89772666342", "lisova@mail.ru",
-                "Evgenevna", LocalDate.of(1996, 12, 22), new Passport("34567875",
-                "22.12.2040", "usa"));
-        Passenger p2 =  new Passenger("Vika", "Rodina", "89772666342", "rodina@mail.ru",
-                "Vladimirovna", LocalDate.of(1995, 07, 24), new Passport("8646473",
-                "22.12.2040", "usa"));
-        Passenger p3 =  new Passenger("Vika", "Kim", "89772666232", "rodina2323@mail.ru",
-                "Vladimirovna", LocalDate.of(1992, 07, 24), new Passport("433345",
-                "22.12.2030", "korea"));
-        passengerService.savePassenger(p1);
-        passengerService.savePassenger(p2);
-        passengerService.savePassenger(p3);
-
-        Flight flight = new Flight();
-        Flight flight2 = new Flight();
-
-        flightService.save(flight);
-        flightService.save(flight2);
-
-        Seat seat = new Seat();
-        Seat seat2 = new Seat();
-        Seat seat3 = new Seat();
-
-        seatService.save(seat);
-        seatService.save(seat2);
-        seatService.save(seat3);
-
+    public void createTestTicket() {
         Ticket ticket = new Ticket();
-
-        ticket.setFlight(flight);
-        ticket.setPassenger(p1);
-        ticket.setSeat(seat);
-        ticket.setSubcategory(Ticket.Subcategory.BASIC);
-
-        Ticket ticket2 = new Ticket();
-        ticket2.setFlight(flight2);
-        ticket2.setPassenger(p2);
-        ticket2.setSeat(seat2);
-        ticket2.setSubcategory(Ticket.Subcategory.BASIC);
-
-        Ticket ticket3 = new Ticket();
-        ticket3.setFlight(flight);
-        ticket3.setPassenger(p3);
-        ticket3.setSeat(seat3);
-        ticket3.setSubcategory(Ticket.Subcategory.BASIC);
-
+        ticket.setFlight(flightService.findFlightById(1L));
+        ticket.setPassenger(passengerService.getPassenger(3L));
+        ticket.setSubcategory(Ticket.Subcategory.STANDARD);
+        ticket.setSeat(seatService.getById(23L));
         ticketService.saveTicket(ticket);
-        ticketService.saveTicket(ticket2);
-        ticketService.saveTicket(ticket3);
     }
-
 }

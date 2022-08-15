@@ -4,6 +4,8 @@ import app.entities.Ticket;
 import app.repositories.TicketRepository;
 import org.springframework.stereotype.Service;
 
+import lombok.AllArgsConstructor;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -12,14 +14,12 @@ import java.util.Optional;
  *
  * @author Tamara Ustyan
  */
+
+@AllArgsConstructor
 @Service
 public class TicketServiceImpl implements TicketService {
 
-   private final TicketRepository ticketRepository;
-
-    public TicketServiceImpl(TicketRepository ticketRepository) {
-        this.ticketRepository = ticketRepository;
-    }
+    private final TicketRepository ticketRepository;
 
     /**
      * Method getAllTickets() returns List of all Tickets
@@ -58,7 +58,7 @@ public class TicketServiceImpl implements TicketService {
      */
     @Override
     public void deleteTicket(Long id) {
-    ticketRepository.deleteById(id);
+        ticketRepository.deleteById(id);
     }
     /**
      * Method update(Ticket) for update Ticket
@@ -73,6 +73,15 @@ public class TicketServiceImpl implements TicketService {
      */
     @Override
     public void deleteAllTickets() {
-    ticketRepository.deleteAll();
+        ticketRepository.deleteAll();
     }
+
+    /**
+     * added — Alexander Plekhov
+     */
+    @Override
+    public List<Ticket> findAllTicketsByFlightId(Long id) {
+        return ticketRepository.findAllTicketsByFlightId(id);
+    }
+
 }

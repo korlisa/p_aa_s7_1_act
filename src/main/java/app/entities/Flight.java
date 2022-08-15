@@ -68,7 +68,10 @@ public class Flight {
     public enum FlightStatus {
         ON_TIME("По плану"),
         DELAY("Задержан"),
-        CANCELED("Отменён");
+        CANCELED("Отменён"),
+        REGISTRATION("Регистрация"),
+        BOARDING("Посадка"),
+        IN_TRANSIT("В пути");
 
         private String flightStatus;
 

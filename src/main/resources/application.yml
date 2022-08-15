@@ -30,5 +30,22 @@ spring:
         jdbc:
           time_zone: Europe/Moscow
 
+  #email settings
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: s77airlines@gmail.com
+    password: lmconnwrrbbnrtge
+    protocol: smtp
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: true
+          ssl:
+            trust: smtp.gmail.com
+          auth: true
+
 #logging:
 

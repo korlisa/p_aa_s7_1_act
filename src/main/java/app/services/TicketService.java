@@ -7,15 +7,18 @@ import java.util.List;
 //Интерфейс для билета
 public interface TicketService {
 
-    public List<Ticket> getAllTickets();
+    List<Ticket> getAllTickets();
 
-    public void saveTicket(Ticket ticket);
+    void saveTicket(Ticket ticket);
 
-    public Ticket getTicket(Long id);
+    Ticket getTicket(Long id);
 
-    public void deleteTicket(Long id);
+    void deleteTicket(Long id);
 
-    public Ticket update(Ticket ticket);
+    Ticket update(Ticket ticket);
 
     void deleteAllTickets();
+
+    List<Ticket> findAllTicketsByFlightId(Long id);
+
 }
