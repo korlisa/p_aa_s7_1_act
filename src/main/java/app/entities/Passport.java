@@ -12,11 +12,12 @@ import javax.persistence.*;
  *
  * @author Tamara Ustyan
  */
-@Table
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name="passports")
+@Entity
+@Table(name="passports")
 public class Passport {
 
     @Id

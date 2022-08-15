@@ -83,7 +83,7 @@ public class FlightRestController {
                   tags = {"flight"})
     @PutMapping()
     public ResponseEntity<Flight> updateFlight(@RequestBody Flight flight) {
-        flightService.save(flight);
+        flightService.update(flight);
         return new ResponseEntity<>(flight, HttpStatus.OK);
     }
 

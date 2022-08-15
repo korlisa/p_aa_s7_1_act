@@ -7,6 +7,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -48,6 +49,9 @@ public class PassengerServiceImpl implements PassengerService {
      */
     @Override
     public void savePassenger(Passenger passenger) {
+        if (passenger.getRoles().isEmpty()) {
+            passenger.addRoleToCollection(roleService.findRoleByName("ROLE_PASSENGER"));
+        }
         passenger.setPassword(passwordEncoder.encode(passenger.getPassword()));
         passengerRepository.save(passenger);
     }

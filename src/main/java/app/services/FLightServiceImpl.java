@@ -2,13 +2,16 @@ package app.services;
 
 import app.entities.Flight;
 import app.entities.Seat;
+import app.events.FlightEventPublisher;
 import app.repositories.FlightRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -21,16 +24,37 @@ import java.util.stream.Collectors;
 @Service
 public class FLightServiceImpl implements FlightService {
     private final FlightRepository flightRepository;
+    private final FlightEventPublisher flightEventPublisher;
 
     @Autowired
-    public FLightServiceImpl(FlightRepository flightRepository) {
+    public FLightServiceImpl(FlightRepository flightRepository,
+                             FlightEventPublisher flightEventPublisher) {
         this.flightRepository = flightRepository;
+        this.flightEventPublisher = flightEventPublisher;
     }
 
     @Override
     @Transactional
     public void save(Flight flight) {
         flightRepository.save(flight);
+    }
+
+    @Override
+    @Transactional
+    public void update(Flight flight) {
+        /**
+         * if status has been change, the event starts
+         */
+        if(! (findFlightById(flight.getId()).getFlightStatus().toString().equals(flight.getFlightStatus().toString()))) {
+            flightEventPublisher.startFlightStatusChangeEvent(flight);
+        }
+        /**
+         * if aircraft has been change, the event starts
+         */
+        if(! Objects.equals(findFlightById(flight.getId()).getAircraft().getId(), flight.getAircraft().getId())) {
+            flightEventPublisher.startFlightAircraftReplacementEvent(flight);
+        }
+        save(flight);
     }
 
     @Override
@@ -48,6 +72,12 @@ public class FLightServiceImpl implements FlightService {
         return listWithFromTo.stream()
                 .filter(x -> x.getDepartureDateTime().format(formatter).equals(date))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Flight> findFlightByDepartureDateTime(LocalDateTime localDateTime) {
+        return flightRepository.findAllFlightByDepartureDateTime(localDateTime);
     }
 
     @Override

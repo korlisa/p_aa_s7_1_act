@@ -94,7 +94,6 @@ public class UserService implements UserDetailsService {
 
     }
 
-
     public void deleteAll() {
         userRepository.deleteAll();
     }
@@ -104,5 +103,4 @@ public class UserService implements UserDetailsService {
         User user = userRepository.findByEmail(email);
         return passengerRepository.findPassengerById(user.getId());
     }
-
 }

@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author Minibaeva Elvira
  */
-@NoArgsConstructor
+
 @AllArgsConstructor
 @Service
 public class RoleService {

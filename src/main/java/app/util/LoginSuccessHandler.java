@@ -29,11 +29,10 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         } else if (roles.contains("ROLE_MANAGER")) {
             httpServletResponse.sendRedirect("/manager");
         } else if (roles.contains("ROLE_PASSENGER")){
-            httpServletResponse.sendRedirect("/passenger");
+            httpServletResponse.sendRedirect("/index");
         } else {
             httpServletResponse.sendRedirect("/index");
         }
     }
-
 }
 

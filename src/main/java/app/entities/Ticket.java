@@ -12,12 +12,12 @@ import javax.persistence.*;
  *
  * @author Tamara Ustyan
  */
-@Table
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "tickets")
-
+@Table(name = "tickets")
+@Entity
 public class Ticket {
 
     @Id
@@ -30,7 +30,6 @@ public class Ticket {
      */
     @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "passenger_id")
-    //@NotFound(action = NotFoundAction.IGNORE)
     private Passenger passenger;
 
     /** Field with Flight of tickets flight
@@ -38,7 +37,6 @@ public class Ticket {
      */
     @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "flight_id")
-   // @NotFound(action = NotFoundAction.IGNORE)
     private Flight flight;
 
     /** Field with Seat of tickets seat

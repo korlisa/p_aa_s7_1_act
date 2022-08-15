@@ -2,6 +2,7 @@ package app.entities;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * Сущность AirlineManager является наследником класса User.
@@ -11,7 +12,8 @@ import javax.persistence.Entity;
  */
 
 
-@Entity(name = "managers")
+@Entity
+@Table(name = "managers")
 public class AirlineManager extends User{
 
 }

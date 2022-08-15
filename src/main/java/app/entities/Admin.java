@@ -1,7 +1,11 @@
 package app.entities;
 
-
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Component;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 
 /**
@@ -11,8 +15,10 @@ import javax.persistence.Entity;
  * @author Minibaeva Elvira
  */
 
-
-
-@Entity(name = "admins")
+@Data
+@NoArgsConstructor
+@Component
+@Entity
+@Table(name = "admins")
 public class Admin extends User {
 }

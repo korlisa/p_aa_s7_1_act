@@ -12,12 +12,13 @@ import java.time.LocalDate;
  *
  * @author Tamara Ustyan
  */
-@Table
+
 @Data
 @NoArgsConstructor
 @RequiredArgsConstructor
 @AllArgsConstructor
-@Entity(name = "passengers")
+@Entity
+@Table(name = "passengers")
 public class Passenger extends User {
 
         @Column(name = "first_name")
