@@ -36,8 +36,6 @@ public class TicketRESTControllerTests {
         @Autowired
         private FlightRepository flightRepository;
         @Autowired
-        private PassportRepository passportRepository;
-        @Autowired
         private SeatRepository seatRepository;
         @Autowired
         private MockMvc mockMvc;

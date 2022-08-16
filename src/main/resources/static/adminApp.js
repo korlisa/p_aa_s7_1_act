@@ -8,7 +8,7 @@ $(async function () {
 
     await tableWithRoles()
     await createRole()
-    await deleteRole()
+    await sendEmail()
 })
 
 const userFetchService = {
@@ -17,20 +17,19 @@ const userFetchService = {
         'Content-Type': 'application/json',
         'Referer': null
     },
-    getCurrentUser: async () => await fetch('api'),
-    findAllUsers: async () => await fetch('api/users'),
-    createAdmin: async (admin) => await fetch('api/create/admin', {
+    getCurrentUser: async () => await fetch(`api`),
+    findAllUsers: async () => await fetch(`api/users`),
+    createAdmin: async (admin) => await fetch(`api/create/admin`, {
         method: 'POST',
         headers: userFetchService.head,
         body: JSON.stringify(admin)
 
 
     }),
-    createManager: async (manager) => await fetch('api/create/manager', {
+    createManager: async (manager) => await fetch(`api/create/manager`, {
         method: 'POST',
         headers: userFetchService.head,
         body: JSON.stringify(manager)
-
 
     }),
     findUserById: async (id) => await fetch(`api/${id}`),
@@ -38,11 +37,22 @@ const userFetchService = {
         method: 'DELETE',
         headers: userFetchService.head
     }),
-    editUser: async (admin) => await fetch('api/edit', {
+    editUser: async (admin) => await fetch(`api/edit`, {
         method: 'PUT',
         headers: userFetchService.head,
         body: JSON.stringify(admin)
     })
+}
+const emailFetchService = {
+    head: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Referer': null
+    },
+    sendSimpleEmail: async (toAddress,subject,message) => await fetch(`email/${toAddress}/${subject}/${message}`,{
+        method: 'GET',
+        headers: emailFetchService.head,
+    }),
 }
 
 const roleFetchService = {
@@ -51,19 +61,20 @@ const roleFetchService = {
         'Content-Type': 'application/json',
         'Referer': null
     },
-    findAllRoles: async () => await fetch('api/roles'),
-    createRole: async (role) => await fetch('api/roles/create',{
+    findAllRoles: async () => await fetch(`api/roles`),
+    createRole: async (role) => await fetch(`api/roles/create`,{
         method: 'POST',
         headers: roleFetchService.head,
         body: JSON.stringify(role)
     }),
     findRoleById: async (id) => await fetch(`api/roles/${id}`),
-    deleteRole: async (id) => await fetch(`api/roles/${id}`, {
+    deleteRole: async (id) => await fetch(`api/roles/delete/${id}`, {
         method: 'DELETE',
         headers: roleFetchService.head
     }),
 
 }
+
 
 
 
@@ -207,7 +218,7 @@ async function createUserForm() {
             const response = await userFetchService.createManager(data);
             if (response.ok) {
                 window.location = window.location.href
-                modal.modal('hide')
+                modalForm.modal('hide')
 
             }
             location.reload()
@@ -241,16 +252,16 @@ async function createUserForm() {
                                             </div>
                                             <div class="form-group">
                                                 <span class="font-weight-bold">Role</span>
-                                                <select multiple class="form-control" id="deleteRoles" size="2" readonly>`
+                                                <select multiple class="form-control" id="rolesD" size="2" readonly>`
 
             modal.find('.modal-body').append(bodyForm)
         })
 
         fetch('/api/roles').then(function (response) {
-            modalForm.find('#deleteRoles').empty();
+            modalForm.find('#rolesD').empty();
             response.json().then(roleList => {
                 roleList.forEach(role => {
-                    modalForm.find('#deleteRoles')
+                    modalForm.find('#rolesD')
                         .append($('<option>').val(role.id).text(role.name));
                 })
             })
@@ -260,7 +271,7 @@ async function createUserForm() {
             const response = await userFetchService.deleteUser(id);
             if (response.ok) {
                 tableWithUsers()
-                modal.modal('hide');
+                modalForm.modal('hide');
             }
         })
     }
@@ -399,15 +410,15 @@ async function deleteRole(modal, id) {
     let thisRole = await roleFetchService.findRoleById(id)
     let role = thisRole.json()
     let modalForm = $(`#someDefaultModal`)
-    let deleteButton = `<button class="btn btn-danger" id="deleteButton" data-dismiss="modal" data-backdrop="false">Delete</button>`
+    let deleteRoleButton = `<button class="btn btn-danger" id="deleteRoleButton" data-dismiss="modal" data-backdrop="false">Delete</button>`
     let closeButton = `<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>`
 
-    modal.find('.modal-title').html('Delete role')
-    modal.find('.modal-footer').append(deleteButton)
-    modal.find('.modal-footer').append(closeButton)
+    modalForm.find('.modal-title').html('Delete')
+    modalForm.find('.modal-footer').append(deleteRoleButton)
+    modalForm.find('.modal-footer').append(closeButton)
 
     role.then(role => {
-        let bodyForm = `<form id="deleteUser">
+        let bodyForm = `<form id="deleteRole">
                             <div class="col-md-7 offset-md-3 text-center">
                                 <div class="form-group">
                                     <span class="font-weight-bold">ID</span>
@@ -419,19 +430,15 @@ async function deleteRole(modal, id) {
                                 </div>
                             `
 
-        modal.find('.modal-body').append(bodyForm)
+        modalForm.find('.modal-body').append(bodyForm)
     })
 
-    fetch('/api/roles').then(function (response) {
-        modalForm.find('#deleteRoles').empty()
 
-    })
-
-    $(`#deleteButton`).on('click', async () => {
+    $(`#deleteRoleButton`).on('click', async () => {
         const response = await roleFetchService.deleteRole(id)
         if (response.ok) {
             await tableWithRoles()
-            modal.modal('hide');
+            modalForm.modal('hide');
         } else {
             confirm("You cannot remove a role that is in use")
         }
@@ -468,5 +475,30 @@ async function getDefaultModal() {
         thisModal.find('.modal-footer').html('');
     })
 }
+//email sending
+async function sendEmail() {
+    let modalForm = $(`#sendEmail`)
+    let sendButton = `<button type="submit" class="btn btn-success btn-lg" id="sendEmailButton" data-toggle="modal" data-target="#modalSendEmail">Отправить письмо</button>`
+    modalForm.find('.modal-title').html('send Email')
+    modalForm.find('.modal-footer').append(sendButton)
 
+    $("#sendEmailButton").on('click', async () => {
+        let textSubject = document.getElementById('textSubject').value
+        let textMessage = document.getElementById('textMessage').value;
+        let items = document.getElementsByName("toAddress");
+        let toAddress
+        for (let i = 0; i < items.length; i++) {
+            if (items[i].checked) {
+                toAddress = items[i].value
+            }
+        }
+
+        const response = await emailFetchService.sendSimpleEmail(toAddress, textSubject, textMessage)
+        if (response.ok) {
+            console.log("Your message send!")
+        } else {
+            console.log("error")
+        }
+    })
+}
 

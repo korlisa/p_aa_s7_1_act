@@ -18,7 +18,6 @@ import java.util.List;
 @AllArgsConstructor
 @Service
 public class RoleService {
-    @Autowired
     private RoleRepository roleRepository;
 
     public Role findRoleByName(String name){return roleRepository.findRoleByName(name);}

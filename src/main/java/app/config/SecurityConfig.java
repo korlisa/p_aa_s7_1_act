@@ -20,18 +20,15 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @AllArgsConstructor
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
-    private UserService userService;
-
+    private final UserService userService;
     private final LoginSuccessHandler successHandler;
-
 
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/index").permitAll()
-                .antMatchers("/").hasRole("ADMIN")
+                .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/").hasRole("MANAGER")
                 .antMatchers("/passenger/**").hasRole("PASSENGER")
                 .anyRequest().authenticated()

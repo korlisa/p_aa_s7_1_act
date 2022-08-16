@@ -1,6 +1,5 @@
 package app.services;
 
-
 import app.entities.Admin;
 import app.entities.AirlineManager;
 import app.entities.Passenger;
@@ -15,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -51,15 +51,19 @@ public class UserService implements UserDetailsService {
             admin.setEmail(user.getEmail());
             admin.setRoles(user.getRoles());
             admin.setPassword(passwordEncoder.encode(user.getPassword()));
-            admin.addRoleToCollection(roleService.findRoleByName("ROLE_ADMIN"));
+            if (user.getRoles().isEmpty()) {
+                admin.addRoleToCollection(roleService.findRoleByName("ROLE_MANAGER"));
+            }
             userRepository.save(admin);
-        } else {
+        } else if (userRepository.findUserById(user.getId()).getClass().toString().contains("AirlineManager")){
             AirlineManager manager = new AirlineManager();
             manager.setId(user.getId());
             manager.setEmail(user.getEmail());
             manager.setRoles(user.getRoles());
             manager.setPassword(passwordEncoder.encode(user.getPassword()));
-            manager.addRoleToCollection(roleService.findRoleByName("ROLE_MANAGER"));
+            if (user.getRoles().isEmpty()) {
+                manager.addRoleToCollection(roleService.findRoleByName("ROLE_MANAGER"));
+            }
             userRepository.save(manager);
         }
     }
@@ -67,10 +71,12 @@ public class UserService implements UserDetailsService {
     public List<User> findAll() {
         return userRepository.findAll();
     }
+
     @Transactional(readOnly = true)
     public User findUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
+
     public void deleteUserById(Long id) {
         userRepository.deleteById(id);
     }
@@ -103,4 +109,66 @@ public class UserService implements UserDetailsService {
         User user = userRepository.findByEmail(email);
         return passengerRepository.findPassengerById(user.getId());
     }
+
+    /**
+     * Метод для получения Emails всех пользователей для рассылки
+     * @return массив usersEmails
+     */
+    public String [] findAllEmails() {
+        String[] usersEmails = new String[userRepository.findAll().size()];
+        for (int i = 0; i< userRepository.findAll().size(); i++) {
+            usersEmails [i] = userRepository.findAll().get(i).getEmail();
+        }
+        return usersEmails;
+    }
+
+    /**
+     * Метод для получения Emails всех пассажиров для рассылки
+     * @return массив passengersEmails
+     */
+    public String [] findAllEmailsPassengers() {
+        List<Passenger> pass = passengerRepository.findAll();
+        String[] passengersEmails = new String[pass.size()];
+        for (int i = 0; i< pass.size(); i++) {
+            passengersEmails [i] = pass.get(i).getEmail();
+        }
+        return passengersEmails;
+    }
+
+    /**
+     * Метод для получения Emails всех менеджеров для рассылки
+     * @return массив mangersEmails
+     */
+    public String [] findAllEmailsManagers() {
+        List<AirlineManager> managers= new ArrayList<>();
+        for (User u:userRepository.findAll()){
+            if (u instanceof AirlineManager){
+                managers.add((AirlineManager) u);
+            }
+        }
+        String[] mangersEmails = new String[managers.size()];
+        for (int i = 0; i< managers.size(); i++) {
+            mangersEmails [i] = managers.get(i).getEmail();
+        }
+        return mangersEmails;
+    }
+
+    /**
+     * Метод для получения Emails всех админов для рассылки
+     * @return массив adminsEmails
+     */
+    public String [] findAllEmailsAdmins() {
+        List<Admin> admins= new ArrayList<>();
+        for (User u:userRepository.findAll()){
+            if (u instanceof Admin){
+                admins.add((Admin) u);
+            }
+        }
+        String[] adminsEmails = new String[admins.size()];
+        for (int i = 0; i< admins.size(); i++) {
+            adminsEmails [i] = admins.get(i).getEmail();
+        }
+        return adminsEmails;
+    }
+
 }

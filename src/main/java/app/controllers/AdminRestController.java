@@ -8,7 +8,7 @@ import app.services.RoleService;
 import app.services.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -31,14 +31,14 @@ import java.util.List;
  *
  * @author Minibaeva Elvira
  */
+@AllArgsConstructor
 @RestController
 @RequestMapping("/api")
 @Api(tags = "AdminRestController", description = "Управление пользователями и ролями")
 public class AdminRestController {
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private RoleService roleService;
+
+    private final UserService userService;
+    private final RoleService roleService;
 
 
     /** Метод возвращающий авторизированного пользователя
@@ -66,7 +66,7 @@ public class AdminRestController {
      */
     @ApiOperation(value = "Get user by id")
     @GetMapping("/{id}")
-    public ResponseEntity<User> findUserById(@PathVariable("id") long id) {return ResponseEntity.ok(userService.findById(id));}
+    public ResponseEntity<User> findUserById(@PathVariable("id") Long id) {return ResponseEntity.ok(userService.findById(id));}
 
     /**Метод создающий нового Админа
      *
@@ -106,7 +106,6 @@ public class AdminRestController {
         userService.saveUserFromController(user);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
 
     /**Метод удаляющий пользователя по id
      *
@@ -155,7 +154,7 @@ public class AdminRestController {
      * @param id
      */
     @ApiOperation(value = "Delete role by id")
-    @DeleteMapping("/roles/{id}")
+    @DeleteMapping("/roles/delete/{id}")
     public ResponseEntity<Void> deleteRole(@PathVariable("id") long id) {
             roleService.deleteRoleById(id);
         return new ResponseEntity<>(HttpStatus.OK);
