@@ -1,54 +1,38 @@
 package app.entities;
 
 import app.util.Category;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 
-/**
- * Class Seat with properties.
- *
- * <b>seatNumber</b> - number of passengers seat, for example "12B"
- * <b>fare</b> - basic fare per seat, no extra charge
- * <b>isRegistered</b> - is passenger registered or not for this seat
- * <b>isSold</b> - is this seat sold or not
- * <b>category</b> - category of this seat - "Business" oe "Economy"
- * @see Category
- *
- * @author Eugene Kolyshev
- */
-@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@RequiredArgsConstructor
-@Table(name = "t_seats")
+@Entity
+@Table(name = "seat")
 public class Seat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
 
-    @Column(name = "seatNumber")
-    @NonNull
-    private String seatNumber;
+    public void setSeatNumber(String s) {
+    }
 
-    @Column(name = "fare")
-    @NonNull
-    private Integer fare = 0;
+    public void setCategory(Category category) {
+    }
 
-    @Column(name = "isRegistered")
-    @NonNull
-    private Boolean isRegistered = false;
+    public boolean isRegistered() {
+        return true;
+    }
 
-    @Column(name = "isSold")
-    @NonNull
-    private Boolean isSold = false;
+    public boolean isSold() {
+        return true;
+    }
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "category")
-    @NonNull
-    private Category category;
-
+    public Object getCategory() {
+        return app.entities.Category.BUSINESS;
+    }
 }
-

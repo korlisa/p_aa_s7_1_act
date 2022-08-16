@@ -4,6 +4,8 @@ import app.entities.Ticket;
 import app.services.TicketService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -20,6 +22,7 @@ public class TicketRESTController {
      *
      * @see TicketService
      */
+    Logger logger = LogManager.getLogger(getClass());
     private final TicketService ticketService;
 
     public TicketRESTController(TicketService ticketService) {
@@ -35,6 +38,7 @@ public class TicketRESTController {
     @GetMapping("/all")
     public List<Ticket> showAllTickets() {
         List<Ticket> allTickets = ticketService.getAllTickets();
+        logger.info("Show all tickets");
         return allTickets;
     }
 
@@ -48,8 +52,10 @@ public class TicketRESTController {
     public Ticket getTicket(@PathVariable Long id) {
         Ticket ticket = ticketService.getTicket(id);
         if (ticket == null) {
+            logger.warn("Ticket not found: " + id);
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Ticket not found");
         }
+        logger.info("Show ticket: " + id);
         return ticket;
     }
 
@@ -62,6 +68,7 @@ public class TicketRESTController {
     @PostMapping("/create")
     public Ticket addNewTicket(@RequestBody Ticket ticket) {
         ticketService.saveTicket(ticket);
+        logger.info("Ticket created");
         return ticket;
     }
 
@@ -74,8 +81,10 @@ public class TicketRESTController {
     @PutMapping("/edit")
     public Ticket edit(@RequestBody Ticket ticket) {
         if (ticketService.getTicket(ticket.getId()) == null) {
+            logger.warn("Ticket not found: " + ticket.getId());
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Ticket not found");
         }
+        logger.info("Ticket edited: " + ticket.getId());
         return ticketService.update(ticket);
     }
 
@@ -89,9 +98,11 @@ public class TicketRESTController {
     public Ticket delete(@PathVariable Long id) {
         Ticket ticket = ticketService.getTicket(id);
         if (ticket == null) {
+            logger.warn("Ticket not found: " + id);
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Ticket not found");
         }
         ticketService.deleteTicket(id);
+        logger.info("Ticket deleted: " + id);
         return ticket;
     }
 }
