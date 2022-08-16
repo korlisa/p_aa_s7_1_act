@@ -85,12 +85,12 @@ public class DataInitializer {
         manager.addRoleToCollection(roleService.findRoleByName("ROLE_MANAGER"));
         userService.saveUser(manager);
 
-
     }
 
     /**
      * Create 3 Aircraft in DB
      *
+     * @author Eugene Kolyshev
      */
 
     public void createAircraft() {

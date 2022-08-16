@@ -28,6 +28,7 @@ public class PassengerReminderServiceImpl implements PassengerReminderService {
     /**
      * An event-reminder is launched every 5 minutes
      */
+    @Override
     @Async
     @Scheduled(cron = EVERY_FIVE_MINUTES, zone = zoneMoscow)
     public void remindAboutFlight() {
