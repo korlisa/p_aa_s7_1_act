@@ -4,6 +4,8 @@ import app.entities.Passenger;
 import app.services.PassengerService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import app.services.UserService;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,8 @@ import java.util.List;
 @Api(tags = "Passenger Rest Controller", description = "CRUD for Passenger")
 @RequestMapping("/api/passenger")
 public class PassengerRESTController {
+
+    Logger logger = LogManager.getLogger(getClass());
 
     /**
      * Field passengerService with CRUD service for Passenger Entity
@@ -46,6 +50,7 @@ public class PassengerRESTController {
     @GetMapping("/all")
     public List<Passenger> showAllPassengers() {
         List<Passenger> allPassengers = passengerService.getAllPassengers();
+        logger.info("show all Passengers ");
         return allPassengers;
     }
 
@@ -61,8 +66,10 @@ public class PassengerRESTController {
     public Passenger getPassenger(@PathVariable long id) {
         Passenger passenger = passengerService.getPassenger(id);
         if (passenger == null) {
+            logger.warn("Passenger not found (getPassenger): " + id);
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Passenger not found");
         }
+        logger.info("Show Passenger: " + id);
         return passenger;
     }
 
@@ -77,6 +84,7 @@ public class PassengerRESTController {
     @PostMapping("/create")
     public Passenger addNewPassenger(@RequestBody Passenger passenger) {
         passengerService.savePassenger(passenger);
+        logger.info("Passenger created: " + passenger.getId());
         return passenger;
     }
 
@@ -90,9 +98,11 @@ public class PassengerRESTController {
     @ApiOperation(value = "Update Passenger")
     @PutMapping("/edit")
     public Passenger edit(@RequestBody Passenger passenger) {
-        if ( passengerService.getPassenger(passenger.getId()) == null) {
+        if (passengerService.getPassenger(passenger.getId()) == null) {
+            logger.warn("Passenger does not exist: " + passenger.getId());
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Passenger not found");
         }
+        logger.info("Passenger updated: " + passenger.getId());
         return passengerService.update(passenger);
     }
 
@@ -107,9 +117,11 @@ public class PassengerRESTController {
     public Passenger delete(@PathVariable long id) {
         Passenger passenger = passengerService.getPassenger(id);
         if (passenger == null) {
+            logger.warn("Passenger does not exist: " + id);
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Passenger not found");
         }
         passengerService.deletePassenger(id);
+        logger.info("Passenger deleted: " + id);
         return passenger;
     }
 

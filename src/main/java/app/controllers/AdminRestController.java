@@ -8,7 +8,9 @@ import app.services.RoleService;
 import app.services.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import lombok.AllArgsConstructor;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -37,8 +39,12 @@ import java.util.List;
 @Api(tags = "AdminRestController", description = "Управление пользователями и ролями")
 public class AdminRestController {
 
-    private final UserService userService;
-    private final RoleService roleService;
+    Logger logger = LogManager.getLogger(getClass());
+
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private RoleService roleService;
 
 
     /** Метод возвращающий авторизированного пользователя
@@ -49,6 +55,7 @@ public class AdminRestController {
     @GetMapping()
     public ResponseEntity<User> getCurrentUser() {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        logger.info("Show authorized User");
         return ResponseEntity.ok(user);}
 
     /**Метод возвращающий лист всех пользователей
@@ -57,7 +64,10 @@ public class AdminRestController {
      */
     @ApiOperation(value = "Get list of all Users")
     @GetMapping("/users")
-    public ResponseEntity<List<User>> findAllUsers() {return ResponseEntity.ok(userService.findAll());}
+    public ResponseEntity<List<User>> findAllUsers() {
+        logger.info("Show list of all Users");
+        return ResponseEntity.ok(userService.findAll());
+    }
 
     /**Метод возвращающий пользователя по id
      *
@@ -66,7 +76,10 @@ public class AdminRestController {
      */
     @ApiOperation(value = "Get user by id")
     @GetMapping("/{id}")
-    public ResponseEntity<User> findUserById(@PathVariable("id") Long id) {return ResponseEntity.ok(userService.findById(id));}
+    public ResponseEntity<User> findUserById(@PathVariable("id") long id) {
+        logger.info("Show user by id");
+        return ResponseEntity.ok(userService.findById(id));
+    }
 
     /**Метод создающий нового Админа
      *
@@ -79,6 +92,7 @@ public class AdminRestController {
             admin.addRoleToCollection(roleService.findRoleByName("ROLE_ADMIN"));
         }
         userService.saveUser(admin);
+        logger.info("Admin created");
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
@@ -93,6 +107,7 @@ public class AdminRestController {
             manager.addRoleToCollection(roleService.findRoleByName("ROLE_MANAGER"));
         }
         userService.saveUser(manager);
+        logger.info("New Admin created");
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
@@ -104,6 +119,7 @@ public class AdminRestController {
     @PutMapping("/edit")
     public ResponseEntity<Void> updateUser(@RequestBody User user) {
         userService.saveUserFromController(user);
+        logger.info("User edited");
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -115,6 +131,7 @@ public class AdminRestController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable("id") long id) {
         userService.deleteUserById(id);
+        logger.info("User deleted: " + id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -125,6 +142,7 @@ public class AdminRestController {
     @ApiOperation(value = "Get list of all Roles")
     @GetMapping("/roles")
     public ResponseEntity<List<Role>> findAllRoles() {
+        logger.info("Show list of all Roles");
         return ResponseEntity.ok(roleService.findAll());
     }
 
@@ -136,6 +154,7 @@ public class AdminRestController {
     @PostMapping("/roles/create")
     public ResponseEntity<Void> createRole(@RequestBody Role role) {
         roleService.saveRole(role);
+        logger.info("New Role created");
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
@@ -146,7 +165,10 @@ public class AdminRestController {
      */
     @ApiOperation(value = "Get role by id")
     @GetMapping("/roles/{id}")
-    public ResponseEntity<Role> findRoleById(@PathVariable("id") long id) {return ResponseEntity.ok(roleService.findRoleById(id));}
+    public ResponseEntity<Role> findRoleById(@PathVariable("id") long id) {
+        logger.info("Show role: " + id);
+        return ResponseEntity.ok(roleService.findRoleById(id));
+    }
 
     /**Метод удаляющий роль по id
      * Метод позволяет удалить только не используемую роль
@@ -156,6 +178,7 @@ public class AdminRestController {
     @ApiOperation(value = "Delete role by id")
     @DeleteMapping("/roles/delete/{id}")
     public ResponseEntity<Void> deleteRole(@PathVariable("id") long id) {
+        logger.info("Role deleted: " + id);
             roleService.deleteRoleById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

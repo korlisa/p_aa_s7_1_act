@@ -5,6 +5,8 @@ import app.services.DestinationService;
 import app.services.DestinationServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +22,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/destination")
 public class DestinationRestController {
-
+    Logger logger = LogManager.getLogger(getClass());
     private final DestinationService destinationService;
 
     @Autowired
@@ -36,6 +38,7 @@ public class DestinationRestController {
     @ApiOperation(value = "get all Destinations")
     @GetMapping
     public ResponseEntity<List<Destination>>findAllDestinations(){
+        logger.info("show all Destinations");
         return new ResponseEntity<>(destinationService.getAllDestinations(), HttpStatus.OK);
     }
 
@@ -49,6 +52,7 @@ public class DestinationRestController {
     @ApiOperation(value = "create new Destination")
     @PostMapping
     public ResponseEntity<Destination> addNewDestination (@RequestBody Destination destination) {
+        logger.info("Destination created");
         return new ResponseEntity<>(destinationService.saveDestination(destination), HttpStatus.CREATED);
     }
     
@@ -61,6 +65,7 @@ public class DestinationRestController {
     @PatchMapping
     public ResponseEntity<Destination> updateDestination (@RequestBody Destination destination) {
         destinationService.updateDestination(destination);
+        logger.info("Destinations updated: " + destination.getId());
         return new ResponseEntity<>(destination, HttpStatus.OK);
     }
     
@@ -72,6 +77,7 @@ public class DestinationRestController {
     @ApiOperation(value = "get unique Destination by Id")
     @GetMapping("/{id}")
     public ResponseEntity<Destination> getDestinationById(@PathVariable(value ="id") Long id) {
+        logger.info("show destination by id: " + id);
         return new ResponseEntity(destinationService.getDestinationById(id), HttpStatus.OK);
     }
 
@@ -83,6 +89,7 @@ public class DestinationRestController {
     @ApiOperation(value = "get unique Destination by country")
     @GetMapping("/country")
     public ResponseEntity<Destination> getDestinationByCountry(@RequestParam(value = "country_name", required = false)  String country_name) {
+        logger.info("show destination  by country: " + country_name);
         return new ResponseEntity(destinationService.getDestinationByCountryName(country_name), HttpStatus.OK);
     }
 
@@ -94,6 +101,7 @@ public class DestinationRestController {
     @ApiOperation(value = "get unique Destination by city")
     @GetMapping("/city")
     public ResponseEntity<Destination> getDestinationByCity(@RequestParam(value = "city", required = false) String city) {
+        logger.info("show destination  by city: " + city);
         return new ResponseEntity(destinationService.getDestinationByCity(city), HttpStatus.OK);
     }
 
