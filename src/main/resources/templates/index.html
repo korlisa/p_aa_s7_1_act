@@ -3,8 +3,9 @@
 
 <head>
     <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="https://ads.travelaudience.com/js/ta.js"></script>
-    <link rel="stylesheet" type="text/css" media="all" href="../css/index.css" th:href="@{/css/index.css}" />
+    <link rel="stylesheet" type="text/css" media="all" href="../css/index.css" th:href="@{/css/index.css}"/>
     <meta name="apple-mobile-web-app-title" content="S7 Airlines">
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no,user-scalable=no">
     <link rel="manifest" href="/manifest.json?_ts=07092021">
@@ -30,22 +31,7 @@
     <meta name="twitter:card" content="app">
     <title>Купить авиабилеты на рейсы S7 Airlines онлайн</title>
     <link href="https://portal.s7cdn.online/front-static/css/1g92d089c/main.38e998058b9e6fa18486.css" rel="stylesheet">
-    <script>
-        if (!!window.sentryActivate) {
-            var sentryHost = location.host;
-            var env = sentryHost.slice(0, sentryHost.indexOf('-'));
-            if (sentryHost == 'www.s7.ru') env = 'production';
-            var isBot = /slackbot|pinterest|yahoo|bot|googlebot|crawler|spider|robot|crawling|YandexBot/i.test(navigator.userAgent)
-            if (!isBot && typeof Sentry !== 'undefined') {
-                Sentry.init({
-                    dsn: 'https://41ce929861374aa5936b6e03db467fbf@sentry.s7.ru/sentry/2',
-                    environment: env,
-                    whitelistUrls: [/https:\/\/(.+)\.(s7\.ru|s7-airlines\.com)/, 'https://unpkg.com',
-                        'https://cdn.jsdelivr.net', 'https://static.s7cdn.online', 'https://portal.s7cdn.online', 'https://browser.sentry-cdn']
-                });
-            }
-        }
-    </script>
+
     <script type="text/javascript">document.domain = 's7.ru';</script>
 
     <style>
@@ -61,7 +47,7 @@
             }
         }
     </style>
-    <meta name="yandex-verification" content="8791736d72b23a1b">
+
     <style>
         .mainpage__offers {
             margin-top: 0 !important;
@@ -19351,46 +19337,8 @@
     </style>
 </head>
 
-<body style="min-height: inherit;"><!-- Google Tag Manager (noscript) -->
-<noscript>
-    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MWTWZW"
-            height="0" width="0" style="display:none;visibility:hidden"></iframe>
-</noscript>
-<!-- End Google Tag Manager (noscript) -->
-<!--Yandex.Metrika counter -->
+<body style="min-height: inherit;">
 
-<noscript>
-    <div><img src="https://mc.yandex.ru/watch/4173733" style="position:absolute; left:-9999px;" alt=""/></div>
-</noscript>
-<!-- /Yandex.Metrika counter -->
-
-<script type="text/javascript">
-    // only for IE
-    if (window.navigator.userAgent.indexOf("MSIE ") > 0 || window.navigator.userAgent.indexOf("Trident") > 0) {
-        var s = document.createElement("script");
-        s.type = "text/javascript";
-        s.src = "https://portal.s7cdn.online/S7PCabinService/media/by-path/raw/scripts/polyfill.min.js";
-        document.head.appendChild(s);
-    }
-    (function (m, e, t, r, i, k, a) {
-        m[i] = m[i] || function () {
-            (m[i].a = m[i].a || []).push(arguments)
-        };
-        m[i].l = 1 * new Date();
-        k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
-    })
-    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-
-    ym(4173733, "init", {
-        clickmap: true,
-        trackLinks: true,
-        accurateTrackBounce: true,
-        webvisor: false,
-        trackHash: true,
-        ecommerce: "dataLayer",
-        triggerEvent: true
-    });
-</script>
 <script>if (typeof (s7NotifyOnSucess) !== 'undefined' && ('s7PageInit' in window)) {
     s7PageInit.profilePrefetch = {"stc": 300, "std": "No results"};
     s7NotifyOnSucess('profilePrefetch', s7PageInit.profilePrefetch);
@@ -20052,112 +20000,247 @@
                             <div class="tabs__pane" id="content-4">
                                 <div class="zCQuGUY7">
                                     <div class="fTMw7MVc"></div>
-                                    <div class="IgP9Lsir">
+                                    <div class="IgP9Lsir"> <!--tabs-->
+                                        <style>
+                                            .disactive {
+                                                display: none;
+                                            }
+                                        </style>
                                         <ul class="A75sGA2n">
-                                            <li class="_25h7No4L _37hzAnHH" role="tab">По&nbsp;маршруту</li>
-                                            <li class="_25h7No4L" role="tab">По&nbsp;номеру рейса</li>
+                                            <li class="state_tab track_tab _25h7No4L _37hzAnHH"
+                                                onclick="setTabState('track_tab')" role="tab">По&nbsp;маршруту
+                                            </li>
+                                            <li class="state_tab flight_tab _25h7No4L"
+                                                onclick="setTabState('flight_tab')" role="tab">По&nbsp;номеру рейса
+                                            </li>
+                                            <script>
+                                                setTabState = function (tab) {
+                                                    $('.state_tab').removeClass('_37hzAnHH');
+                                                    $('.' + tab).addClass('_37hzAnHH');
+                                                    $('.state_tab_content').removeClass('disactive');
+                                                    $('.' + tab + '_content').addClass('disactive');
+                                                }
+                                            </script>
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="_1YXwWzlF" id="bot-avia-js">
                                     <div class="_1W1T7NUe">
-                                        <form class="_3MQoQyV3">
-                                            <div class="KiBTwWq7">
-                                                <div class="_3SRtC4bN">
-                                                    <div class="MTazVphs _6k03yfnZ">
-                                                        <div class="_1rWLuzgD CEteZZB2 _21ATs0tk"
-                                                             data-test="editable_select undefined">
-                                                            <div class="_1cD2Iyc6 _1Ta4j6hR"
-                                                                 data-test="input_component"><label class="_2Q1Q3T3Z">
-                                                                <div class="_3pBKKUE5"><input class="_1Zankvd6"
-                                                                                              aria-required="false"
-                                                                                              data-test="input_component__input  "
-                                                                                              value=""><span
-                                                                        class="AfJS6A5g _1iuoRFXU">Откуда</span></div>
-                                                            </label></div>
+                                        <div class="_3MQoQyV3">
+                                            <div class="KiBTwWq7" style="display: block"> <!--tabs__content-->
+                                                <div class="state_tab_content flight_tab_content ">
+                                                    <div class="_3SRtC4bN " style="display: flex">
+                                                        <!--tabs__pane tabs__pane_show-->
+                                                        <div class="MTazVphs _6k03yfnZ">
+                                                            <div class="_1rWLuzgD CEteZZB2 _21ATs0tk"
+                                                                 data-test="editable_select undefined">
+                                                                <div class="_1cD2Iyc6 _1Ta4j6hR"
+                                                                     data-test="input_component"><label class="_2Q1Q3T3Z">
+                                                                    <div class="_3pBKKUE5"><input class="_1Zankvd6"
+                                                                                                  id = "flight_from"
+                                                                                                  aria-required="false"
+                                                                                                  placeholder="Откуда"
+                                                                                                  data-test="input_component__input  "
+                                                                                                  value=""></div>
+                                                                </label></div>
+                                                            </div>
+                                                            <span class="_3GLANNGX" data-test="swap_avia_directions"><svg
+                                                                    viewBox="0 0 20 20"><path
+                                                                    d="M5.884 12.5H16.5a1 1 0 0 1 0 2H5.914l1.293 1.293a1 1 0 1 1-1.414 1.414l-3-3a1 1 0 0 1-.006-1.408l2.947-3a1 1 0 0 1 1.427 1.402L5.884 12.5zm8.202-5H3.5a1 1 0 1 1 0-2h10.616l-1.277-1.3a1 1 0 0 1 1.427-1.4l2.947 3a1 1 0 0 1-.006 1.407l-3 3a1 1 0 0 1-1.414-1.414L14.086 7.5z"></path></svg></span>
+                                                            <div class="_1rWLuzgD CEteZZB2 _2MHi1zve"
+                                                                 data-test="editable_select undefined">
+                                                                <div class="_1cD2Iyc6 _1Ta4j6hR"
+                                                                     data-test="input_component"><label class="_2Q1Q3T3Z">
+                                                                    <div class="_3pBKKUE5"><input class="_1Zankvd6"
+                                                                                                  id = "flight_to"
+                                                                                                  aria-required="false"
+                                                                                                  placeholder="Куда"
+                                                                                                  data-test="input_component__input  "
+                                                                                                  value=""></div>
+                                                                </label></div>
+                                                            </div>
                                                         </div>
-                                                        <span class="_3GLANNGX" data-test="swap_avia_directions"><svg
-                                                                viewBox="0 0 20 20"><path
-                                                                d="M5.884 12.5H16.5a1 1 0 0 1 0 2H5.914l1.293 1.293a1 1 0 1 1-1.414 1.414l-3-3a1 1 0 0 1-.006-1.408l2.947-3a1 1 0 0 1 1.427 1.402L5.884 12.5zm8.202-5H3.5a1 1 0 1 1 0-2h10.616l-1.277-1.3a1 1 0 0 1 1.427-1.4l2.947 3a1 1 0 0 1-.006 1.407l-3 3a1 1 0 0 1-1.414-1.414L14.086 7.5z"></path></svg></span>
-                                                        <div class="_1rWLuzgD CEteZZB2 _2MHi1zve"
-                                                             data-test="editable_select undefined">
-                                                            <div class="_1cD2Iyc6 _1Ta4j6hR"
-                                                                 data-test="input_component"><label class="_2Q1Q3T3Z">
-                                                                <div class="_3pBKKUE5"><input class="_1Zankvd6"
-                                                                                              aria-required="false"
-                                                                                              data-test="input_component__input  "
-                                                                                              value=""><span
-                                                                        class="AfJS6A5g _1iuoRFXU">Куда</span></div>
-                                                            </label></div>
+                                                        <div class="_1bUcfAcW">
+                                                            <div class="_1cD2Iyc6 _11YqStNG" data-test="input_component">
+                                                                <label class="_2Q1Q3T3Z _2_evT-AF">
+                                                                    <div class="_3pBKKUE5"><input class="_1Zankvd6"
+                                                                                                  id = "flight_date"
+                                                                                                  type="date"
+                                                                                                  aria-required="false"
+                                                                                                  data-test="input_component__input  "
+                                                                                                  value="29 июл, пт"></div>
+                                                                </label></div>
                                                         </div>
+                                                        <div class="v0lYl_fw">
+                                                            <button onclick="openFlightStatusFromToDate()" class="DS__Button__root DS__Button__theme_b2c DS__Button__size_medium"
+                                                                    type="button"><span class="DS__Button__content"><span>Проверить статус</span></span>
+                                                            </button>
+                                                        </div>
+                                                        <script>
+                                                            function openFlightStatusFromToDate() {
+
+                                                                let from = $('#flight_from').val();
+                                                                let to = $('#flight_to').val();
+                                                                let date = $('#flight_date').val();
+
+                                                                fetch(`/api/flights/${from}/${to}/${date}`, {method: 'GET'})
+                                                                    .then(function (response) {
+                                                                        return response.json();
+                                                                    })
+                                                                    .then(function (json) {
+                                                                        console.log(json);
+                                                                        $('#table_flights').removeClass('disactive');
+                                                                        let uTable = $('#flights');
+                                                                        uTable.html('');
+                                                                        json.map(flight => {
+                                                                            uTable.append('<tr>' +
+                                                                                /*'<td><span>' + flight.from.city + '</span></td>\n' +
+                                                                                '<td><span>' + flight.to.city + '</span></td>\n' +*/
+                                                                                '<td><span>' + flight.departureDateTime.split('T')[1].substring(0, 5) + '</span></td>\n' +
+                                                                                '<td><span>' + flight.flightStatus + '</span></td>\n' +
+                                                                                '</tr>');
+                                                                        })
+                                                                    });
+
+                                                            }
+                                                        </script>
                                                     </div>
-                                                    <div class="_3Pz0OBIJ">
-                                                        <div class="_1cD2Iyc6 _1VsDWwM1" data-test="input_component">
-                                                            <label class="_2Q1Q3T3Z _2_evT-AF">
-                                                                <div class="_3pBKKUE5"><input class="_1Zankvd6"
-                                                                                              readonly=""
-                                                                                              aria-required="false"
-                                                                                              data-test="input_component__input  "
-                                                                                              value="29 июл, пт"><span
-                                                                        class="AfJS6A5g"></span></div>
-                                                                <i class="CvcVPWq1" data-test="input_component__icon">
-                                                                    <svg width="16" height="16" viewBox="0 0 16 16"
-                                                                         fill="none">
-                                                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                                                              d="M4 10h3V7H4v3zm-2 4V5h12l.002 9H2zM14 2h-1V1a1 1 0 00-2 0v1H5V1a1 1 0 00-2 0v1H2C.897 2 0 2.897 0 4v10c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2z"
-                                                                              fill="currentColor"></path>
-                                                                    </svg>
-                                                                </i></label></div>
-                                                    </div>
-                                                    <div class="v0lYl_fw">
-                                                        <button class="DS__Button__root DS__Button__theme_b2c DS__Button__size_medium"
-                                                                type="button"><span class="DS__Button__content"><span>Проверить статус</span></span>
-                                                        </button>
+                                                    <div>
+                                                        <table id="table_flights" class="disactive statusTable">
+                                                            <thead>
+                                                            <tr>
+                                                            <!--<th>From</th>
+                                                            <th>To</th>-->
+                                                            <th>Time</th>
+                                                            <th>Status</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody id="flights">
+                                                            </tbody>
+                                                        </table>
                                                     </div>
                                                 </div>
-                                                <div class="_3SRtC4bN _18Fw33yn _3QbZdeFK">
-                                                    <div class="_1cD2Iyc6 _1Ta4j6hR _2dEBUOKV"
-                                                         data-test="input_component"><label class="_2Q1Q3T3Z">
-                                                        <div class="_3pBKKUE5"><input class="_1Zankvd6"
-                                                                                      aria-required="false"
-                                                                                      data-test="input_component__input  "
-                                                                                      maxlength="4" value=""><span
-                                                                class="AfJS6A5g _1iuoRFXU">Номер рейса</span></div>
-                                                    </label></div>
-                                                    <div class="_1bUcfAcW">
-                                                        <div class="_1cD2Iyc6 _11YqStNG" data-test="input_component">
-                                                            <label class="_2Q1Q3T3Z _2_evT-AF">
-                                                                <div class="_3pBKKUE5"><input class="_1Zankvd6"
-                                                                                              readonly=""
-                                                                                              aria-required="false"
-                                                                                              data-test="input_component__input  "
-                                                                                              value="29 июл, пт"><span
-                                                                        class="AfJS6A5g"></span></div>
-                                                                <i class="CvcVPWq1" data-test="input_component__icon">
-                                                                    <svg width="16" height="16" viewBox="0 0 16 16"
-                                                                         fill="none">
-                                                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                                                              d="M4 10h3V7H4v3zm-2 4V5h12l.002 9H2zM14 2h-1V1a1 1 0 00-2 0v1H5V1a1 1 0 00-2 0v1H2C.897 2 0 2.897 0 4v10c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2z"
-                                                                              fill="currentColor"></path>
-                                                                    </svg>
-                                                                </i></label></div>
+
+                                                <div class="state_tab_content track_tab_content disactive">
+                                                    <div class=" _3SRtC4bN " style="display: flex">
+                                                        <!--tabs__pane-->
+                                                        <div class="_1cD2Iyc6 _1Ta4j6hR _2dEBUOKV"
+                                                             data-test="input_component"><label class="_2Q1Q3T3Z">
+                                                            <div class="_3pBKKUE5"><input class="_1Zankvd6"
+                                                                                          id = "flight_number"
+                                                                                          aria-required="false"
+                                                                                          placeholder="Номер рейса"
+                                                                                          data-test="input_component__input  "
+                                                                                          maxlength="4" value=""></div>
+                                                        </label></div>
+
+                                                        <div class="_1bUcfAcW">
+                                                            <div class="_1cD2Iyc6 _11YqStNG" data-test="input_component">
+                                                                <label class="_2Q1Q3T3Z _2_evT-AF">
+                                                                    <div class="_3pBKKUE5"><input class="_1Zankvd6"
+                                                                                                  id = "flight_date_"
+                                                                                                  type="date"
+                                                                                                  aria-required="false"
+                                                                                                  data-test="input_component__input  "
+                                                                                                  value="29 июл, пт"></div>
+                                                                </label></div>
+                                                        </div>
+
+                                                        <div class="v0lYl_fw">
+                                                            <button onclick="openFlightStatusFlightNumber()" class="DS__Button__root DS__Button__theme_b2c DS__Button__size_medium"
+                                                                    type="button"><span class="DS__Button__content"><span>Проверить статус</span></span>
+                                                            </button>
+                                                        </div>
+
                                                     </div>
-                                                    <div class="v0lYl_fw">
-                                                        <button class="DS__Button__root DS__Button__theme_b2c DS__Button__size_medium"
-                                                                type="button"><span class="DS__Button__content"><span>Проверить статус</span></span>
-                                                        </button>
-                                                    </div>
+                                                    <div>
+                                                    <table id="table_flights_number" class="disactive statusTable">
+                                                        <thead>
+                                                        <tr>
+                                                        <!--<th>Flight_number</th>-->
+                                                        <th>Time</th>
+                                                        <th>Status</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody id="flights_number">
+                                                        </tbody>
+                                                    </table>
                                                 </div>
+                                                </div>
+                                                <style>
+                                                    .statusTable, th, td {
+                                                    /*border: 1px solid;*/
+                                                    width: 25%;
+                                                        text-align: left;
+                                                        table-layout: fixed;
+                                                        line-height: normal;
+                                                }
+                                                </style>
+                                                <script>
+                                                    function openFlightStatusFlightNumber() {
+
+                                                        let id = $('#flight_number').val();
+                                                        let date = $('#flight_date_').val();
+
+                                                        fetch(`/api/flights/${id}`, {method: 'GET'})
+                                                            .then(function (response) {
+                                                                return response.json();
+                                                            })
+                                                            .then(function (flight) {
+                                                                console.log(flight);
+                                                                $('#table_flights_number').removeClass('disactive');
+                                                                let uTable = $('#flights_number');
+                                                                uTable.html('');
+                                                                uTable.append('<tr>' +
+                                                                    /*'<td><span>' + flight.id + '</span></td>\n' +*/
+                                                                    '<td><span>' + flight.departureDateTime.split('T')[1].substring(0, 5) + '</span></td>\n' +
+                                                                    '<td><span>' + flight.flightStatus + '</span></td>\n' +
+                                                                    '</tr>');
+                                                            });
+                                                    }
+                                                </script>
+                                                </div>
+                                                <style>
+                                                    .statusTable, th, td {
+                                                    /*border: 1px solid;*/
+                                                    width: 25%;
+                                                        text-align: left;
+                                                        table-layout: fixed;
+                                                        line-height: normal;
+
+                                                }
+                                                </style>
+                                                <script>
+                                                    function openFlightStatusFlightNumber() {
+
+                                                        let id = $('#flight_number').val();
+                                                        let date = $('#flight_date_').val();
+
+                                                        fetch(`/api/flights/${id}`, {method: 'GET'})
+                                                            .then(function (response) {
+                                                                return response.json();
+                                                            })
+                                                            .then(function (flight) {
+                                                                console.log(flight);
+                                                                $('#table_flights_number').removeClass('disactive');
+                                                                let uTable = $('#flights_number');
+                                                                uTable.html('');
+                                                                uTable.append('<tr>' +
+                                                                    /*'<td><span>' + flight.id + '</span></td>\n' +*/
+                                                                    '<td><span>' + flight.departureDateTime.split('T')[1].substring(0, 5) + '</span></td>\n' +
+                                                                    '<td><span>' + flight.flightStatus + '</span></td>\n' +
+                                                                    '</tr>');
+                                                            });
+                                                    }
+                                                </script>
                                             </div>
+
+
                                             <div class="t76SxHZQ"><p class="UBqGKoTD">Поиск рейсов, отслеживание
                                                 статуса, времени вылета и посадки самолёта.</p>
-                                                <div class="v0lYl_fw _2PbRf-FF">
-                                                    <button class="DS__Button__root DS__Button__theme_b2c DS__Button__size_medium"
-                                                            type="button"><span class="DS__Button__content"><span>Проверить статус</span></span>
-                                                    </button>
-                                                </div>
                                             </div>
-                                        </form>
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -20165,6 +20248,7 @@
                     </div>
                 </div>
                 <script>
+
                     class ItcTabs {
                         constructor(target, config) {
                             const defaultConfig = {};

@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.LocalDateTime;
 
@@ -103,16 +104,20 @@ public class DataInitializer {
 
     public void createFlight() {
         Flight flight = new Flight();
-        LocalDateTime localDateTimeDepart = LocalDateTime.of(2022, Month.AUGUST, 14, 4, 15, 0);
-        LocalDateTime localDateTimeArrive = localDateTimeDepart.plusHours(15);
-
-        flight.setFrom(destinationRepository.findDestinationByCity("New York").get());
-        flight.setTo(destinationRepository.findDestinationByCity("Stockholm").get());
-        flight.setDepartureDateTime(localDateTimeDepart);
-        flight.setArrivalDateTime(localDateTimeArrive);
-        flight.setAircraft(aircraftService.getById(2L));
+        flight.setAircraft(aircraftService.getById(1L));
+        flight.setFrom(destinationService.getDestinationById(1L).get());
+        flight.setTo(destinationService.getDestinationById(2L).get());
+        flight.setDepartureDateTime(LocalDateTime.of(2022, 8, 9, 10, 0));
         flight.setFlightStatus(Flight.FlightStatus.ON_TIME);
         flightService.save(flight);
+
+        Flight flight1 = new Flight();
+        flight1.setAircraft(aircraftService.getById(2L));
+        flight1.setFrom(destinationService.getDestinationById(1L).get());
+        flight1.setTo(destinationService.getDestinationById(2L).get());
+        flight1.setDepartureDateTime(LocalDateTime.of(2022, 8, 9, 11, 0));
+        flight1.setFlightStatus(Flight.FlightStatus.DELAY);
+        flightService.save(flight1);
     }
 
     public void createTestPassenger() {
