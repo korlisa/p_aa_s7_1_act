@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <script type="text/javascript" src="https://ads.travelaudience.com/js/ta.js"></script>
     <link rel="stylesheet" type="text/css" media="all" href="../css/index.css" th:href="@{/css/index.css}"/>
     <meta name="apple-mobile-web-app-title" content="S7 Airlines">
@@ -31,6 +32,28 @@
     <meta name="twitter:card" content="app">
     <title>Купить авиабилеты на рейсы S7 Airlines онлайн</title>
     <link href="https://portal.s7cdn.online/front-static/css/1g92d089c/main.38e998058b9e6fa18486.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+    <script th:src="@{/searchFlights.js}" src="../static/searchFlights.js"></script>
+    <script>
+
+        if (!!window.sentryActivate) {
+            var sentryHost = location.host;
+            var env = sentryHost.slice(0, sentryHost.indexOf('-'));
+            if (sentryHost == 'www.s7.ru') env = 'production';
+            var isBot = /slackbot|pinterest|yahoo|bot|googlebot|crawler|spider|robot|crawling|YandexBot/i.test(navigator.userAgent)
+            if (!isBot && typeof Sentry !== 'undefined') {
+                Sentry.init({
+                    dsn: 'https://41ce929861374aa5936b6e03db467fbf@sentry.s7.ru/sentry/2',
+                    environment: env,
+                    whitelistUrls: [/https:\/\/(.+)\.(s7\.ru|s7-airlines\.com)/, 'https://unpkg.com',
+                        'https://cdn.jsdelivr.net', 'https://static.s7cdn.online', 'https://portal.s7cdn.online', 'https://browser.sentry-cdn']
+                });
+            }
+        }
+    </script>
 
     <script type="text/javascript">document.domain = 's7.ru';</script>
 
@@ -19337,8 +19360,46 @@
     </style>
 </head>
 
-<body style="min-height: inherit;">
+<body style="min-height: inherit;"><!-- Google Tag Manager (noscript) -->
+<noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MWTWZW"
+            height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!--Yandex.Metrika counter -->
 
+<noscript>
+    <div><img src="https://mc.yandex.ru/watch/4173733" style="position:absolute; left:-9999px;" alt=""/></div>
+</noscript>
+<!-- /Yandex.Metrika counter -->
+
+<script type="text/javascript">
+    // only for IE
+    if (window.navigator.userAgent.indexOf("MSIE ") > 0 || window.navigator.userAgent.indexOf("Trident") > 0) {
+        var s = document.createElement("script");
+        s.type = "text/javascript";
+        s.src = "https://portal.s7cdn.online/S7PCabinService/media/by-path/raw/scripts/polyfill.min.js";
+        document.head.appendChild(s);
+    }
+    (function (m, e, t, r, i, k, a) {
+        m[i] = m[i] || function () {
+            (m[i].a = m[i].a || []).push(arguments)
+        };
+        m[i].l = 1 * new Date();
+        k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+    })
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+    ym(4173733, "init", {
+        clickmap: true,
+        trackLinks: true,
+        accurateTrackBounce: true,
+        webvisor: false,
+        trackHash: true,
+        ecommerce: "dataLayer",
+        triggerEvent: true
+    });
+</script>
 <script>if (typeof (s7NotifyOnSucess) !== 'undefined' && ('s7PageInit' in window)) {
     s7PageInit.profilePrefetch = {"stc": 300, "std": "No results"};
     s7NotifyOnSucess('profilePrefetch', s7PageInit.profilePrefetch);
@@ -19594,7 +19655,7 @@
                 </div>
             </div>
         </div>
-        <div class="DS__TechnicalMessage__root alert-block hide-alert-block-on-thematic-page">
+        <!--<div class="DS__TechnicalMessage__root alert-block hide-alert-block-on-thematic-page">
             <div class="DS__TechnicalMessageAlert__root DS__TechnicalMessageAlert__type_default DS__TechnicalMessageAlert__view_flipping DS__TechnicalMessageAlert__visible">
                 <div class="DS__TechnicalMessageAlert__content DS__TechnicalMessageAlert__has_close_button">
                     <div class="DS__TextBase__root DS__TextBase__alignment_left DS__CssUtils__color_N900 DS__TextBase__size_l">
@@ -19604,7 +19665,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
         <div class="page-content" style="min-height: initial;">
             <div class="mainpage">
                 <div class="mainpage-slider-wrapper">
@@ -19743,25 +19804,23 @@
                                     </div>
                                 </div>
                                 <div class="_1YXwWzlF" id="bot-avia-js">
-                                    <form class="VMV4PIP2">
+                                    <form class="VMV4PIP2" id="newSearch">
                                         <div class="_21sbWC6o" id="avia-controls">
                                             <div class="I5YTs3m2 _1kiOyM6J _361w4O7W _3Dbox2Ke">
                                                 <div class="_1G-8inlW">
-                                                    <div><label
-                                                            class="_2gBQjtZn TuPk5qeB _31Ft0Yn7 _35jdMK9A _1605ozhZ _2_piJ0Jp _3mh498_u sDZPTMsH _6AUfP-Nk _2VXqKGJZ TrU-Ts4n _3CFEopiy _1yJByOzm _1EeGlJBb _1rfy66XH _2G-XYnL7 _3LhrabYa _3n_DUhtS _3WT6dx7i _28IVP4Uf _1zrlazVu"><input
-                                                            class="_1_1Rhm09" placeholder="Откуда" autocomplete="off"
-                                                            data-test="" value="Москва, Домодедово"><span
-                                                            class="D_oa8YDU juEjHmlC">DME</span></label></div>
+                                                    <div>
+                                                        <label class="_2gBQjtZn TuPk5qeB _31Ft0Yn7 _35jdMK9A _1605ozhZ _2_piJ0Jp _3mh498_u sDZPTMsH _6AUfP-Nk _2VXqKGJZ TrU-Ts4n _3CFEopiy _1yJByOzm _1EeGlJBb _1rfy66XH _2G-XYnL7 _3LhrabYa _3n_DUhtS _3WT6dx7i _28IVP4Uf _1zrlazVu">
+                                                            <input class="_1_1Rhm09" placeholder="City from"
+                                                                   autocomplete="off" name="from" id="from"
+                                                                   data-test="">
+                                                            <!--value="Москва, Домодедово">-->
+                                                          <!--  <span class="D_oa8YDU juEjHmlC">DME</span>-->
+                                                        </label>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="_3tCR_nWI _1f1ryyMK MqCuRL60 _3Dbox2Ke">
-                                                <div class="_1VMzEETv">
-                                                    <div><label
-                                                            class="_2gBQjtZn TuPk5qeB _31Ft0Yn7 _35jdMK9A _1605ozhZ _2_piJ0Jp _3mh498_u sDZPTMsH _6AUfP-Nk _2VXqKGJZ TrU-Ts4n _3CFEopiy _1yJByOzm _1EeGlJBb _1rfy66XH _2G-XYnL7 _3LhrabYa _3n_DUhtS _3WT6dx7i _28IVP4Uf _1zrlazVu"><input
-                                                            class="_1_1Rhm09" placeholder="Откуда" autocomplete="off"
-                                                            data-test="" value="Москва, Домодедово"><span
-                                                            class="D_oa8YDU juEjHmlC">DME</span></label></div>
-                                                </div>
+
                                             </div>
                                             <button class="_34NRHCCs _3DtvD63-">
                                                 <svg class="_3QqWcI-d _3wusUrHy" width="20" height="20"
@@ -19775,54 +19834,60 @@
                                             </button>
                                             <div class="I5YTs3m2 _1kiOyM6J _361w4O7W _44IHwQM1">
                                                 <div class="_1G-8inlW">
-                                                    <div><label
-                                                            class="_2gBQjtZn TuPk5qeB _31Ft0Yn7 _3mh498_u sDZPTMsH _1cZkIPW2 _2_ojnm5s _37aZJARW _3CFEopiy _1yJByOzm _1EeGlJBb _1rfy66XH _2G-XYnL7 _3LhrabYa _3n_DUhtS _3WT6dx7i _28IVP4Uf _1zrlazVu"><input
-                                                            class="_1_1Rhm09" placeholder="Куда" autocomplete="off"
-                                                            data-test="" value=""><span
-                                                            class="D_oa8YDU juEjHmlC"></span></label></div>
+                                                    <div>
+                                                        <label class="_2gBQjtZn TuPk5qeB _31Ft0Yn7 _3mh498_u sDZPTMsH _1cZkIPW2 _2_ojnm5s _37aZJARW _3CFEopiy _1yJByOzm _1EeGlJBb _1rfy66XH _2G-XYnL7 _3LhrabYa _3n_DUhtS _3WT6dx7i _28IVP4Uf _1zrlazVu">
+                                                            <input class="_1_1Rhm09" placeholder="City to"
+                                                                   autocomplete="off" name="to" id="to"
+                                                                   data-test="" value="">
+                                                            <span class="D_oa8YDU juEjHmlC"></span>
+                                                        </label>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="_3tCR_nWI _1f1ryyMK MqCuRL60 _44IHwQM1">
-                                                <div class="_1VMzEETv">
-                                                    <div><label
-                                                            class="_2gBQjtZn TuPk5qeB _31Ft0Yn7 _3mh498_u sDZPTMsH _1cZkIPW2 _2_ojnm5s _37aZJARW _3CFEopiy _1yJByOzm _1EeGlJBb _1rfy66XH _2G-XYnL7 _3LhrabYa _3n_DUhtS _3WT6dx7i _28IVP4Uf _1zrlazVu"><input
-                                                            class="_1_1Rhm09" placeholder="Куда" autocomplete="off"
-                                                            data-test="" value=""><span
-                                                            class="D_oa8YDU juEjHmlC"></span></label></div>
-                                                </div>
+
                                             </div>
                                             <div class="_18TKAEyO _11jhO-VH date-range">
                                                 <div class="_1cD2Iyc6 _1Ta4j6hR _1tACkGx3 _3npr7eNs _24raRyxU"
-                                                     data-test="input_component"><label class="_2Q1Q3T3Z">
-                                                    <div class="_3pBKKUE5"><input class="_1Zankvd6" readonly=""
-                                                                                  aria-required="false"
-                                                                                  data-test="input_component__input date-range-input "
-                                                                                  value=""><span
-                                                            class="AfJS6A5g _1iuoRFXU">Туда</span></div>
-                                                    <i class="CvcVPWq1" data-test="input_component__icon">
-                                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                                  d="M4 10h3V7H4v3zm-2 4V5h12l.002 9H2zM14 2h-1V1a1 1 0 00-2 0v1H5V1a1 1 0 00-2 0v1H2C.897 2 0 2.897 0 4v10c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2z"
-                                                                  fill="currentColor"></path>
-                                                        </svg>
-                                                    </i></label></div>
+                                                     data-test="input_component">
+                                                    <label class="_2Q1Q3T3Z">
+                                                        <div class="_3pBKKUE5">
+                                                            <input class="_1_1Rhm09" placeholder="yyyy-mm-dd"
+                                                                   autocomplete="off" name="when" id="when"
+                                                                   data-test="" value="">
+                                                            <span class="D_oa8YDU juEjHmlC"></span>
+
+                                                        </div>
+                                                        <i class="CvcVPWq1" data-test="input_component__icon">
+                                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                      d="M4 10h3V7H4v3zm-2 4V5h12l.002 9H2zM14 2h-1V1a1 1 0 00-2 0v1H5V1a1 1 0 00-2 0v1H2C.897 2 0 2.897 0 4v10c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2z"
+                                                                      fill="currentColor"></path>
+                                                            </svg>
+                                                        </i>
+                                                    </label>
+                                                </div>
                                                 <div class="_1cD2Iyc6 _1Ta4j6hR _1tACkGx3 _3npr7eNs TGu7qrBL"
-                                                     data-test="input_component"><label class="_2Q1Q3T3Z">
-                                                    <div class="_3pBKKUE5"><input class="_1Zankvd6" readonly=""
-                                                                                  aria-required="false"
-                                                                                  data-test="input_component__input date-range-input "
-                                                                                  value=""><span
-                                                            class="AfJS6A5g _1iuoRFXU">Обратно</span></div>
-                                                </label></div>
+                                                     data-test="input_component">
+                                                    <label class="_2Q1Q3T3Z">
+                                                        <div class="_3pBKKUE5">
+                                                            <input class="_1Zankvd6" readonly="" aria-required="false"
+                                                                   data-test="input_component__input date-range-input "
+                                                                   value="">
+                                                            <span class="AfJS6A5g _1iuoRFXU">Обратно</span>
+                                                        </div>
+                                                    </label>
+                                                </div>
                                             </div>
                                             <div class="_2xFnBBmU _373YDRWN">
                                                 <div class="_1cD2Iyc6 _1ZPFwwnn" data-test="input_component"><label
                                                         class="_2Q1Q3T3Z _2_evT-AF">
-                                                    <div class="_3pBKKUE5"><input class="_1Zankvd6" readonly=""
-                                                                                  aria-required="false"
-                                                                                  data-test="input_component__input amount_passengers_input "
-                                                                                  value="1, Эконом"><span
-                                                            class="AfJS6A5g"></span></div>
+                                                    <div class="_3pBKKUE5">
+                                                        <input class="_1Zankvd6" readonly=""
+                                                               aria-required="false"
+                                                               data-test="input_component__input amount_passengers_input "
+                                                               value="1, Эконом">
+                                                        <span class="AfJS6A5g"></span></div>
                                                     <i class="CvcVPWq1" data-test="input_component__icon">
                                                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                                                             <path fill-rule="evenodd" clip-rule="evenodd"
@@ -19833,42 +19898,62 @@
                                             </div>
                                             <label class="_2Tr_L2jH">
                                                 <ul class="_1TwUaHJR _2K2i9K-K">
-                                                    <li class="_1JtK5SaH _3k8gxdS6"><span
-                                                            class="_2fjHNiXt">Эконом</span></li>
-                                                    <li class="_1JtK5SaH"><span class="_2fjHNiXt">Бизнес</span></li>
+                                                    <li class="_1JtK5SaH _3k8gxdS6">
+                                                        <span class="_2fjHNiXt">Эконом</span>
+                                                    </li>
+                                                    <li class="_1JtK5SaH">
+                                                        <span class="_2fjHNiXt">Бизнес</span>
+                                                    </li>
                                                 </ul>
                                             </label>
                                             <div class="_3bnnnpzx">
-                                                <button data-test="avia-bot-submit"
+                                                <button type="button"
                                                         class="DS__Button__root DS__Button__theme_b2c DS__Button__size_medium"
-                                                        type="button"><span class="DS__Button__content"><svg
-                                                        xmlns="http://www.w3.org/2000/svg" width="1024" height="1024"
-                                                        viewBox="0 0 1024 1024" fill="#c4d600"><path
-                                                        d="M736.531 689.775l132.583 132.583c19.995 19.995 19.995 52.413 0 72.408s-52.413 19.995-72.408 0l-136.27-136.27C603.383 796.832 534.704 819.2 460.8 819.2c-197.939 0-358.4-160.461-358.4-358.4s160.461-358.4 358.4-358.4c197.939 0 358.4 160.461 358.4 358.4 0 87.065-31.045 166.879-82.669 228.975zM460.8 716.8c141.385 0 256-114.615 256-256s-114.615-256-256-256-256 114.615-256 256 114.615 256 256 256z"></path></svg></span>
+                                                        data-toggle="modal" onclick="createSearch()"
+                                                        data-whatever="5" data-target="#editModal">Поиск
                                                 </button>
                                             </div>
                                         </div>
+
+                                        <div class="tab-content" id="nav-tabContent">
+                                            <form id="editForm">
+
+                                                    <div class="modal fade">
+                                                        <div class="modal-body text-center" id="modal-body">
+                                                        </div>
+                                                    </div>
+
+                                            </form>
+                                        </div>
+
+
                                         <div class="_3LWGa8l6">
-                                            <div class="_18TKAEyO _391gvdvU"><a class="_1NLf8QUI"
-                                                                                href="https://ibe.s7.ru/air?id=multiSearch&amp;amp;locale=ru"
-                                                                                data-test="multi-search-link"><i
-                                                    class="rx0ITPMy">
-                                                <svg width="20" height="20" viewBox="0 0 20 20">
-                                                    <path d="M16 16a1 1 0 1 1 0-2 1 1 0 0 1 0 2M4 16a1 1 0 1 1 0-2 1 1 0 0 1 0 2m6-12a1 1 0 1 1 0 2 1 1 0 0 1 0-2m-3.682 9.119l3.064-5.184a3 3 0 0 0 1.236 0l3.064 5.184c-.23.282-.407.605-.522.958H6.84a2.965 2.965 0 0 0-.522-.958M16 12c-.212 0-.419.023-.618.065l-3.064-5.184A2.97 2.97 0 0 0 13 5c0-1.654-1.346-3-3-3S7 3.346 7 5c0 .716.262 1.364.682 1.881l-3.064 5.184A3.004 3.004 0 0 0 1 15c0 1.654 1.346 3 3 3a3 3 0 0 0 2.792-1.923h6.416A3 3 0 0 0 16 18c1.654 0 3-1.346 3-3s-1.346-3-3-3"></path>
-                                                </svg>
-                                            </i><span class="_1MRQhNGq">Составить сложный маршрут</span></a></div>
-                                            <div class="_2kWs8KEn"><label bottheme="Light"
-                                                                          class="DS__Checkbox__root _3ZV3_LI1"><span
-                                                    class="DS__CheckboxBase__root DS__CheckboxBase__theme_b2c DS__Checkbox__checkbox zDhP6T4Z"><input
-                                                    class="DS__CheckboxBase__input" type="checkbox" value=""><span
-                                                    class="DS__CheckboxBase__box"><svg width="16" height="16"
-                                                                                       viewBox="0 0 16 16" fill="none"
-                                                                                       class=""><path
-                                                    fill-rule="evenodd" clip-rule="evenodd"
-                                                    d="M12.663 4.627c.38.36.39.964.02 1.336l-5.444 5.464a1 1 0 01-1.358 0L3.34 8.962a.932.932 0 111.3-1.336L6.56 9.5l4.799-4.852a.933.933 0 011.304-.021z"
-                                                    fill="currentColor"></path></svg></span></span><span
-                                                    class="DS__Checkbox__text"><span
-                                                    class="DS__TextBase__root DS__CssUtils__color_N900 DS__TextBase__size_m">Лечу по работе</span></span></label><label
+                                            <div class="_18TKAEyO _391gvdvU">
+                                                <a class="_1NLf8QUI"
+                                                   href="complexsearch"
+                                                   data-test="multi-search-link">
+                                                    <i class="rx0ITPMy">
+                                                        <svg width="20" height="20" viewBox="0 0 20 20">
+                                                            <path d="M16 16a1 1 0 1 1 0-2 1 1 0 0 1 0 2M4 16a1 1 0 1 1 0-2 1 1 0 0 1 0 2m6-12a1 1 0 1 1 0 2 1 1 0 0 1 0-2m-3.682 9.119l3.064-5.184a3 3 0 0 0 1.236 0l3.064 5.184c-.23.282-.407.605-.522.958H6.84a2.965 2.965 0 0 0-.522-.958M16 12c-.212 0-.419.023-.618.065l-3.064-5.184A2.97 2.97 0 0 0 13 5c0-1.654-1.346-3-3-3S7 3.346 7 5c0 .716.262 1.364.682 1.881l-3.064 5.184A3.004 3.004 0 0 0 1 15c0 1.654 1.346 3 3 3a3 3 0 0 0 2.792-1.923h6.416A3 3 0 0 0 16 18c1.654 0 3-1.346 3-3s-1.346-3-3-3"></path>
+                                                        </svg>
+                                                    </i>
+                                                    <span class="_1MRQhNGq">Составить сложный маршрут</span>
+                                                </a>
+                                            </div>
+                                            <div class="_2kWs8KEn">
+                                                <label bottheme="Light"
+                                                       class="DS__Checkbox__root _3ZV3_LI1">
+                                                <span class="DS__CheckboxBase__root DS__CheckboxBase__theme_b2c DS__Checkbox__checkbox zDhP6T4Z"><input
+                                                        class="DS__CheckboxBase__input" type="checkbox" value="">
+                                                <span class="DS__CheckboxBase__box">
+                                                <svg width="16" height="16"
+                                                     viewBox="0 0 16 16" fill="none"
+                                                     class="">
+                                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                                          d="M12.663 4.627c.38.36.39.964.02 1.336l-5.444 5.464a1 1 0 01-1.358 0L3.34 8.962a.932.932 0 111.3-1.336L6.56 9.5l4.799-4.852a.933.933 0 011.304-.021z"
+                                                          fill="currentColor"></path></svg></span></span><span
+                                                        class="DS__Checkbox__text"><span
+                                                        class="DS__TextBase__root DS__CssUtils__color_N900 DS__TextBase__size_m">Лечу по работе</span></span></label><label
                                                     bottheme="Light" class="DS__Checkbox__root _3ZV3_LI1"><span
                                                     class="DS__CheckboxBase__root DS__CheckboxBase__theme_b2c DS__Checkbox__checkbox zDhP6T4Z"><input
                                                     class="DS__CheckboxBase__input" type="checkbox" value=""><span
@@ -19896,7 +19981,11 @@
                                         <div class="_3bnnnpzx _2y8lOxNk">
                                             <button data-test="avia-bot-submit"
                                                     class="DS__Button__root DS__Button__theme_b2c DS__Button__size_large DS__Button__disabled"
-                                                    disabled="" type="submit"><span class="DS__Button__content"><span>Найти</span></span>
+                                                    disabled="" type="submit"
+                                                    onclick="createSearch()" data-whatever="5" data-target="#editModal">
+                                                <span class="DS__Button__content">
+                                                    <span>Найти</span>
+                                                </span>
                                             </button>
                                         </div>
                                         <div class="_18TKAEyO _2ulaouN-"><a class="_1NLf8QUI"
@@ -20242,10 +20331,33 @@
 
                                         </div>
                                     </div>
+                                            <!--<button type="button" class="btn btn-info btn-sm" data-toggle="modal" onclick="createSearch()"
+                                                                                                data-whatever="5" data-target="#editModal">Поиск
+                                                                                        </button>-->
+                                        </div>
+
+
+                                    </form>
                                 </div>
                             </div>
+
+
                         </div>
                     </div>
+
+
+                    <script>
+                        class ItcTabs {
+                            constructor(target, config) {
+                                const defaultConfig = {};
+                                this._config = Object.assign(defaultConfig, config);
+                                this._elTabs = typeof target === 'string' ? document.querySelector(target) : target;
+                                this._elButtons = this._elTabs.querySelectorAll('.tabs__btn');
+                                this._elPanes = this._elTabs.querySelectorAll('.tabs__pane');
+                                this._eventShow = new Event('tab.itc.change');
+                                this._init();
+                                this._events();
+                            }
                 </div>
                 <script>
 
@@ -20261,796 +20373,845 @@
                             this._events();
                         }
 
-                        _init() {
-                            this._elTabs.setAttribute('role', 'tablist');
-                            this._elButtons.forEach((el, index) => {
-                                el.dataset.index = index;
-                                el.setAttribute('role', 'tab');
-                                this._elPanes[index].setAttribute('role', 'tabpanel');
-                            });
-                        }
-
-                        show(elLinkTarget) {
-                            const elPaneTarget = this._elPanes[elLinkTarget.dataset.index];
-                            const elLinkActive = this._elTabs.querySelector('.tabs__btn_active');
-                            const elPaneShow = this._elTabs.querySelector('.tabs__pane_show');
-                            console.log(elLinkActive, elLinkTarget)
-                            if (elLinkTarget === elLinkActive) {
-                                return;
+                            _init() {
+                                this._elTabs.setAttribute('role', 'tablist');
+                                this._elButtons.forEach((el, index) => {
+                                    el.dataset.index = index;
+                                    el.setAttribute('role', 'tab');
+                                    this._elPanes[index].setAttribute('role', 'tabpanel');
+                                });
                             }
-                            elLinkActive ? elLinkActive.classList.remove('tabs__btn_active') : null;
-                            elLinkActive ? elLinkActive.classList.remove('_1T77MOCn') : null;
-                            elPaneShow ? elPaneShow.classList.remove('tabs__pane_show') : null;
-                            elLinkTarget.classList.add('tabs__btn_active');
-                            elLinkTarget.classList.add('_1T77MOCn');
-                            elPaneTarget.classList.add('tabs__pane_show');
-                            this._elTabs.dispatchEvent(this._eventShow);
-                            elLinkTarget.focus();
-                        }
 
-                        showByIndex(index) {
-                            const elLinkTarget = this._elButtons[index];
-                            elLinkTarget ? this.show(elLinkTarget) : null;
-                        };
-
-                        _events() {
-                            this._elTabs.addEventListener('click', (e) => {
-                                const target = e.target.closest('.tabs__btn');
-                                if (target) {
-                                    e.preventDefault();
-                                    this.show(target);
+                            show(elLinkTarget) {
+                                const elPaneTarget = this._elPanes[elLinkTarget.dataset.index];
+                                const elLinkActive = this._elTabs.querySelector('.tabs__btn_active');
+                                const elPaneShow = this._elTabs.querySelector('.tabs__pane_show');
+                                console.log(elLinkActive, elLinkTarget)
+                                if (elLinkTarget === elLinkActive) {
+                                    return;
                                 }
-                            });
+                                elLinkActive ? elLinkActive.classList.remove('tabs__btn_active') : null;
+                                elLinkActive ? elLinkActive.classList.remove('_1T77MOCn') : null;
+                                elPaneShow ? elPaneShow.classList.remove('tabs__pane_show') : null;
+                                elLinkTarget.classList.add('tabs__btn_active');
+                                elLinkTarget.classList.add('_1T77MOCn');
+                                elPaneTarget.classList.add('tabs__pane_show');
+                                this._elTabs.dispatchEvent(this._eventShow);
+                                elLinkTarget.focus();
+                            }
+
+                            showByIndex(index) {
+                                const elLinkTarget = this._elButtons[index];
+                                elLinkTarget ? this.show(elLinkTarget) : null;
+                            };
+
+                            _events() {
+                                this._elTabs.addEventListener('click', (e) => {
+                                    const target = e.target.closest('.tabs__btn');
+                                    if (target) {
+                                        e.preventDefault();
+                                        this.show(target);
+                                    }
+                                });
+                            }
                         }
-                    }
 
-                    // инициализация .tabs как табов
-                    new ItcTabs('.tabs');
-                </script>
+                        // инициализация .tabs как табов
+                        new ItcTabs('.tabs');
+                    </script>
 
 
-                <div class="mainpage-holder">
-                    <div class="mainpage-news">
-                        <section class="section__container___3NVLB news-block">
-                            <div class="section__header___4-4kP"><h2 class="section__title___zm8fL">Новости S7&nbsp;Airlines</h2>
-                                <a href="https://www.s7.ru/ru/news" target="_self" rel=""
-                                   class="show-more__container___35E8A true"><p class="show-more__text___Ed3To">Все
-                                    новости</p>
-                                    <div class="show-more__icon___1FrqW">
-                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                  d="M8.366 8L5.32 11.103a1.126 1.126 0 000 1.572 1.077 1.077 0 001.542 0l3.819-3.89a1.126 1.126 0 000-1.57l-3.819-3.89a1.077 1.077 0 00-1.542 0 1.126 1.126 0 000 1.572L8.366 8z"
-                                                  fill="currentColor"></path>
-                                        </svg>
-                                    </div>
-                                </a></div>
-                            <div class="section__inner___3QciA">
-                                <div class="news-block-holder"><a
-                                        href="/ru/news/S7-Airlines-i-GirlPower-dayut-shans-perspektivnym-molodym-futbolistkam-so-vsey-rossii"
-                                        class="card__card___1Nzae card__card-lg-s___lhrSl card__card-md-s___3kPhj news-block-holder-item">
-                                    <div class="card__card-img___oI_18"
-                                         style="background-image: url(&quot;https://portal.s7cdn.online/S7WImageResizeService/webp/portal.s7cdn.online/S7PCabinService/media/a440fed5-bff8-4185-8b26-c44982c567b9&quot;);"></div>
-                                    <div class="card__card-info___2paYq">
-                                        <div class="card__card-info-text___2NIsy"><p class="card__card-title___2mrjG">S7&nbsp;Airlines
-                                            и&nbsp;GirlPower дают «Шанс» перспективным молодым футболисткам со&nbsp;всей
-                                            России</p>
-                                            <div class="LinesEllipsis LinesEllipsis--clamped card__card-text___280pZ card__hidden___3kdHW">
-                                                <div>S7 Airlines и женский футбольный клуб GirlPower объединяют усилия
-                                                    для поддержки талантливых и увлеченных<span
-                                                            class="LinesEllipsis-unit"> </span><span><wbr><span
-                                                            class="LinesEllipsis-ellipsis">...</span></span></div>
-                                            </div>
+                    <div class="mainpage-holder">
+                        <div class="mainpage-news">
+                            <section class="section__container___3NVLB news-block">
+                                <div class="section__header___4-4kP"><h2 class="section__title___zm8fL">Новости S7&nbsp;Airlines</h2>
+                                    <a href="https://www.s7.ru/ru/news" target="_self" rel=""
+                                       class="show-more__container___35E8A true"><p class="show-more__text___Ed3To">Все
+                                        новости</p>
+                                        <div class="show-more__icon___1FrqW">
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                      d="M8.366 8L5.32 11.103a1.126 1.126 0 000 1.572 1.077 1.077 0 001.542 0l3.819-3.89a1.126 1.126 0 000-1.57l-3.819-3.89a1.077 1.077 0 00-1.542 0 1.126 1.126 0 000 1.572L8.366 8z"
+                                                      fill="currentColor"></path>
+                                            </svg>
                                         </div>
-                                        <p class="card__card-date___wCHH3">01 ИЮЛЬ 2022</p></div>
-                                </a><a href="/ru/news/S7-Airlines-zapuskaet-zakaz-pitaniya-iz-vkusvilla-v-polet"
-                                       class="card__card___1Nzae card__card-lg-s___lhrSl card__card-md-s___3kPhj news-block-holder-item">
-                                    <div class="card__card-img___oI_18"
-                                         style="background-image: url(&quot;https://portal.s7cdn.online/S7WImageResizeService/webp/portal.s7cdn.online/S7PCabinService/media/9b75ab66-2ba3-4e48-b753-0bd699008403&quot;);"></div>
-                                    <div class="card__card-info___2paYq">
-                                        <div class="card__card-info-text___2NIsy"><p class="card__card-title___2mrjG">S7
-                                            Airlines запускает заказ питания из ВкусВилла в полет</p>
-                                            <div class="LinesEllipsis LinesEllipsis--clamped card__card-text___280pZ">
-                                                <div>S7&nbsp;Airlines расширяет опции здорового питания на&nbsp;борту и&nbsp;предлагает
-                                                    приобрести в&nbsp;полет наборы питания из&nbsp;ВкусВилла для рейсов,
-                                                    вылетающих<span class="LinesEllipsis-unit"> </span><span><wbr><span
-                                                            class="LinesEllipsis-ellipsis">...</span></span></div>
+                                    </a></div>
+                                <div class="section__inner___3QciA">
+                                    <div class="news-block-holder"><a
+                                            href="/ru/news/S7-Airlines-i-GirlPower-dayut-shans-perspektivnym-molodym-futbolistkam-so-vsey-rossii"
+                                            class="card__card___1Nzae card__card-lg-s___lhrSl card__card-md-s___3kPhj news-block-holder-item">
+                                        <div class="card__card-img___oI_18"
+                                             style="background-image: url(&quot;https://portal.s7cdn.online/S7WImageResizeService/webp/portal.s7cdn.online/S7PCabinService/media/a440fed5-bff8-4185-8b26-c44982c567b9&quot;);"></div>
+                                        <div class="card__card-info___2paYq">
+                                            <div class="card__card-info-text___2NIsy"><p
+                                                    class="card__card-title___2mrjG">S7&nbsp;Airlines
+                                                и&nbsp;GirlPower дают «Шанс» перспективным молодым футболисткам со&nbsp;всей
+                                                России</p>
+                                                <div class="LinesEllipsis LinesEllipsis--clamped card__card-text___280pZ card__hidden___3kdHW">
+                                                    <div>S7 Airlines и женский футбольный клуб GirlPower объединяют
+                                                        усилия
+                                                        для поддержки талантливых и увлеченных<span
+                                                                class="LinesEllipsis-unit"> </span><span><wbr><span
+                                                                class="LinesEllipsis-ellipsis">...</span></span></div>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <p class="card__card-date___wCHH3">28 ИЮНЬ 2022</p></div>
-                                </a><a href="/ru/news/S7-Airlines-rasshiryaet-deystvie-programmy-vrachi-na-bortu-na-studentov-medikov"
-                                       class="card__card___1Nzae card__card-lg-s___lhrSl card__card-md-s___3kPhj news-block-holder-item">
-                                    <div class="card__card-img___oI_18"
-                                         style="background-image: url(&quot;https://portal.s7cdn.online/S7WImageResizeService/webp/portal.s7cdn.online/S7PCabinService/media/e80e4333-03c8-458a-b812-331dc41415f4&quot;);"></div>
-                                    <div class="card__card-info___2paYq">
-                                        <div class="card__card-info-text___2NIsy"><p class="card__card-title___2mrjG">S7&nbsp;Airlines
-                                            расширяет действие программы «Врачи на&nbsp;борту»
-                                            на&nbsp;студентов-медиков</p>
-                                            <div class="LinesEllipsis LinesEllipsis--clamped card__card-text___280pZ card__hidden___3kdHW">
-                                                <div>Теперь стать участниками программы «Врачи на&nbsp;борту» и&nbsp;воспользоваться
-                                                    ее&nbsp;привилегиями могут студенты<span
-                                                            class="LinesEllipsis-unit"> </span><span><wbr><span
-                                                            class="LinesEllipsis-ellipsis">...</span></span></div>
+                                            <p class="card__card-date___wCHH3">01 ИЮЛЬ 2022</p></div>
+                                    </a><a href="/ru/news/S7-Airlines-zapuskaet-zakaz-pitaniya-iz-vkusvilla-v-polet"
+                                           class="card__card___1Nzae card__card-lg-s___lhrSl card__card-md-s___3kPhj news-block-holder-item">
+                                        <div class="card__card-img___oI_18"
+                                             style="background-image: url(&quot;https://portal.s7cdn.online/S7WImageResizeService/webp/portal.s7cdn.online/S7PCabinService/media/9b75ab66-2ba3-4e48-b753-0bd699008403&quot;);"></div>
+                                        <div class="card__card-info___2paYq">
+                                            <div class="card__card-info-text___2NIsy"><p
+                                                    class="card__card-title___2mrjG">S7
+                                                Airlines запускает заказ питания из ВкусВилла в полет</p>
+                                                <div class="LinesEllipsis LinesEllipsis--clamped card__card-text___280pZ">
+                                                    <div>S7&nbsp;Airlines расширяет опции здорового питания на&nbsp;борту
+                                                        и&nbsp;предлагает
+                                                        приобрести в&nbsp;полет наборы питания из&nbsp;ВкусВилла для
+                                                        рейсов,
+                                                        вылетающих<span class="LinesEllipsis-unit"> </span><span><wbr><span
+                                                                class="LinesEllipsis-ellipsis">...</span></span></div>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <p class="card__card-date___wCHH3">27 ИЮНЬ 2022</p></div>
-                                </a></div>
-                            </div>
-                        </section>
+                                            <p class="card__card-date___wCHH3">28 ИЮНЬ 2022</p></div>
+                                    </a><a href="/ru/news/S7-Airlines-rasshiryaet-deystvie-programmy-vrachi-na-bortu-na-studentov-medikov"
+                                           class="card__card___1Nzae card__card-lg-s___lhrSl card__card-md-s___3kPhj news-block-holder-item">
+                                        <div class="card__card-img___oI_18"
+                                             style="background-image: url(&quot;https://portal.s7cdn.online/S7WImageResizeService/webp/portal.s7cdn.online/S7PCabinService/media/e80e4333-03c8-458a-b812-331dc41415f4&quot;);"></div>
+                                        <div class="card__card-info___2paYq">
+                                            <div class="card__card-info-text___2NIsy"><p
+                                                    class="card__card-title___2mrjG">S7&nbsp;Airlines
+                                                расширяет действие программы «Врачи на&nbsp;борту»
+                                                на&nbsp;студентов-медиков</p>
+                                                <div class="LinesEllipsis LinesEllipsis--clamped card__card-text___280pZ card__hidden___3kdHW">
+                                                    <div>Теперь стать участниками программы «Врачи на&nbsp;борту» и&nbsp;воспользоваться
+                                                        ее&nbsp;привилегиями могут студенты<span
+                                                                class="LinesEllipsis-unit"> </span><span><wbr><span
+                                                                class="LinesEllipsis-ellipsis">...</span></span></div>
+                                                </div>
+                                            </div>
+                                            <p class="card__card-date___wCHH3">27 ИЮНЬ 2022</p></div>
+                                    </a></div>
+                                </div>
+                            </section>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <footer class="main-footer-white">
-            <div class="main-footer">
-                <div class="main-footer__top">
-                    <ul class="main-footer__links">
-                        <li class="main-footer__link"><a class="" href="/ru/about/s7-airlines.dot" title=""><span>О компании S7 Airlines</span></a>
-                        </li>
-                        <li class="main-footer__link"><a class="" href="/ru/about/sustainability/" title=""><span>Устойчивое развитие</span></a>
-                        </li>
-                        <li class="main-footer__link"><a class="" href="/ru/blagotvoritelnost/" title=""><span>Благотворительность</span></a>
-                        </li>
-                        <li class="main-footer__link"><a class="" href="/ru/about/partners.dot"
-                                                         title=""><span>Партнеры</span></a></li>
-                        <li class="main-footer__link"><a class="" href="/ru/contacts/"
-                                                         title=""><span>Контакты</span></a></li>
-                        <li class="main-footer__link"><a class="" href="/ru/routes/"
-                                                         title=""><span>Направления</span></a></li>
-                        <li class="main-footer__link"><a class="" href="/ru/countries/" title=""><span>Страны</span></a>
-                        </li>
-                        <li class="main-footer__link"><a class="" href="/ru/flights/" title=""><span>Рейсы</span></a>
-                        </li>
-                        <li class="main-footer__link"><a class="" href="/ru/about/vacancies/"
-                                                         title=""><span>Вакансии</span></a></li>
-                        <li class="main-footer__link"><a class="" href="/ru/about/offices/" title=""><span>Офисы продаж и представительства</span></a>
-                        </li>
-                        <li class="main-footer__link"><a class="" href="/ru/about/tender.dot"
-                                                         title=""><span>Закупки</span></a></li>
-                        <li class="main-footer__link"><a class="" href="/ru/news/" title=""><span>Новости</span></a>
-                        </li>
-                        <li class="main-footer__link"><a class="" href="/ru/specialnyi-vozvrat/" title=""><span>Возвраты для особых категорий&nbsp;граждан</span></a>
-                        </li>
-                        <li class="main-footer__link"><a class="" href="/ru/about/contactus/" title=""><span>Обратная связь</span></a>
-                        </li>
-                        <li class="main-footer__link"><a class="" href="https://helpcenter.s7.ru/" title=""><span>Справочный центр</span></a>
-                        </li>
-                        <li class="main-footer__link"><a class="" href="/ru/confidentiality/" title=""><span>Конфиденциальность </span></a>
-                        </li>
-                        <li class="main-footer__link"><a class="" href="/ru/siberia"
-                                                         title=""><span>Мы — Сибирь</span></a></li>
-                        <li class="main-footer__link"><a class="" href="/ru/doctors-on-board/" title=""><span>Врачи на борту</span></a>
-                        </li>
-                        <li class="main-footer__link"><a class="" href="/ru/uslugi-po-podgotovke-gruza-k-perevozke/"
-                                                         title=""><span>Подготовка груза к перевозке</span></a></li>
-                    </ul>
-                    <div class="main-footer__phones "><p class="main-footer__tollfree-line"><span
-                            class="main-footer__tollfree">Москва</span><a class="main-footer__tollfree-phone"
-                                                                          href="tel:+74957830707">+7 495 783-0707</a>
-                    </p>
-                        <p class="main-footer__online-services">
-                            <button class="main-footer__online-action"><span class="DS__IconRound__root"><svg width="20"
-                                                                                                              height="20"
+            <footer class="main-footer-white">
+                <div class="main-footer">
+                    <div class="main-footer__top">
+                        <ul class="main-footer__links">
+                            <li class="main-footer__link"><a class="" href="/ru/about/s7-airlines.dot" title=""><span>О компании S7 Airlines</span></a>
+                            </li>
+                            <li class="main-footer__link"><a class="" href="/ru/about/sustainability/" title=""><span>Устойчивое развитие</span></a>
+                            </li>
+                            <li class="main-footer__link"><a class="" href="/ru/blagotvoritelnost/" title=""><span>Благотворительность</span></a>
+                            </li>
+                            <li class="main-footer__link"><a class="" href="/ru/about/partners.dot"
+                                                             title=""><span>Партнеры</span></a></li>
+                            <li class="main-footer__link"><a class="" href="/ru/contacts/"
+                                                             title=""><span>Контакты</span></a></li>
+                            <li class="main-footer__link"><a class="" href="/ru/routes/"
+                                                             title=""><span>Направления</span></a></li>
+                            <li class="main-footer__link"><a class="" href="/ru/countries/" title=""><span>Страны</span></a>
+                            </li>
+                            <li class="main-footer__link"><a class="" href="/ru/flights/"
+                                                             title=""><span>Рейсы</span></a>
+                            </li>
+                            <li class="main-footer__link"><a class="" href="/ru/about/vacancies/"
+                                                             title=""><span>Вакансии</span></a></li>
+                            <li class="main-footer__link"><a class="" href="/ru/about/offices/" title=""><span>Офисы продаж и представительства</span></a>
+                            </li>
+                            <li class="main-footer__link"><a class="" href="/ru/about/tender.dot"
+                                                             title=""><span>Закупки</span></a></li>
+                            <li class="main-footer__link"><a class="" href="/ru/news/" title=""><span>Новости</span></a>
+                            </li>
+                            <li class="main-footer__link"><a class="" href="/ru/specialnyi-vozvrat/" title=""><span>Возвраты для особых категорий&nbsp;граждан</span></a>
+                            </li>
+                            <li class="main-footer__link"><a class="" href="/ru/about/contactus/" title=""><span>Обратная связь</span></a>
+                            </li>
+                            <li class="main-footer__link"><a class="" href="https://helpcenter.s7.ru/" title=""><span>Справочный центр</span></a>
+                            </li>
+                            <li class="main-footer__link"><a class="" href="/ru/confidentiality/" title=""><span>Конфиденциальность </span></a>
+                            </li>
+                            <li class="main-footer__link"><a class="" href="/ru/siberia"
+                                                             title=""><span>Мы — Сибирь</span></a></li>
+                            <li class="main-footer__link"><a class="" href="/ru/doctors-on-board/" title=""><span>Врачи на борту</span></a>
+                            </li>
+                            <li class="main-footer__link"><a class="" href="/ru/uslugi-po-podgotovke-gruza-k-perevozke/"
+                                                             title=""><span>Подготовка груза к перевозке</span></a></li>
+                        </ul>
+                        <div class="main-footer__phones "><p class="main-footer__tollfree-line"><span
+                                class="main-footer__tollfree">Москва</span><a class="main-footer__tollfree-phone"
+                                                                              href="tel:+74957830707">+7 495
+                            783-0707</a>
+                        </p>
+                            <p class="main-footer__online-services">
+                                <button class="main-footer__online-action"><span class="DS__IconRound__root"><svg
+                                        width="20"
+                                        height="20"
+                                        viewBox="0 0 16 16"
+                                        fill="none"
+                                        class=""><path
+                                        d="M4.408 11.563C6.917 14.069 9.95 16 12.425 16c1.1 0 2.075-.391 2.858-1.249.45-.508.717-1.082.717-1.656 0-.475-.175-.924-.625-1.24l-2.567-1.824c-.408-.291-.75-.424-1.058-.424-.4 0-.75.224-1.142.616l-.616.607a.445.445 0 01-.325.125.783.783 0 01-.35-.1c-.525-.291-1.442-1.074-2.284-1.906-.833-.84-1.625-1.748-1.908-2.281a.78.78 0 01-.1-.35c0-.108.033-.224.125-.316l.608-.624c.392-.392.617-.741.617-1.14 0-.309-.133-.65-.425-1.058L4.133.633C3.817.19 3.35 0 2.858 0c-.566 0-1.141.241-1.641.716C.375 1.506 0 2.489 0 3.588c0 2.472 1.908 5.478 4.408 7.975z"
+                                        fill="currentColor"></path></svg></span>
+                            <p>Звонок онлайн</p></button>
+                            <button class="main-footer__online-action"><span class="DS__IconRound__root"><svg width="16"
+                                                                                                              height="16"
                                                                                                               viewBox="0 0 16 16"
                                                                                                               fill="none"
                                                                                                               class=""><path
-                                    d="M4.408 11.563C6.917 14.069 9.95 16 12.425 16c1.1 0 2.075-.391 2.858-1.249.45-.508.717-1.082.717-1.656 0-.475-.175-.924-.625-1.24l-2.567-1.824c-.408-.291-.75-.424-1.058-.424-.4 0-.75.224-1.142.616l-.616.607a.445.445 0 01-.325.125.783.783 0 01-.35-.1c-.525-.291-1.442-1.074-2.284-1.906-.833-.84-1.625-1.748-1.908-2.281a.78.78 0 01-.1-.35c0-.108.033-.224.125-.316l.608-.624c.392-.392.617-.741.617-1.14 0-.309-.133-.65-.425-1.058L4.133.633C3.817.19 3.35 0 2.858 0c-.566 0-1.141.241-1.641.716C.375 1.506 0 2.489 0 3.588c0 2.472 1.908 5.478 4.408 7.975z"
+                                    d="M3.154 14.492c.27 0 .484-.112.817-.396l1.735-1.484c-.345-.272-.653-.739-.653-1.625V6.648c0-1.903 1.244-3.056 3.263-3.056h4.627l-.006-.153c-.132-1.147-.95-1.939-2.49-1.939H2.509C.949 1.5 0 2.34 0 3.805v6.017c0 1.437.918 2.294 2.427 2.294h.092v1.708c0 .408.232.668.635.668zm9.143.008c.396 0 .635-.26.635-.668v-.836h.635c1.515 0 2.433-.863 2.433-2.299v-3.89c0-1.465-.95-2.304-2.515-2.304H8.53c-1.61 0-2.508.833-2.508 2.346v3.848c0 1.46.905 2.3 2.508 2.3h1.488l1.463 1.107c.326.284.54.396.817.396z"
                                     fill="currentColor"></path></svg></span>
-                        <p>Звонок онлайн</p></button>
-                        <button class="main-footer__online-action"><span class="DS__IconRound__root"><svg width="16"
-                                                                                                          height="16"
-                                                                                                          viewBox="0 0 16 16"
-                                                                                                          fill="none"
-                                                                                                          class=""><path
-                                d="M3.154 14.492c.27 0 .484-.112.817-.396l1.735-1.484c-.345-.272-.653-.739-.653-1.625V6.648c0-1.903 1.244-3.056 3.263-3.056h4.627l-.006-.153c-.132-1.147-.95-1.939-2.49-1.939H2.509C.949 1.5 0 2.34 0 3.805v6.017c0 1.437.918 2.294 2.427 2.294h.092v1.708c0 .408.232.668.635.668zm9.143.008c.396 0 .635-.26.635-.668v-.836h.635c1.515 0 2.433-.863 2.433-2.299v-3.89c0-1.465-.95-2.304-2.515-2.304H8.53c-1.61 0-2.508.833-2.508 2.346v3.848c0 1.46.905 2.3 2.508 2.3h1.488l1.463 1.107c.326.284.54.396.817.396z"
-                                fill="currentColor"></path></svg></span>
-                            <p>Чат</p></button>
-                        <a class="main-footer__online-action" href="https://t.me/s7assistant_bot" target="_blank"
-                           rel="noopener noreferrer"><span class="DS__IconRound__root"><svg width="20" height="20"
-                                                                                            viewBox="0 0 16 16"
-                                                                                            fill="none"
-                                                                                            xmlns="http://www.w3.org/2000/svg"><path
-                                d="M13.963 3.993l-1.962 9.251c-.148.653-.534.816-1.082.508l-2.99-2.203-1.442 1.388c-.16.16-.293.293-.6.293l.214-3.045 5.54-5.006c.241-.214-.052-.333-.374-.119L4.418 9.373 1.47 8.45c-.642-.2-.653-.641.133-.949l11.533-4.443c.534-.2 1.001.119.827.935z"
-                                fill="currentColor"></path></svg></span>
-                            <p>Чат в Telegram</p></a></p></div>
-                    <div class="main-footer__subscribe">
-                        <div class="main-footer__email">Новостная рассылка</div>
-                        <form class="main-footer__subscribe-form"><label class=" input-wrapper   ">
-                            <div style="position: relative;"><input class="input" type="text" autocomplete="off"
-                                                                    data-test="input-field" value="">
-                                <div class="input-placeholder">Электронная почта</div>
-                                <button class="input__email">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
-                                        <g fill="none" fill-rule="evenodd">
-                                            <path d="M0 0h20v20H0z"></path>
-                                            <path fill="#000" fill-opacity=".38"
-                                                  d="M17.707 9.293l-5-5a.999.999 0 1 0-1.414 1.414L14.586 9H3a1 1 0 1 0 0 2h11.586l-3.293 3.293a.999.999 0 1 0 1.414 1.414l5-5a.999.999 0 0 0 0-1.414"></path>
-                                        </g>
-                                    </svg>
-                                </button>
-                            </div>
-                        </label></form>
+                                <p>Чат</p></button>
+                            <a class="main-footer__online-action" href="https://t.me/s7assistant_bot" target="_blank"
+                               rel="noopener noreferrer"><span class="DS__IconRound__root"><svg width="20" height="20"
+                                                                                                viewBox="0 0 16 16"
+                                                                                                fill="none"
+                                                                                                xmlns="http://www.w3.org/2000/svg"><path
+                                    d="M13.963 3.993l-1.962 9.251c-.148.653-.534.816-1.082.508l-2.99-2.203-1.442 1.388c-.16.16-.293.293-.6.293l.214-3.045 5.54-5.006c.241-.214-.052-.333-.374-.119L4.418 9.373 1.47 8.45c-.642-.2-.653-.641.133-.949l11.533-4.443c.534-.2 1.001.119.827.935z"
+                                    fill="currentColor"></path></svg></span>
+                                <p>Чат в Telegram</p></a></p></div>
+                        <div class="main-footer__subscribe">
+                            <div class="main-footer__email">Новостная рассылка</div>
+                            <form class="main-footer__subscribe-form"><label class=" input-wrapper   ">
+                                <div style="position: relative;"><input class="input" type="text" autocomplete="off"
+                                                                        data-test="input-field" value="">
+                                    <div class="input-placeholder">Электронная почта</div>
+                                    <button class="input__email">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                             viewBox="0 0 20 20">
+                                            <g fill="none" fill-rule="evenodd">
+                                                <path d="M0 0h20v20H0z"></path>
+                                                <path fill="#000" fill-opacity=".38"
+                                                      d="M17.707 9.293l-5-5a.999.999 0 1 0-1.414 1.414L14.586 9H3a1 1 0 1 0 0 2h11.586l-3.293 3.293a.999.999 0 1 0 1.414 1.414l5-5a.999.999 0 0 0 0-1.414"></path>
+                                            </g>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </label></form>
+                        </div>
+                    </div>
+                    <div class="main-footer__bottom">
+                        <div class="main-footer__bottom-content">
+                            <div class="main-footer__social"><a href="https://www.facebook.com/S7AirlinesOfficial"
+                                                                target="_blank" rel="noopener noreferrer"
+                                                                class="main-footer__social-link"
+                                                                aria-label="Facebook"><span
+                                    class="main-footer__social-icon"><svg width="16" height="16" viewBox="0 0 16 16"
+                                                                          fill="none" class=""><path fill-rule="evenodd"
+                                                                                                     clip-rule="evenodd"
+                                                                                                     d="M9.498 16V8.702h2.498l.373-2.845H9.5V4.041c0-.823.232-1.384 1.436-1.384h1.536V.111A20.921 20.921 0 0010.233 0c-2.214 0-3.73 1.326-3.73 3.76v2.097H4v2.845h2.504V16h2.994z"
+                                                                                                     fill="currentColor"></path></svg></span></a><a
+                                    href="https://vk.com/s7airlines" target="_blank" rel="noopener noreferrer"
+                                    class="main-footer__social-link" aria-label="VK"><span
+                                    class="main-footer__social-icon"><svg
+                                    width="16" height="16" viewBox="0 0 16 16" fill="none" class=""><path
+                                    fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M15.633 3.843c.111-.37 0-.643-.53-.643h-1.75c-.445 0-.65.235-.761.495 0 0-.89 2.17-2.152 3.579-.407.408-.593.538-.816.538-.11 0-.272-.13-.272-.5v-3.47c0-.445-.129-.643-.5-.643h-2.75c-.279 0-.446.207-.446.402 0 .422.63.52.695 1.706v2.578c0 .565-.102.668-.324.668-.594 0-2.037-2.18-2.893-4.674-.168-.484-.336-.68-.783-.68H.6c-.5.001-.6.236-.6.496 0 .464.593 2.763 2.763 5.804 1.447 2.077 3.484 3.203 5.339 3.203 1.113 0 1.25-.25 1.25-.68v-1.57c0-.5.106-.6.458-.6.26 0 .705.13 1.743 1.13 1.187 1.188 1.383 1.72 2.05 1.72h1.75c.5 0 .75-.25.607-.743-.158-.492-.725-1.206-1.477-2.052-.408-.482-1.02-1.001-1.205-1.26-.26-.334-.186-.483 0-.78 0 0 2.132-3.004 2.355-4.024z"
+                                    fill="currentColor"></path></svg></span></a><a href="https://ok.ru/s7airlines"
+                                                                                   target="_blank"
+                                                                                   rel="noopener noreferrer"
+                                                                                   class="main-footer__social-link"
+                                                                                   aria-label="Odnoklassniki"><span
+                                    class="main-footer__social-icon"><svg width="16" height="16" viewBox="0 0 16 16"
+                                                                          fill="none" class=""><path fill-rule="evenodd"
+                                                                                                     clip-rule="evenodd"
+                                                                                                     d="M10.829 8.666a1.127 1.127 0 011.41 1.76c-.053.041-1.047.828-2.707 1.166l2.505 2.483a1.127 1.127 0 01-1.593 1.595l-2.432-2.368-2.21 2.353a1.124 1.124 0 01-1.594.03 1.127 1.127 0 01-.029-1.595l2.379-2.485c-1.707-.33-2.743-1.137-2.796-1.18a1.127 1.127 0 011.41-1.759c.01.008 1.094.822 2.84.823 1.745 0 2.806-.815 2.816-.823zM8.067 0a4.146 4.146 0 110 8.292 4.146 4.146 0 010-8.292zm0 2.432a1.714 1.714 0 100 3.428 1.714 1.714 0 000-3.428z"
+                                                                                                     fill="currentColor"></path></svg></span></a><a
+                                    href="https://www.instagram.com/s7airlines/" target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="main-footer__social-link" aria-label="Instagram"><span
+                                    class="main-footer__social-icon"><svg width="16" height="16" viewBox="0 0 16 16"
+                                                                          fill="none" class=""><path fill-rule="evenodd"
+                                                                                                     clip-rule="evenodd"
+                                                                                                     d="M7.175 0H8.82c1.44.003 1.744.014 2.475.048.851.038 1.433.174 1.941.371a3.92 3.92 0 011.417.923c.407.4.722.883.923 1.416.197.509.333 1.09.371 1.942.035.761.046 1.06.048 2.661v1.272c-.002 1.6-.013 1.9-.048 2.661-.038.851-.174 1.433-.371 1.941a4.09 4.09 0 01-2.34 2.34c-.508.197-1.09.332-1.94.371-.762.035-1.061.046-2.662.048H7.36c-1.601-.002-1.9-.013-2.661-.048-.852-.039-1.433-.174-1.942-.371a3.922 3.922 0 01-1.416-.923 3.92 3.92 0 01-.923-1.416c-.197-.51-.332-1.09-.371-1.942C.014 10.564.003 10.26 0 8.82V7.175C.003 5.735.014 5.431.048 4.7c.038-.852.174-1.433.371-1.942a3.92 3.92 0 01.923-1.416A3.92 3.92 0 012.758.419C3.267.222 3.848.086 4.7.048 5.43.014 5.735.003 7.175 0zM8.83 1.441H7.164c-1.39.002-1.68.013-2.399.046-.78.036-1.203.166-1.485.275a2.478 2.478 0 00-.92.599 2.48 2.48 0 00-.598.92c-.11.281-.24.704-.275 1.484-.039.844-.047 1.096-.047 3.232s.008 2.388.047 3.232c.035.78.166 1.203.275 1.485.129.347.333.661.599.92.258.265.572.47.92.598.28.109.704.24 1.484.275.75.034 1.033.044 2.586.046h1.291c1.554-.002 1.837-.012 2.587-.046.78-.036 1.203-.166 1.485-.275a2.648 2.648 0 001.517-1.518c.11-.282.24-.706.276-1.485.035-.781.045-1.056.046-2.787v-.89c0-1.731-.01-2.006-.046-2.787-.036-.78-.166-1.203-.276-1.485a2.478 2.478 0 00-.598-.92 2.478 2.478 0 00-.92-.598c-.281-.11-.705-.24-1.484-.275-.719-.033-1.009-.044-2.399-.046zM7.997 3.89a4.107 4.107 0 110 8.214 4.107 4.107 0 010-8.214zm0 1.441a2.666 2.666 0 100 5.332 2.666 2.666 0 000-5.332zm4.269-2.563a.96.96 0 110 1.92.96.96 0 010-1.92z"
+                                                                                                     fill="currentColor"></path></svg></span></a><a
+                                    href="https://www.youtube.com/user/S7Group" target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="main-footer__social-link" aria-label="YouTube"><span
+                                    class="main-footer__social-icon"><svg width="16" height="16" viewBox="0 0 16 16"
+                                                                          fill="none" class=""><path fill-rule="evenodd"
+                                                                                                     clip-rule="evenodd"
+                                                                                                     d="M8.036 2.4c.455 0 5.035.017 6.224.343a2.005 2.005 0 011.41 1.41C16 5.354 16 7.806 16 8.002v.04c-.001.282-.02 2.645-.33 3.82a2.005 2.005 0 01-1.41 1.411c-1.177.31-5.673.328-6.208.33h-.104c-.534-.002-5.02-.021-6.208-.343a2.005 2.005 0 01-1.41-1.41C.02 10.686 0 8.312 0 8.029v-.056c.001-.282.02-2.644.33-3.82a2.046 2.046 0 011.41-1.424c1.19-.313 5.768-.328 6.223-.33h.073zm-1.63 3.202V10.4L10.57 8 6.405 5.602z"
+                                                                                                     fill="currentColor"></path></svg></span></a><a
+                                    href="https://t.me/s7airlines" target="_blank" rel="noopener noreferrer"
+                                    class="main-footer__social-link" aria-label="Telegram"><span
+                                    class="main-footer__social-icon"><svg width="16" height="16" viewBox="0 0 16 16"
+                                                                          fill="none"
+                                                                          xmlns="http://www.w3.org/2000/svg"><path
+                                    d="M13.963 3.993l-1.962 9.251c-.148.653-.534.816-1.082.508l-2.99-2.203-1.442 1.388c-.16.16-.293.293-.6.293l.214-3.045 5.54-5.006c.241-.214-.052-.333-.374-.119L4.418 9.373 1.47 8.45c-.642-.2-.653-.641.133-.949l11.533-4.443c.534-.2 1.001.119.827.935z"
+                                    fill="currentColor"></path></svg></span></a></div>
+                            <div class="main-footer__apps"><a
+                                    href="https://click.google-analytics.com/redirect?tid=UA-30023455-1&amp;url=https%3A%2F%2Fitunes.apple.com%2Fru%2Fapp%2Fs7-airlines%2Fid552920434&amp;aid=ru.s7.s7app&amp;idfa=%{idfa}&amp;cs=portal&amp;cm=badge&amp;cn=app_download"
+                                    class="main-footer__app main-footer__app_apple main-footer__app_apple_ru"
+                                    rel="noopener noreferrer" target="_blank"></a><a
+                                    href="https://play.google.com/store/apps/details?id=ru.s7.android&amp;referrer=utm_source%3Dportal%26utm_medium%3Dbadge%26utm_campaign%3Dapp_download"
+                                    class="main-footer__app main-footer__app_google main-footer__app_google_ru"
+                                    rel="noopener noreferrer" target="_blank"></a><a
+                                    href="https://appgallery.huawei.com/#/app/C101255277"
+                                    class="main-footer__app main-footer__app_huawei main-footer__app_huawei_ru"
+                                    rel="noopener noreferrer" target="_blank"></a></div>
+                            <p class="main-footer__copyright">© 2022. S7 Airlines — Все пpава защищены</p></div>
                     </div>
                 </div>
-                <div class="main-footer__bottom">
-                    <div class="main-footer__bottom-content">
-                        <div class="main-footer__social"><a href="https://www.facebook.com/S7AirlinesOfficial"
-                                                            target="_blank" rel="noopener noreferrer"
-                                                            class="main-footer__social-link" aria-label="Facebook"><span
-                                class="main-footer__social-icon"><svg width="16" height="16" viewBox="0 0 16 16"
-                                                                      fill="none" class=""><path fill-rule="evenodd"
-                                                                                                 clip-rule="evenodd"
-                                                                                                 d="M9.498 16V8.702h2.498l.373-2.845H9.5V4.041c0-.823.232-1.384 1.436-1.384h1.536V.111A20.921 20.921 0 0010.233 0c-2.214 0-3.73 1.326-3.73 3.76v2.097H4v2.845h2.504V16h2.994z"
-                                                                                                 fill="currentColor"></path></svg></span></a><a
-                                href="https://vk.com/s7airlines" target="_blank" rel="noopener noreferrer"
-                                class="main-footer__social-link" aria-label="VK"><span class="main-footer__social-icon"><svg
-                                width="16" height="16" viewBox="0 0 16 16" fill="none" class=""><path
-                                fill-rule="evenodd" clip-rule="evenodd"
-                                d="M15.633 3.843c.111-.37 0-.643-.53-.643h-1.75c-.445 0-.65.235-.761.495 0 0-.89 2.17-2.152 3.579-.407.408-.593.538-.816.538-.11 0-.272-.13-.272-.5v-3.47c0-.445-.129-.643-.5-.643h-2.75c-.279 0-.446.207-.446.402 0 .422.63.52.695 1.706v2.578c0 .565-.102.668-.324.668-.594 0-2.037-2.18-2.893-4.674-.168-.484-.336-.68-.783-.68H.6c-.5.001-.6.236-.6.496 0 .464.593 2.763 2.763 5.804 1.447 2.077 3.484 3.203 5.339 3.203 1.113 0 1.25-.25 1.25-.68v-1.57c0-.5.106-.6.458-.6.26 0 .705.13 1.743 1.13 1.187 1.188 1.383 1.72 2.05 1.72h1.75c.5 0 .75-.25.607-.743-.158-.492-.725-1.206-1.477-2.052-.408-.482-1.02-1.001-1.205-1.26-.26-.334-.186-.483 0-.78 0 0 2.132-3.004 2.355-4.024z"
-                                fill="currentColor"></path></svg></span></a><a href="https://ok.ru/s7airlines"
-                                                                               target="_blank" rel="noopener noreferrer"
-                                                                               class="main-footer__social-link"
-                                                                               aria-label="Odnoklassniki"><span
-                                class="main-footer__social-icon"><svg width="16" height="16" viewBox="0 0 16 16"
-                                                                      fill="none" class=""><path fill-rule="evenodd"
-                                                                                                 clip-rule="evenodd"
-                                                                                                 d="M10.829 8.666a1.127 1.127 0 011.41 1.76c-.053.041-1.047.828-2.707 1.166l2.505 2.483a1.127 1.127 0 01-1.593 1.595l-2.432-2.368-2.21 2.353a1.124 1.124 0 01-1.594.03 1.127 1.127 0 01-.029-1.595l2.379-2.485c-1.707-.33-2.743-1.137-2.796-1.18a1.127 1.127 0 011.41-1.759c.01.008 1.094.822 2.84.823 1.745 0 2.806-.815 2.816-.823zM8.067 0a4.146 4.146 0 110 8.292 4.146 4.146 0 010-8.292zm0 2.432a1.714 1.714 0 100 3.428 1.714 1.714 0 000-3.428z"
-                                                                                                 fill="currentColor"></path></svg></span></a><a
-                                href="https://www.instagram.com/s7airlines/" target="_blank" rel="noopener noreferrer"
-                                class="main-footer__social-link" aria-label="Instagram"><span
-                                class="main-footer__social-icon"><svg width="16" height="16" viewBox="0 0 16 16"
-                                                                      fill="none" class=""><path fill-rule="evenodd"
-                                                                                                 clip-rule="evenodd"
-                                                                                                 d="M7.175 0H8.82c1.44.003 1.744.014 2.475.048.851.038 1.433.174 1.941.371a3.92 3.92 0 011.417.923c.407.4.722.883.923 1.416.197.509.333 1.09.371 1.942.035.761.046 1.06.048 2.661v1.272c-.002 1.6-.013 1.9-.048 2.661-.038.851-.174 1.433-.371 1.941a4.09 4.09 0 01-2.34 2.34c-.508.197-1.09.332-1.94.371-.762.035-1.061.046-2.662.048H7.36c-1.601-.002-1.9-.013-2.661-.048-.852-.039-1.433-.174-1.942-.371a3.922 3.922 0 01-1.416-.923 3.92 3.92 0 01-.923-1.416c-.197-.51-.332-1.09-.371-1.942C.014 10.564.003 10.26 0 8.82V7.175C.003 5.735.014 5.431.048 4.7c.038-.852.174-1.433.371-1.942a3.92 3.92 0 01.923-1.416A3.92 3.92 0 012.758.419C3.267.222 3.848.086 4.7.048 5.43.014 5.735.003 7.175 0zM8.83 1.441H7.164c-1.39.002-1.68.013-2.399.046-.78.036-1.203.166-1.485.275a2.478 2.478 0 00-.92.599 2.48 2.48 0 00-.598.92c-.11.281-.24.704-.275 1.484-.039.844-.047 1.096-.047 3.232s.008 2.388.047 3.232c.035.78.166 1.203.275 1.485.129.347.333.661.599.92.258.265.572.47.92.598.28.109.704.24 1.484.275.75.034 1.033.044 2.586.046h1.291c1.554-.002 1.837-.012 2.587-.046.78-.036 1.203-.166 1.485-.275a2.648 2.648 0 001.517-1.518c.11-.282.24-.706.276-1.485.035-.781.045-1.056.046-2.787v-.89c0-1.731-.01-2.006-.046-2.787-.036-.78-.166-1.203-.276-1.485a2.478 2.478 0 00-.598-.92 2.478 2.478 0 00-.92-.598c-.281-.11-.705-.24-1.484-.275-.719-.033-1.009-.044-2.399-.046zM7.997 3.89a4.107 4.107 0 110 8.214 4.107 4.107 0 010-8.214zm0 1.441a2.666 2.666 0 100 5.332 2.666 2.666 0 000-5.332zm4.269-2.563a.96.96 0 110 1.92.96.96 0 010-1.92z"
-                                                                                                 fill="currentColor"></path></svg></span></a><a
-                                href="https://www.youtube.com/user/S7Group" target="_blank" rel="noopener noreferrer"
-                                class="main-footer__social-link" aria-label="YouTube"><span
-                                class="main-footer__social-icon"><svg width="16" height="16" viewBox="0 0 16 16"
-                                                                      fill="none" class=""><path fill-rule="evenodd"
-                                                                                                 clip-rule="evenodd"
-                                                                                                 d="M8.036 2.4c.455 0 5.035.017 6.224.343a2.005 2.005 0 011.41 1.41C16 5.354 16 7.806 16 8.002v.04c-.001.282-.02 2.645-.33 3.82a2.005 2.005 0 01-1.41 1.411c-1.177.31-5.673.328-6.208.33h-.104c-.534-.002-5.02-.021-6.208-.343a2.005 2.005 0 01-1.41-1.41C.02 10.686 0 8.312 0 8.029v-.056c.001-.282.02-2.644.33-3.82a2.046 2.046 0 011.41-1.424c1.19-.313 5.768-.328 6.223-.33h.073zm-1.63 3.202V10.4L10.57 8 6.405 5.602z"
-                                                                                                 fill="currentColor"></path></svg></span></a><a
-                                href="https://t.me/s7airlines" target="_blank" rel="noopener noreferrer"
-                                class="main-footer__social-link" aria-label="Telegram"><span
-                                class="main-footer__social-icon"><svg width="16" height="16" viewBox="0 0 16 16"
-                                                                      fill="none" xmlns="http://www.w3.org/2000/svg"><path
-                                d="M13.963 3.993l-1.962 9.251c-.148.653-.534.816-1.082.508l-2.99-2.203-1.442 1.388c-.16.16-.293.293-.6.293l.214-3.045 5.54-5.006c.241-.214-.052-.333-.374-.119L4.418 9.373 1.47 8.45c-.642-.2-.653-.641.133-.949l11.533-4.443c.534-.2 1.001.119.827.935z"
-                                fill="currentColor"></path></svg></span></a></div>
-                        <div class="main-footer__apps"><a
-                                href="https://click.google-analytics.com/redirect?tid=UA-30023455-1&amp;url=https%3A%2F%2Fitunes.apple.com%2Fru%2Fapp%2Fs7-airlines%2Fid552920434&amp;aid=ru.s7.s7app&amp;idfa=%{idfa}&amp;cs=portal&amp;cm=badge&amp;cn=app_download"
-                                class="main-footer__app main-footer__app_apple main-footer__app_apple_ru"
-                                rel="noopener noreferrer" target="_blank"></a><a
-                                href="https://play.google.com/store/apps/details?id=ru.s7.android&amp;referrer=utm_source%3Dportal%26utm_medium%3Dbadge%26utm_campaign%3Dapp_download"
-                                class="main-footer__app main-footer__app_google main-footer__app_google_ru"
-                                rel="noopener noreferrer" target="_blank"></a><a
-                                href="https://appgallery.huawei.com/#/app/C101255277"
-                                class="main-footer__app main-footer__app_huawei main-footer__app_huawei_ru"
-                                rel="noopener noreferrer" target="_blank"></a></div>
-                        <p class="main-footer__copyright">© 2022. S7 Airlines — Все пpава защищены</p></div>
-                </div>
-            </div>
-        </footer>
-        <div>
-            <div class="Widget_Widget__22xiY Widget_Position__8j_zv" style="display: none; z-index: 1000;">
-                <div class="Spinner_spinnerContainer__1nfV4 Spinner_visible__1Y9ca">
-                    <div class="Spinner_spinner__1q0RK"></div>
-                </div>
-                <div class="WidgetHeader_header__2a9nd">
-                    <svg width="32px" height="32px" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-                        <path fill-rule="evenodd" clip-rule="evenodd"
-                              d="M32 16.003C32 24.843 24.842 32 16.005 32 7.167 32 0 24.843 0 16.003 0 7.164 7.167 0 16.005 0 24.842 0 32 7.164 32 16.003Z"
-                              fill="#C4D600"></path>
-                        <path fill-rule="evenodd" clip-rule="evenodd"
-                              d="M9.449 8.29c1.177-.436 2.803-.575 5.31-.575h2.261l-1.106 2.767h-1.55c-1.664 0-2.732.005-3.309.196-.561.174-.976.385-1.202.716-.209.267-.279.633-.279.95 0 .332.036.646.365 1.068.405.405 1.073.927 2.383 1.733 2.612 1.63 3.385 2.923 3.385 4.625 0 2.77-2.613 5.416-6.991 5.416-1.316 0-3.153-.193-3.927-.44l-.407-.12c.159-.527.678-1.98.908-2.593l.41.103c.86.21 2.207.334 3.101.334 2.562 0 3.558-1.156 3.558-2.172 0-.929-.507-1.438-3.049-2.979-2.382-1.472-3.205-2.752-3.205-4.52 0-2.123 1.366-3.738 3.344-4.508Zm9.234-.575h7.786c.366 0 .436.259.295.54-.51 1.262-5.313 13.298-5.313 13.298H18.24s3.794-9.668 4.424-11.109c-.146 0-.28.004-.459.01-.357.011-.891.028-2.048.028h-2.581l1.107-2.767Z"
-                              fill="#fff"></path>
-                    </svg>
-                    <div class="WidgetHeader_header-info__YA9g9"><h1 class="WidgetHeader_header-info__name__1xsHK">
-                        Поддержка S7</h1>
-                        <p class="WidgetHeader_header-info__status__3bv8p">Соединение</p></div>
-                </div>
-                <div class="Messages_messages__3LqFi"></div>
-                <div class="MessageSender_message-sender__7QTjF">
-                    <div contenteditable="true" class="MessageSender_message-sender__input__2q7wK"
-                         placeholder="Введите сообщение..."></div>
-                    <div class="MessageSender_message-sender__tools__2lZxp">
-                        <svg width="20" height="20" fill="#BCC4D3" xmlns="http://www.w3.org/2000/svg"
-                             class="MessageSender_svg__1vdH3 ">
-                            <path d="M7.375 9.625a1.125 1.125 0 1 0 0-2.25 1.125 1.125 0 0 0 0 2.25Zm-.17 2.875a.75.75 0 0 0-1.118 1A5.239 5.239 0 0 0 10 15.25a5.239 5.239 0 0 0 3.913-1.75.75.75 0 0 0-1.118-1A3.739 3.739 0 0 1 10 13.75a3.739 3.739 0 0 1-2.795-1.25Zm6.545-4a1.125 1.125 0 1 1-2.25 0 1.125 1.125 0 0 1 2.25 0ZM19 10a9 9 0 1 0-18 0 9 9 0 0 0 18 0ZM2.5 10a7.5 7.5 0 1 1 15 0 7.5 7.5 0 0 1-15 0Z"></path>
+            </footer>
+            <div>
+                <div class="Widget_Widget__22xiY Widget_Position__8j_zv" style="display: none; z-index: 1000;">
+                    <div class="Spinner_spinnerContainer__1nfV4 Spinner_visible__1Y9ca">
+                        <div class="Spinner_spinner__1q0RK"></div>
+                    </div>
+                    <div class="WidgetHeader_header__2a9nd">
+                        <svg width="32px" height="32px" fill="none" xmlns="http://www.w3.org/2000/svg"
+                             viewBox="0 0 32 32">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                  d="M32 16.003C32 24.843 24.842 32 16.005 32 7.167 32 0 24.843 0 16.003 0 7.164 7.167 0 16.005 0 24.842 0 32 7.164 32 16.003Z"
+                                  fill="#C4D600"></path>
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                  d="M9.449 8.29c1.177-.436 2.803-.575 5.31-.575h2.261l-1.106 2.767h-1.55c-1.664 0-2.732.005-3.309.196-.561.174-.976.385-1.202.716-.209.267-.279.633-.279.95 0 .332.036.646.365 1.068.405.405 1.073.927 2.383 1.733 2.612 1.63 3.385 2.923 3.385 4.625 0 2.77-2.613 5.416-6.991 5.416-1.316 0-3.153-.193-3.927-.44l-.407-.12c.159-.527.678-1.98.908-2.593l.41.103c.86.21 2.207.334 3.101.334 2.562 0 3.558-1.156 3.558-2.172 0-.929-.507-1.438-3.049-2.979-2.382-1.472-3.205-2.752-3.205-4.52 0-2.123 1.366-3.738 3.344-4.508Zm9.234-.575h7.786c.366 0 .436.259.295.54-.51 1.262-5.313 13.298-5.313 13.298H18.24s3.794-9.668 4.424-11.109c-.146 0-.28.004-.459.01-.357.011-.891.028-2.048.028h-2.581l1.107-2.767Z"
+                                  fill="#fff"></path>
                         </svg>
-                        <label class="MessageSender_file-btn__1s0gg">
+                        <div class="WidgetHeader_header-info__YA9g9"><h1 class="WidgetHeader_header-info__name__1xsHK">
+                            Поддержка S7</h1>
+                            <p class="WidgetHeader_header-info__status__3bv8p">Соединение</p></div>
+                    </div>
+                    <div class="Messages_messages__3LqFi"></div>
+                    <div class="MessageSender_message-sender__7QTjF">
+                        <div contenteditable="true" class="MessageSender_message-sender__input__2q7wK"
+                             placeholder="Введите сообщение..."></div>
+                        <div class="MessageSender_message-sender__tools__2lZxp">
                             <svg width="20" height="20" fill="#BCC4D3" xmlns="http://www.w3.org/2000/svg"
-                                 class="MessageSender_svg__1vdH3">
-                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                      d="M8.79 2.39c2.03-2.042 5.381-1.758 7.478.352 2.098 2.11 2.38 5.481.35 7.523l-7.626 7.67c-1.561 1.572-4.11 1.333-5.684-.25-1.574-1.584-1.811-4.147-.25-5.718L8.989 6c1.094-1.1 2.84-.906 3.89.151 1.05 1.057 1.244 2.81.152 3.91l-4.614 4.697a.843.843 0 0 1-1.197.007.855.855 0 0 1-.007-1.204l4.615-4.698.004-.004c.31-.312.368-.982-.15-1.503-.52-.522-1.185-.463-1.495-.151L4.255 13.17c-.778.783-.792 2.261.25 3.309s2.512 1.034 3.29.252L15.42 9.06c1.246-1.253 1.215-3.54-.35-5.114-1.565-1.574-3.838-1.605-5.084-.352L4.903 8.708a.843.843 0 0 1-1.198 0 .855.855 0 0 1 0-1.204L8.79 2.39Z"></path>
+                                 class="MessageSender_svg__1vdH3 ">
+                                <path d="M7.375 9.625a1.125 1.125 0 1 0 0-2.25 1.125 1.125 0 0 0 0 2.25Zm-.17 2.875a.75.75 0 0 0-1.118 1A5.239 5.239 0 0 0 10 15.25a5.239 5.239 0 0 0 3.913-1.75.75.75 0 0 0-1.118-1A3.739 3.739 0 0 1 10 13.75a3.739 3.739 0 0 1-2.795-1.25Zm6.545-4a1.125 1.125 0 1 1-2.25 0 1.125 1.125 0 0 1 2.25 0ZM19 10a9 9 0 1 0-18 0 9 9 0 0 0 18 0ZM2.5 10a7.5 7.5 0 1 1 15 0 7.5 7.5 0 0 1-15 0Z"></path>
                             </svg>
-                            <input id="button-file" type="file" hidden="" class="MessageSender_file__rH1iy"
-                                   accept=".doc, .docx, .pdf, .txt, .m4a, .amr, .bmp, .gif, .jpeg, .jpg, .tiff, .tif, .png"></label>
+                            <label class="MessageSender_file-btn__1s0gg">
+                                <svg width="20" height="20" fill="#BCC4D3" xmlns="http://www.w3.org/2000/svg"
+                                     class="MessageSender_svg__1vdH3">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                          d="M8.79 2.39c2.03-2.042 5.381-1.758 7.478.352 2.098 2.11 2.38 5.481.35 7.523l-7.626 7.67c-1.561 1.572-4.11 1.333-5.684-.25-1.574-1.584-1.811-4.147-.25-5.718L8.989 6c1.094-1.1 2.84-.906 3.89.151 1.05 1.057 1.244 2.81.152 3.91l-4.614 4.697a.843.843 0 0 1-1.197.007.855.855 0 0 1-.007-1.204l4.615-4.698.004-.004c.31-.312.368-.982-.15-1.503-.52-.522-1.185-.463-1.495-.151L4.255 13.17c-.778.783-.792 2.261.25 3.309s2.512 1.034 3.29.252L15.42 9.06c1.246-1.253 1.215-3.54-.35-5.114-1.565-1.574-3.838-1.605-5.084-.352L4.903 8.708a.843.843 0 0 1-1.198 0 .855.855 0 0 1 0-1.204L8.79 2.39Z"></path>
+                                </svg>
+                                <input id="button-file" type="file" hidden="" class="MessageSender_file__rH1iy"
+                                       accept=".doc, .docx, .pdf, .txt, .m4a, .amr, .bmp, .gif, .jpeg, .jpg, .tiff, .tif, .png"></label>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<script type="text/javascript" id="">var _tmr = _tmr || [];
-_tmr.push({type: "itemView", productid: "", pagetype: "home", totalvalue: "", list: "3"});
-_tmr.push({type: "itemView", productid: "", pagetype: "home", totalvalue: "", list: "4"});
-_tmr.push({type: "itemView", productid: "", pagetype: "home", totalvalue: "", list: "2"});
-_tmr.push({type: "itemView", productid: "", pagetype: "home", totalvalue: "", list: "1"});</script>
-<script type="text/javascript" id="">function setCookie(d, c, a) {
-    a = a || {};
-    var b = a.expires;
-    if ("number" == typeof b && b) {
-        var e = new Date;
-        e.setTime(e.getTime() + 1E3 * b);
-        b = a.expires = e
+    <script type="text/javascript" id="">var _tmr = _tmr || [];
+    _tmr.push({type: "itemView", productid: "", pagetype: "home", totalvalue: "", list: "3"});
+    _tmr.push({type: "itemView", productid: "", pagetype: "home", totalvalue: "", list: "4"});
+    _tmr.push({type: "itemView", productid: "", pagetype: "home", totalvalue: "", list: "2"});
+    _tmr.push({type: "itemView", productid: "", pagetype: "home", totalvalue: "", list: "1"});</script>
+    <script type="text/javascript" id="">function setCookie(d, c, a) {
+        a = a || {};
+        var b = a.expires;
+        if ("number" == typeof b && b) {
+            var e = new Date;
+            e.setTime(e.getTime() + 1E3 * b);
+            b = a.expires = e
+        }
+        b && b.toUTCString && (a.expires = b.toUTCString());
+        c = encodeURIComponent(c);
+        d = d + "\x3d" + c;
+        for (var f in a) d += "; " + f, c = a[f], !0 !== c && (d += "\x3d" + c);
+        document.cookie = d
     }
-    b && b.toUTCString && (a.expires = b.toUTCString());
-    c = encodeURIComponent(c);
-    d = d + "\x3d" + c;
-    for (var f in a) d += "; " + f, c = a[f], !0 !== c && (d += "\x3d" + c);
-    document.cookie = d
-}
 
-var refh = google_tag_manager["GTM-MWTWZW"].macro(246);
--1 == refh.indexOf("s7.ru") && null == location.pathname.match(/mainflow|personal|myb|confirmBooking|CheckIn/g) && (void 0 != google_tag_manager["GTM-MWTWZW"].macro(247) ? (setCookie("source", google_tag_manager["GTM-MWTWZW"].macro(248), {
-    expires: 7776E3,
-    domain: "s7.ru",
-    path: "/"
-}), setCookie("medium", google_tag_manager["GTM-MWTWZW"].macro(249), {
-    expires: 7776E3,
-    domain: "s7.ru",
-    path: "/"
-}), setCookie("sourceLastClick", google_tag_manager["GTM-MWTWZW"].macro(250), {
-    expires: 3600,
-    domain: "s7.ru",
-    path: "/"
-}), setCookie("mediumLastClick", google_tag_manager["GTM-MWTWZW"].macro(251), {
-    expires: 3600,
-    domain: "s7.ru",
-    path: "/"
-}), setCookie("utm_campaign",
-    google_tag_manager["GTM-MWTWZW"].macro(252), {
+    var refh = google_tag_manager["GTM-MWTWZW"].macro(246);
+    -1 == refh.indexOf("s7.ru") && null == location.pathname.match(/mainflow|personal|myb|confirmBooking|CheckIn/g) && (void 0 != google_tag_manager["GTM-MWTWZW"].macro(247) ? (setCookie("source", google_tag_manager["GTM-MWTWZW"].macro(248), {
         expires: 7776E3,
         domain: "s7.ru",
         path: "/"
-    })) : "" != google_tag_manager["GTM-MWTWZW"].macro(253) ? (setCookie("source", google_tag_manager["GTM-MWTWZW"].macro(254), {
-    expires: 7776E3,
-    domain: "s7.ru",
-    path: "/"
-}), setCookie("medium", "referral", {
-    expires: 7776E3,
-    domain: "s7.ru",
-    path: "/"
-}), setCookie("sourceLastClick", google_tag_manager["GTM-MWTWZW"].macro(255), {
-    expires: 3600,
-    domain: "s7.ru",
-    path: "/"
-}), setCookie("mediumLastClick", "referral", {
-    expires: 3600,
-    domain: "s7.ru",
-    path: "/"
-})) : "" == google_tag_manager["GTM-MWTWZW"].macro(256) && (setCookie("sourceLastClick", "direct", {
-    expires: 3600, domain: "s7.ru",
-    path: "/"
-}), setCookie("mediumLastClick", "none", {
-    expires: 3600,
-    domain: "s7.ru",
-    path: "/"
-}), void 0 == google_tag_manager["GTM-MWTWZW"].macro(257) && (setCookie("source", "direct", {
-    expires: 7776E3,
-    domain: "s7.ru",
-    path: "/"
-}), setCookie("medium", "none", {expires: 7776E3, domain: "s7.ru", path: "/"}))));
-void 0 == google_tag_manager["GTM-MWTWZW"].macro(258) ? 0 < document.referrer.indexOf("s7.ru") || ("admitad" == google_tag_manager["GTM-MWTWZW"].macro(259) ? (setCookie("admitad_check", google_tag_manager["GTM-MWTWZW"].macro(260) + "|" + (new Date).getTime(), {
-    expires: 1800,
-    domain: "s7.ru",
-    path: "/"
-}), setCookie("admitad_id", google_tag_manager["GTM-MWTWZW"].macro(261), {
-    expires: 1728E3,
-    domain: "s7.ru",
-    path: "/"
-})) : setCookie("admitad_check", google_tag_manager["GTM-MWTWZW"].macro(262) + "|" + (new Date).getTime(), {
-    expires: 1800,
-    domain: "s7.ru",
-    path: "/"
-})) : 0 < document.referrer.indexOf("s7.ru") || (void 0 != google_tag_manager["GTM-MWTWZW"].macro(263) ? "admitad" ==
-google_tag_manager["GTM-MWTWZW"].macro(264) ? (console.info("TIME NOW - " + (new Date).getTime()), console.info("TIME OLD - " + google_tag_manager["GTM-MWTWZW"].macro(265).split("|")[1]), 18E5 > (new Date).getTime() - google_tag_manager["GTM-MWTWZW"].macro(266).split("|")[1] || (setCookie("admitad_check", google_tag_manager["GTM-MWTWZW"].macro(267) + "|" + (new Date).getTime(), {
-    expires: 1728E3,
-    domain: "s7.ru",
-    path: "/"
-}), setCookie("admitad_id", google_tag_manager["GTM-MWTWZW"].macro(268), {
-    expires: 1728E3,
-    domain: "s7.ru",
-    path: "/"
-}))) : setCookie("admitad_check", google_tag_manager["GTM-MWTWZW"].macro(269) + "|" + (new Date).getTime(), {
-    expires: 1800, domain: "s7.ru",
-    path: "/"
-}) : setCookie("admitad_check", "|" + (new Date).getTime(), {expires: 1800, domain: "s7.ru", path: "/"}));</script>
-<script type="text/javascript" id="">var curr = google_tag_manager["GTM-MWTWZW"].macro(270);
-if (google_tag_manager["GTM-MWTWZW"].macro(271) != undefined) setCookie("currency", google_tag_manager["GTM-MWTWZW"].macro(272), {
-    expires: 7776E3,
-    domain: "s7.ru",
-    path: "/"
-}); else if (google_tag_manager["GTM-MWTWZW"].macro(273) == undefined && google_tag_manager["GTM-MWTWZW"].macro(274) != "undefined") ;</script>
-<script type="text/javascript" id="">function setCookie(d, c, a) {
-    a = a || {};
-    var b = a.expires;
-    if ("number" == typeof b && b) {
-        var e = new Date;
-        e.setTime(e.getTime() + 1E3 * b);
-        b = a.expires = e
-    }
-    b && b.toUTCString && (a.expires = b.toUTCString());
-    c = encodeURIComponent(c);
-    d = d + "\x3d" + c;
-    for (var f in a) d += "; " + f, c = a[f], !0 !== c && (d += "\x3d" + c);
-    document.cookie = d
-}
-
-var refh = google_tag_manager["GTM-MWTWZW"].macro(275);
--1 != refh.indexOf("s7.ru") || null != location.pathname.match(/mainflow|personal|myb|confirmBooking|CheckIn/g) || void 0 == google_tag_manager["GTM-MWTWZW"].macro(276) || "WremeTHu3h" != google_tag_manager["GTM-MWTWZW"].macro(277) && "h6cevuDaFe" != google_tag_manager["GTM-MWTWZW"].macro(278) || setCookie("kayak24h", "true", {
-    expires: 86400,
-    domain: "s7.ru",
-    path: "/"
-});</script>
-<script type="text/javascript" id="">function getQueryParams(a) {
-    a = a.split("+").join(" ");
-    for (var c = {}, b, d = /[?&]?([^=]+)=([^&]*)/g; b = d.exec(a);) c[decodeURIComponent(b[1])] = decodeURIComponent(b[2]);
-    return c
-}
-
-var query = getQueryParams(document.location.search);
--1 === document.referrer.indexOf("s7.ru") && "" !== document.referrer && (window.localStorage.removeItem("utm_source"), window.localStorage.removeItem("utm_medium"), window.localStorage.removeItem("utm_campaign"), window.localStorage.removeItem("utm_content"), window.localStorage.removeItem("utm_term"));
-void 0 !== query.utm_source && void 0 !== query.utm_medium && void 0 !== query.utm_campaign && (window.localStorage.setItem("utm_source", query.utm_source), window.localStorage.setItem("utm_medium", query.utm_medium), window.localStorage.setItem("utm_campaign", query.utm_campaign), query.utm_content ? window.localStorage.setItem("utm_content", query.utm_content) : window.localStorage.removeItem("utm_content"), query.utm_term ? window.localStorage.setItem("utm_term", query.utm_term) : window.localStorage.removeItem("utm_term"));
-if (window.localStorage.getItem("utm_source")) {
-    var utms = [], utm_source = "utm_source\x3d" + window.localStorage.getItem("utm_source"),
-        utm_medium = "utm_medium\x3d" + window.localStorage.getItem("utm_medium"),
-        utm_campaign = "utm_campaign\x3d" + window.localStorage.getItem("utm_campaign");
-    utms.push(utm_source, utm_medium, utm_campaign);
-    if (window.localStorage.getItem("utm_content")) {
-        var utm_content = "utm_content\x3d" + window.localStorage.getItem("utm_content");
-        utms.push(utm_content)
-    }
-    if (window.localStorage.getItem("utm_content")) {
-        var utm_term =
-            "utm_term\x3d" + window.localStorage.getItem("utm_term");
-        utms.push(utm_term)
-    }
-}
-;</script>
-<script type="text/javascript" id="">var _tmr = window._tmr || (window._tmr = []);
-_tmr.push({id: "2600380", type: "pageView", start: (new Date).getTime(), pid: "USER_ID"});
-(function (c, e, a) {
-    if (!c.getElementById(a)) {
-        var b = c.createElement("script");
-        b.type = "text/javascript";
-        b.async = !0;
-        b.id = a;
-        b.src = "https://top-fwz1.mail.ru/js/code.js";
-        a = function () {
-            var d = c.getElementsByTagName("script")[0];
-            d.parentNode.insertBefore(b, d)
-        };
-        "[object Opera]" == e.opera ? c.addEventListener("DOMContentLoaded", a, !1) : a()
-    }
-})(document, window, "topmailru-code");</script>
-<noscript>
-    <div>
-        <img src="https://top-fwz1.mail.ru/counter?id=2600380;js=na" style="border:0;position:absolute;left:-9999px;"
-             alt="Top.Mail.Ru">
-    </div>
-</noscript>
-<script type="text/javascript" id="">!function () {
-    var a = document.createElement("script");
-    a.type = "text/javascript";
-    a.async = !0;
-    a.src = "https://vk.com/js/api/openapi.js?162";
-    a.onload = function () {
-        VK.Retargeting.Init("VK-RTRG-363531-8pdtI");
-        VK.Retargeting.Hit()
-    };
-    document.head.appendChild(a)
-}();</script>
-<noscript>
-    <img src="https://vk.com/rtrg?p=VK-RTRG-363531-8pdtI" style="position:fixed; left:-999px;" alt="">
-</noscript>
-<script type="text/javascript" id="">var _tmr = window._tmr || (window._tmr = []);
-_tmr.push({id: "2600380", type: "pageView", start: (new Date).getTime()});
-(function (c, d, a) {
-    if (!c.getElementById(a)) {
-        var b = c.createElement("script");
-        b.type = "text/javascript";
-        b.async = !0;
-        b.id = a;
-        b.src = "https://top-fwz1.mail.ru/js/code.js";
-        a = function () {
-            var a = c.getElementsByTagName("script")[0];
-            a.parentNode.insertBefore(b, a)
-        };
-        "[object Opera]" == d.opera ? c.addEventListener("DOMContentLoaded", a, !1) : a()
-    }
-})(document, window, "topmailru-code");</script>
-<noscript>
-    <div>
-        <img src="https://top-fwz1.mail.ru/counter?id=2600380;js=na" style="border:0;position:absolute;left:-9999px;"
-             alt="Top.Mail.Ru">
-    </div>
-</noscript>
-<script type="text/javascript" id="" src="https://static.terratraf.io/engine/GP.js"></script>
-<script type="text/javascript" id="">(function (a) {
-    a = document.createElement("script");
-    a.type = "text/javascript";
-    a.async = !0;
-    a.src = "https://analytics.tiktok.com/i18n/pixel/sdk.js?sdkid\x3dBSMMJPFRH2682FEL6130";
-    var b = document.getElementsByTagName("script")[0];
-    b.parentNode.insertBefore(a, b)
-})(window);</script>
-<script type="text/javascript" id="">try {
-    (function () {
-        var c = "", e = "ndl7AJkDlVQ0z0stXXNJ", f = [];
-        f.push("pr_" + e + "_home");
-        f.push("pr_" + e + "_uid_unknown");
-        var g = "__rtbhouse.lid", b = window.localStorage.getItem(g);
-        if (!b) {
-            b = "";
-            for (var h = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789", d = 0; 20 > d; d++) b += h.charAt(Math.floor(Math.random() * h.length));
-            window.localStorage.setItem(g, b)
+    }), setCookie("medium", google_tag_manager["GTM-MWTWZW"].macro(249), {
+        expires: 7776E3,
+        domain: "s7.ru",
+        path: "/"
+    }), setCookie("sourceLastClick", google_tag_manager["GTM-MWTWZW"].macro(250), {
+        expires: 3600,
+        domain: "s7.ru",
+        path: "/"
+    }), setCookie("mediumLastClick", google_tag_manager["GTM-MWTWZW"].macro(251), {
+        expires: 3600,
+        domain: "s7.ru",
+        path: "/"
+    }), setCookie("utm_campaign",
+        google_tag_manager["GTM-MWTWZW"].macro(252), {
+            expires: 7776E3,
+            domain: "s7.ru",
+            path: "/"
+        })) : "" != google_tag_manager["GTM-MWTWZW"].macro(253) ? (setCookie("source", google_tag_manager["GTM-MWTWZW"].macro(254), {
+        expires: 7776E3,
+        domain: "s7.ru",
+        path: "/"
+    }), setCookie("medium", "referral", {
+        expires: 7776E3,
+        domain: "s7.ru",
+        path: "/"
+    }), setCookie("sourceLastClick", google_tag_manager["GTM-MWTWZW"].macro(255), {
+        expires: 3600,
+        domain: "s7.ru",
+        path: "/"
+    }), setCookie("mediumLastClick", "referral", {
+        expires: 3600,
+        domain: "s7.ru",
+        path: "/"
+    })) : "" == google_tag_manager["GTM-MWTWZW"].macro(256) && (setCookie("sourceLastClick", "direct", {
+        expires: 3600, domain: "s7.ru",
+        path: "/"
+    }), setCookie("mediumLastClick", "none", {
+        expires: 3600,
+        domain: "s7.ru",
+        path: "/"
+    }), void 0 == google_tag_manager["GTM-MWTWZW"].macro(257) && (setCookie("source", "direct", {
+        expires: 7776E3,
+        domain: "s7.ru",
+        path: "/"
+    }), setCookie("medium", "none", {expires: 7776E3, domain: "s7.ru", path: "/"}))));
+    void 0 == google_tag_manager["GTM-MWTWZW"].macro(258) ? 0 < document.referrer.indexOf("s7.ru") || ("admitad" == google_tag_manager["GTM-MWTWZW"].macro(259) ? (setCookie("admitad_check", google_tag_manager["GTM-MWTWZW"].macro(260) + "|" + (new Date).getTime(), {
+        expires: 1800,
+        domain: "s7.ru",
+        path: "/"
+    }), setCookie("admitad_id", google_tag_manager["GTM-MWTWZW"].macro(261), {
+        expires: 1728E3,
+        domain: "s7.ru",
+        path: "/"
+    })) : setCookie("admitad_check", google_tag_manager["GTM-MWTWZW"].macro(262) + "|" + (new Date).getTime(), {
+        expires: 1800,
+        domain: "s7.ru",
+        path: "/"
+    })) : 0 < document.referrer.indexOf("s7.ru") || (void 0 != google_tag_manager["GTM-MWTWZW"].macro(263) ? "admitad" ==
+    google_tag_manager["GTM-MWTWZW"].macro(264) ? (console.info("TIME NOW - " + (new Date).getTime()), console.info("TIME OLD - " + google_tag_manager["GTM-MWTWZW"].macro(265).split("|")[1]), 18E5 > (new Date).getTime() - google_tag_manager["GTM-MWTWZW"].macro(266).split("|")[1] || (setCookie("admitad_check", google_tag_manager["GTM-MWTWZW"].macro(267) + "|" + (new Date).getTime(), {
+        expires: 1728E3,
+        domain: "s7.ru",
+        path: "/"
+    }), setCookie("admitad_id", google_tag_manager["GTM-MWTWZW"].macro(268), {
+        expires: 1728E3,
+        domain: "s7.ru",
+        path: "/"
+    }))) : setCookie("admitad_check", google_tag_manager["GTM-MWTWZW"].macro(269) + "|" + (new Date).getTime(), {
+        expires: 1800, domain: "s7.ru",
+        path: "/"
+    }) : setCookie("admitad_check", "|" + (new Date).getTime(), {expires: 1800, domain: "s7.ru", path: "/"}));</script>
+    <script type="text/javascript" id="">var curr = google_tag_manager["GTM-MWTWZW"].macro(270);
+    if (google_tag_manager["GTM-MWTWZW"].macro(271) != undefined) setCookie("currency", google_tag_manager["GTM-MWTWZW"].macro(272), {
+        expires: 7776E3,
+        domain: "s7.ru",
+        path: "/"
+    }); else if (google_tag_manager["GTM-MWTWZW"].macro(273) == undefined && google_tag_manager["GTM-MWTWZW"].macro(274) != "undefined") ;</script>
+    <script type="text/javascript" id="">function setCookie(d, c, a) {
+        a = a || {};
+        var b = a.expires;
+        if ("number" == typeof b && b) {
+            var e = new Date;
+            e.setTime(e.getTime() + 1E3 * b);
+            b = a.expires = e
         }
-        f.push("pr_" + e + "_lid_" + b);
-        var a = document.createElement("iframe");
-        e = encodeURIComponent(document.referrer ? document.referrer : "");
-        g = encodeURIComponent(document.location.href ?
-            document.location.href : "");
-        c = "https://" + c + "creativecdn.com/tags?type\x3diframe";
-        b = encodeURIComponent("" + Date.now());
-        for (d = 0; d < f.length; d++) c += "\x26id\x3d" + encodeURIComponent(f[d]);
-        c += "\x26su\x3d" + g + "\x26sr\x3d" + e + "\x26ts\x3d" + b;
-        a.setAttribute("src", c);
-        a.setAttribute("width", "1");
-        a.setAttribute("height", "1");
-        a.setAttribute("scrolling", "no");
-        a.setAttribute("frameBorder", "0");
-        a.setAttribute("style", "display:none");
-        a.setAttribute("referrerpolicy", "no-referrer-when-downgrade");
-        document.body ? document.body.appendChild(a) :
-            window.addEventListener("DOMContentLoaded", function () {
-                document.body.appendChild(a)
-            })
-    })()
-} catch (c) {
-}
-;</script>
-<iframe src="https://creativecdn.com/tags?type=iframe&amp;id=pr_ndl7AJkDlVQ0z0stXXNJ_home&amp;id=pr_ndl7AJkDlVQ0z0stXXNJ_uid_unknown&amp;id=pr_ndl7AJkDlVQ0z0stXXNJ_lid_sgkMwkUO7W1cZpYNhHo1&amp;su=https%3A%2F%2Fwww.s7.ru%2F&amp;sr=&amp;ts=1659088098842"
-        width="1" height="1" scrolling="no" frameborder="0" style="display:none"
-        referrerpolicy="no-referrer-when-downgrade"></iframe>
-<script type="text/javascript" id="">(function (b, a, c, f, e) {
-    b[c] = b[c] || function () {
-        (b[c].q = b[c].q || []).push(arguments)
-    };
-    var d = a.createElement(e);
-    a = a.getElementsByTagName(e)[0];
-    d.async = !0;
-    d.src = f;
-    a.parentNode.insertBefore(d, a)
-})(window, document, "DSPCounter", "//tags.soloway.ru/DSPCounter.min.js", "script");
-DSPCounter("firstSend", {custom: {157: google_tag_manager["GTM-MWTWZW"].macro(281)}, sid: 223445});
-dataLayer.push({event: "dsp_loaded"});</script>
-<script type="text/javascript" id="">!function () {
-    var a = document.createElement("script");
-    a.type = "text/javascript";
-    a.async = !0;
-    a.src = "https://vk.com/js/api/openapi.js?167";
-    a.onload = function () {
-        VK.Retargeting.Init("VK-RTRG-457968-7bGC6");
-        VK.Retargeting.Hit()
-    };
-    document.head.appendChild(a)
-}();</script>
-<noscript>
-    <img src="https://vk.com/rtrg?p=VK-RTRG-457968-7bGC6" style="position:fixed; left:-999px;" alt="">
-</noscript>
-<script type="text/javascript" id="">!function (h, k) {
-    function l(d, b, c) {
-        b = b || "\x26";
-        c = c || "\x3d";
-        var e = [], f;
-        for (f in d) d.hasOwnProperty(f) && e.push(f + c + encodeURIComponent(d[f]));
-        return e.join(b)
+        b && b.toUTCString && (a.expires = b.toUTCString());
+        c = encodeURIComponent(c);
+        d = d + "\x3d" + c;
+        for (var f in a) d += "; " + f, c = a[f], !0 !== c && (d += "\x3d" + c);
+        document.cookie = d
     }
 
-    function m(d) {
-        var b = {};
-        if (d) {
-            d = d.split("\x26");
-            for (var c in d) if (d.hasOwnProperty(c)) {
-                var e = d[c].split("\x3d");
-                void 0 !== e[0] && void 0 !== e[1] && (b[e[0]] = decodeURIComponent(e[1]))
+    var refh = google_tag_manager["GTM-MWTWZW"].macro(275);
+    -1 != refh.indexOf("s7.ru") || null != location.pathname.match(/mainflow|personal|myb|confirmBooking|CheckIn/g) || void 0 == google_tag_manager["GTM-MWTWZW"].macro(276) || "WremeTHu3h" != google_tag_manager["GTM-MWTWZW"].macro(277) && "h6cevuDaFe" != google_tag_manager["GTM-MWTWZW"].macro(278) || setCookie("kayak24h", "true", {
+        expires: 86400,
+        domain: "s7.ru",
+        path: "/"
+    });</script>
+    <script type="text/javascript" id="">function getQueryParams(a) {
+        a = a.split("+").join(" ");
+        for (var c = {}, b, d = /[?&]?([^=]+)=([^&]*)/g; b = d.exec(a);) c[decodeURIComponent(b[1])] = decodeURIComponent(b[2]);
+        return c
+    }
+
+    var query = getQueryParams(document.location.search);
+    -1 === document.referrer.indexOf("s7.ru") && "" !== document.referrer && (window.localStorage.removeItem("utm_source"), window.localStorage.removeItem("utm_medium"), window.localStorage.removeItem("utm_campaign"), window.localStorage.removeItem("utm_content"), window.localStorage.removeItem("utm_term"));
+    void 0 !== query.utm_source && void 0 !== query.utm_medium && void 0 !== query.utm_campaign && (window.localStorage.setItem("utm_source", query.utm_source), window.localStorage.setItem("utm_medium", query.utm_medium), window.localStorage.setItem("utm_campaign", query.utm_campaign), query.utm_content ? window.localStorage.setItem("utm_content", query.utm_content) : window.localStorage.removeItem("utm_content"), query.utm_term ? window.localStorage.setItem("utm_term", query.utm_term) : window.localStorage.removeItem("utm_term"));
+    if (window.localStorage.getItem("utm_source")) {
+        var utms = [], utm_source = "utm_source\x3d" + window.localStorage.getItem("utm_source"),
+            utm_medium = "utm_medium\x3d" + window.localStorage.getItem("utm_medium"),
+            utm_campaign = "utm_campaign\x3d" + window.localStorage.getItem("utm_campaign");
+        utms.push(utm_source, utm_medium, utm_campaign);
+        if (window.localStorage.getItem("utm_content")) {
+            var utm_content = "utm_content\x3d" + window.localStorage.getItem("utm_content");
+            utms.push(utm_content)
+        }
+        if (window.localStorage.getItem("utm_content")) {
+            var utm_term =
+                "utm_term\x3d" + window.localStorage.getItem("utm_term");
+            utms.push(utm_term)
+        }
+    }
+    ;</script>
+    <script type="text/javascript" id="">var _tmr = window._tmr || (window._tmr = []);
+    _tmr.push({id: "2600380", type: "pageView", start: (new Date).getTime(), pid: "USER_ID"});
+    (function (c, e, a) {
+        if (!c.getElementById(a)) {
+            var b = c.createElement("script");
+            b.type = "text/javascript";
+            b.async = !0;
+            b.id = a;
+            b.src = "https://top-fwz1.mail.ru/js/code.js";
+            a = function () {
+                var d = c.getElementsByTagName("script")[0];
+                d.parentNode.insertBefore(b, d)
+            };
+            "[object Opera]" == e.opera ? c.addEventListener("DOMContentLoaded", a, !1) : a()
+        }
+    })(document, window, "topmailru-code");</script>
+    <noscript>
+        <div>
+            <img src="https://top-fwz1.mail.ru/counter?id=2600380;js=na"
+                 style="border:0;position:absolute;left:-9999px;"
+                 alt="Top.Mail.Ru">
+        </div>
+    </noscript>
+    <script type="text/javascript" id="">!function () {
+        var a = document.createElement("script");
+        a.type = "text/javascript";
+        a.async = !0;
+        a.src = "https://vk.com/js/api/openapi.js?162";
+        a.onload = function () {
+            VK.Retargeting.Init("VK-RTRG-363531-8pdtI");
+            VK.Retargeting.Hit()
+        };
+        document.head.appendChild(a)
+    }();</script>
+    <noscript>
+        <img src="https://vk.com/rtrg?p=VK-RTRG-363531-8pdtI" style="position:fixed; left:-999px;" alt="">
+    </noscript>
+    <script type="text/javascript" id="">var _tmr = window._tmr || (window._tmr = []);
+    _tmr.push({id: "2600380", type: "pageView", start: (new Date).getTime()});
+    (function (c, d, a) {
+        if (!c.getElementById(a)) {
+            var b = c.createElement("script");
+            b.type = "text/javascript";
+            b.async = !0;
+            b.id = a;
+            b.src = "https://top-fwz1.mail.ru/js/code.js";
+            a = function () {
+                var a = c.getElementsByTagName("script")[0];
+                a.parentNode.insertBefore(b, a)
+            };
+            "[object Opera]" == d.opera ? c.addEventListener("DOMContentLoaded", a, !1) : a()
+        }
+    })(document, window, "topmailru-code");</script>
+    <noscript>
+        <div>
+            <img src="https://top-fwz1.mail.ru/counter?id=2600380;js=na"
+                 style="border:0;position:absolute;left:-9999px;"
+                 alt="Top.Mail.Ru">
+        </div>
+    </noscript>
+    <script type="text/javascript" id="" src="https://static.terratraf.io/engine/GP.js"></script>
+    <script type="text/javascript" id="">(function (a) {
+        a = document.createElement("script");
+        a.type = "text/javascript";
+        a.async = !0;
+        a.src = "https://analytics.tiktok.com/i18n/pixel/sdk.js?sdkid\x3dBSMMJPFRH2682FEL6130";
+        var b = document.getElementsByTagName("script")[0];
+        b.parentNode.insertBefore(a, b)
+    })(window);</script>
+    <script type="text/javascript" id="">try {
+        (function () {
+            var c = "", e = "ndl7AJkDlVQ0z0stXXNJ", f = [];
+            f.push("pr_" + e + "_home");
+            f.push("pr_" + e + "_uid_unknown");
+            var g = "__rtbhouse.lid", b = window.localStorage.getItem(g);
+            if (!b) {
+                b = "";
+                for (var h = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789", d = 0; 20 > d; d++) b += h.charAt(Math.floor(Math.random() * h.length));
+                window.localStorage.setItem(g, b)
             }
+            f.push("pr_" + e + "_lid_" + b);
+            var a = document.createElement("iframe");
+            e = encodeURIComponent(document.referrer ? document.referrer : "");
+            g = encodeURIComponent(document.location.href ?
+                document.location.href : "");
+            c = "https://" + c + "creativecdn.com/tags?type\x3diframe";
+            b = encodeURIComponent("" + Date.now());
+            for (d = 0; d < f.length; d++) c += "\x26id\x3d" + encodeURIComponent(f[d]);
+            c += "\x26su\x3d" + g + "\x26sr\x3d" + e + "\x26ts\x3d" + b;
+            a.setAttribute("src", c);
+            a.setAttribute("width", "1");
+            a.setAttribute("height", "1");
+            a.setAttribute("scrolling", "no");
+            a.setAttribute("frameBorder", "0");
+            a.setAttribute("style", "display:none");
+            a.setAttribute("referrerpolicy", "no-referrer-when-downgrade");
+            document.body ? document.body.appendChild(a) :
+                window.addEventListener("DOMContentLoaded", function () {
+                    document.body.appendChild(a)
+                })
+        })()
+    } catch (c) {
+    }
+    ;</script>
+    <iframe src="https://creativecdn.com/tags?type=iframe&amp;id=pr_ndl7AJkDlVQ0z0stXXNJ_home&amp;id=pr_ndl7AJkDlVQ0z0stXXNJ_uid_unknown&amp;id=pr_ndl7AJkDlVQ0z0stXXNJ_lid_sgkMwkUO7W1cZpYNhHo1&amp;su=https%3A%2F%2Fwww.s7.ru%2F&amp;sr=&amp;ts=1659088098842"
+            width="1" height="1" scrolling="no" frameborder="0" style="display:none"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <script type="text/javascript" id="">(function (b, a, c, f, e) {
+        b[c] = b[c] || function () {
+            (b[c].q = b[c].q || []).push(arguments)
+        };
+        var d = a.createElement(e);
+        a = a.getElementsByTagName(e)[0];
+        d.async = !0;
+        d.src = f;
+        a.parentNode.insertBefore(d, a)
+    })(window, document, "DSPCounter", "//tags.soloway.ru/DSPCounter.min.js", "script");
+    DSPCounter("firstSend", {custom: {157: google_tag_manager["GTM-MWTWZW"].macro(281)}, sid: 223445});
+    dataLayer.push({event: "dsp_loaded"});</script>
+    <script type="text/javascript" id="">!function () {
+        var a = document.createElement("script");
+        a.type = "text/javascript";
+        a.async = !0;
+        a.src = "https://vk.com/js/api/openapi.js?167";
+        a.onload = function () {
+            VK.Retargeting.Init("VK-RTRG-457968-7bGC6");
+            VK.Retargeting.Hit()
+        };
+        document.head.appendChild(a)
+    }();</script>
+    <noscript>
+        <img src="https://vk.com/rtrg?p=VK-RTRG-457968-7bGC6" style="position:fixed; left:-999px;" alt="">
+    </noscript>
+    <script type="text/javascript" id="">!function (h, k) {
+        function l(d, b, c) {
+            b = b || "\x26";
+            c = c || "\x3d";
+            var e = [], f;
+            for (f in d) d.hasOwnProperty(f) && e.push(f + c + encodeURIComponent(d[f]));
+            return e.join(b)
         }
-        return b
-    }
 
-    function n(d) {
-        return (/^\/\//.test(d) ? "https:" : "") + d
-    }
-
-    function p(d, b) {
-        return (d = d.cookie.match("(^|;) ?" + b + "\x3d([^;]*)(;|$)")) ? decodeURIComponent(d[2]) : null
-    }
-
-    var a,
-        g = document;
-    "undefined" == typeof AdriverCounter && (AdriverCounter = ((a = function (d, b, c) {
-        var e = document.domain;
-        if (!(this instanceof AdriverCounter)) return a.items[d];
-        a.urlParams = a.getUrlParameters(window.location.search.substring(1));
-        void 0 !== a.urlParams.adrclid && (b.fsid = a.urlParams.adrclid);
-        null !== a.getCookie(document, "adrcid") && (b.cid = a.getCookie(document, "adrcid"));
-        c && c.id && null !== a.getCookie(document, c.id) && (b.suid = e + "_" + encodeURIComponent(a.getCookie(document, c.id)));
-        c && c.gid1 ? b.gid1 = c.gid1 : null !==
-            a.getCookie(document, "_ga") && (b.gid1 = encodeURIComponent(a.getCookie(document, "_ga")));
-        c && c.yid1 ? b.yid1 = c.yid1 : null !== a.getCookie(document, "_ym_uid") && (b.yid1 = encodeURIComponent(a.getCookie(document, "_ym_uid")));
-        b.loc = encodeURIComponent(window.location.href);
-        d = a.items.length || 1;
-        a.items[d] = this;
-        b.ph = d;
-        b.custom && (b.custom = a.toQueryString(b.custom, ";"));
-        a.request(a.toQueryString(b))
-    }).httplize = n, a.loadScript = function (d) {
-        try {
-            var b = g.getElementsByTagName("head")[0], c = g.createElement("script");
-            c.setAttribute("type",
-                "text/javascript");
-            c.setAttribute("referrerpolicy", "no-referrer-when-downgrade");
-            c.setAttribute("charset", "windows-1251");
-            c.setAttribute("src", d.split("![rnd]").join(Math.round(1E6 * Math.random())));
-            c.onreadystatechange = function () {
-                /loaded|complete/.test(this.readyState) && (c.onload = null, b.removeChild(c))
-            };
-            c.onload = function () {
-                b.removeChild(c)
-            };
-            b.insertBefore(c, b.firstChild)
-        } catch (e) {
+        function m(d) {
+            var b = {};
+            if (d) {
+                d = d.split("\x26");
+                for (var c in d) if (d.hasOwnProperty(c)) {
+                    var e = d[c].split("\x3d");
+                    void 0 !== e[0] && void 0 !== e[1] && (b[e[0]] = decodeURIComponent(e[1]))
+                }
+            }
+            return b
         }
-    }, a.toQueryString = l, a.request = function (d) {
-        var b = a.toQueryString(a.defaults);
-        a.loadScript(a.redirectHost + "/cgi-bin/erle.cgi?" +
-            d + "\x26rnd\x3d![rnd]" + (b ? "\x26" + b : ""))
-    }, a.getUrlParameters = m, a.getCookie = p, a.items = [], a.defaults = {tail256: document.referrer || "unknown"}, a.redirectHost = "https://ad.adriver.ru", a.urlParams = {}, a));
-    new AdriverCounter(0, h, k)
-}({sid: 221346, bt: 62, sz: "main"}, {id: "", gid1: "", yid1: ""});</script>
-<script type="text/javascript" id="">"undefined" === typeof __GetI && (__GetI = []);
-(function () {
-    var a = {type: "VIEW", site_id: "7741", product_id: "", product_price: "", category_id: "", pixel_id: "tracking"};
-    __GetI.push(a);
-    a = "undefined" == typeof __GetI_domain ? "px.adhigh.net" : __GetI_domain;
-    var b = ("https:" == document.location.protocol ? "https://" : "http://") + a + "/p.js";
-    a = document.createElement("script");
-    a.type = "text/javascript";
-    a.src = b;
-    b = document.getElementsByTagName("script")[0];
-    b.parentNode.insertBefore(a, b)
-})();</script>
-<script type="text/javascript" id="">try {
-    var _mt_top_location = window.top.location.href
-} catch (a) {
-    _mt_top_location = window.location.href
-}
-(new Image(1, 1)).src = "https://mediatoday.ru/core/land.gif?ld\x3dLDVBKUNv\x26rl\x3d" + escape(document.referrer) + "\x26ll\x3d" + escape(_mt_top_location) + "\x26r\x3d" + Math.floor(1E9 * Math.random());</script>
-<script type="text/javascript" id="" src="https://relap.io/pcc/pixel.js?id=188"></script>
-<script type="text/javascript" id="" src="https://relap.io/pcc/pixel.js?id=188"></script>
-<script type="text/javascript" id="">function cid() {
-    var a;
-    return Promise.resolve().then(function () {
-        return null === (a = (new URLSearchParams(window.location.search)).get("pid")) ? null : fetch("https://realweb.g2afse.com/click?pid\x3d" + a + "\x26offer_id\x3d23\x26format\x3djson").then(function (b) {
-            return b.json()
+
+        function n(d) {
+            return (/^\/\//.test(d) ? "https:" : "") + d
+        }
+
+        function p(d, b) {
+            return (d = d.cookie.match("(^|;) ?" + b + "\x3d([^;]*)(;|$)")) ? decodeURIComponent(d[2]) : null
+        }
+
+        var a,
+            g = document;
+        "undefined" == typeof AdriverCounter && (AdriverCounter = ((a = function (d, b, c) {
+            var e = document.domain;
+            if (!(this instanceof AdriverCounter)) return a.items[d];
+            a.urlParams = a.getUrlParameters(window.location.search.substring(1));
+            void 0 !== a.urlParams.adrclid && (b.fsid = a.urlParams.adrclid);
+            null !== a.getCookie(document, "adrcid") && (b.cid = a.getCookie(document, "adrcid"));
+            c && c.id && null !== a.getCookie(document, c.id) && (b.suid = e + "_" + encodeURIComponent(a.getCookie(document, c.id)));
+            c && c.gid1 ? b.gid1 = c.gid1 : null !==
+                a.getCookie(document, "_ga") && (b.gid1 = encodeURIComponent(a.getCookie(document, "_ga")));
+            c && c.yid1 ? b.yid1 = c.yid1 : null !== a.getCookie(document, "_ym_uid") && (b.yid1 = encodeURIComponent(a.getCookie(document, "_ym_uid")));
+            b.loc = encodeURIComponent(window.location.href);
+            d = a.items.length || 1;
+            a.items[d] = this;
+            b.ph = d;
+            b.custom && (b.custom = a.toQueryString(b.custom, ";"));
+            a.request(a.toQueryString(b))
+        }).httplize = n, a.loadScript = function (d) {
+            try {
+                var b = g.getElementsByTagName("head")[0], c = g.createElement("script");
+                c.setAttribute("type",
+                    "text/javascript");
+                c.setAttribute("referrerpolicy", "no-referrer-when-downgrade");
+                c.setAttribute("charset", "windows-1251");
+                c.setAttribute("src", d.split("![rnd]").join(Math.round(1E6 * Math.random())));
+                c.onreadystatechange = function () {
+                    /loaded|complete/.test(this.readyState) && (c.onload = null, b.removeChild(c))
+                };
+                c.onload = function () {
+                    b.removeChild(c)
+                };
+                b.insertBefore(c, b.firstChild)
+            } catch (e) {
+            }
+        }, a.toQueryString = l, a.request = function (d) {
+            var b = a.toQueryString(a.defaults);
+            a.loadScript(a.redirectHost + "/cgi-bin/erle.cgi?" +
+                d + "\x26rnd\x3d![rnd]" + (b ? "\x26" + b : ""))
+        }, a.getUrlParameters = m, a.getCookie = p, a.items = [], a.defaults = {tail256: document.referrer || "unknown"}, a.redirectHost = "https://ad.adriver.ru", a.urlParams = {}, a));
+        new AdriverCounter(0, h, k)
+    }({sid: 221346, bt: 62, sz: "main"}, {id: "", gid1: "", yid1: ""});</script>
+    <script type="text/javascript" id="">"undefined" === typeof __GetI && (__GetI = []);
+    (function () {
+        var a = {
+            type: "VIEW",
+            site_id: "7741",
+            product_id: "",
+            product_price: "",
+            category_id: "",
+            pixel_id: "tracking"
+        };
+        __GetI.push(a);
+        a = "undefined" == typeof __GetI_domain ? "px.adhigh.net" : __GetI_domain;
+        var b = ("https:" == document.location.protocol ? "https://" : "http://") + a + "/p.js";
+        a = document.createElement("script");
+        a.type = "text/javascript";
+        a.src = b;
+        b = document.getElementsByTagName("script")[0];
+        b.parentNode.insertBefore(a, b)
+    })();</script>
+    <script type="text/javascript" id="">try {
+        var _mt_top_location = window.top.location.href
+    } catch (a) {
+        _mt_top_location = window.location.href
+    }
+    (new Image(1, 1)).src = "https://mediatoday.ru/core/land.gif?ld\x3dLDVBKUNv\x26rl\x3d" + escape(document.referrer) + "\x26ll\x3d" + escape(_mt_top_location) + "\x26r\x3d" + Math.floor(1E9 * Math.random());</script>
+    <script type="text/javascript" id="" src="https://relap.io/pcc/pixel.js?id=188"></script>
+    <script type="text/javascript" id="" src="https://relap.io/pcc/pixel.js?id=188"></script>
+    <script type="text/javascript" id="">function cid() {
+        var a;
+        return Promise.resolve().then(function () {
+            return null === (a = (new URLSearchParams(window.location.search)).get("pid")) ? null : fetch("https://realweb.g2afse.com/click?pid\x3d" + a + "\x26offer_id\x3d23\x26format\x3djson").then(function (b) {
+                return b.json()
+            })
         })
-    })
-}
+    }
 
-function sc(a) {
-    var b = new Date;
-    b.setTime(b.getTime() + 31536E6);
-    document.cookie = "affclick\x3d" + a + ";expires\x3d" + b.toUTCString() + ";path\x3d/";
-    localStorage.setItem("affclick", a)
-}
+    function sc(a) {
+        var b = new Date;
+        b.setTime(b.getTime() + 31536E6);
+        document.cookie = "affclick\x3d" + a + ";expires\x3d" + b.toUTCString() + ";path\x3d/";
+        localStorage.setItem("affclick", a)
+    }
 
-!function () {
-    var a;
-    Promise.resolve().then(function () {
-        return cid()
-    }).then(function (b) {
-        null !== (a = b) && sc(a.clickid)
-    })
-}();</script>
-<script type="text/javascript" id="">(function (a) {
-    var b = a.createElement("script");
-    b.setAttribute("src", "//pixel.betweenx.com/s/_s7/dist/smartPixel.min.js");
-    b.setAttribute("type", "text/javascript");
-    b.async = !0;
-    a = a.getElementsByTagName("script")[0];
-    a.parentNode.insertBefore(b, a)
-})(document);</script>
-<script type="text/javascript" id="">window._txq = window._txq || [];
-var s = document.createElement("script");
-s.type = "text/javascript";
-s.async = !0;
-s.src = "//st.hybrid.ai/txsp.js";
-(document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(s);
-_txq.push(["createPixel", "62ab0d9b7bc72f656079e755"]);
-_txq.push(["track", "PageView"]);</script>
-<script type="text/javascript" id="">(function (d, a, b, e) {
-    var c = a.getElementsByTagName(b)[0];
-    a = a.createElement(b);
-    a.async = !0;
-    a.src = "//cdn.rutarget.ru/static/tag/tag.js";
-    c.parentNode.insertBefore(a, c);
-    d[e] = {rtgNoSync: !1, rtgSyncFrame: !0}
-})(window, document, "script", "_rtgParams");</script>
-<script type="text/javascript" id="">window.dataLayer = window.dataLayer || [];
+    !function () {
+        var a;
+        Promise.resolve().then(function () {
+            return cid()
+        }).then(function (b) {
+            null !== (a = b) && sc(a.clickid)
+        })
+    }();</script>
+    <script type="text/javascript" id="">(function (a) {
+        var b = a.createElement("script");
+        b.setAttribute("src", "//pixel.betweenx.com/s/_s7/dist/smartPixel.min.js");
+        b.setAttribute("type", "text/javascript");
+        b.async = !0;
+        a = a.getElementsByTagName("script")[0];
+        a.parentNode.insertBefore(b, a)
+    })(document);</script>
+    <script type="text/javascript" id="">window._txq = window._txq || [];
+    var s = document.createElement("script");
+    s.type = "text/javascript";
+    s.async = !0;
+    s.src = "//st.hybrid.ai/txsp.js";
+    (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(s);
+    _txq.push(["createPixel", "62ab0d9b7bc72f656079e755"]);
+    _txq.push(["track", "PageView"]);</script>
+    <script type="text/javascript" id="">(function (d, a, b, e) {
+        var c = a.getElementsByTagName(b)[0];
+        a = a.createElement(b);
+        a.async = !0;
+        a.src = "//cdn.rutarget.ru/static/tag/tag.js";
+        c.parentNode.insertBefore(a, c);
+        d[e] = {rtgNoSync: !1, rtgSyncFrame: !0}
+    })(window, document, "script", "_rtgParams");</script>
+    <script type="text/javascript" id="">window.dataLayer = window.dataLayer || [];
 
-function gtag() {
-    dataLayer.push(arguments)
-}
+    function gtag() {
+        dataLayer.push(arguments)
+    }
 
-gtag("js", new Date);
-gtag("config", "DC-9082396");</script>
-<iframe id="iframe_flock_data_provider" name="iframe_flock_data_provider"
-        src="https://api.flocktory.com/v2/provider/provider.html" width="0" height="0"
-        style="position: absolute; top: -2000px; left: 0px;"></iframe>
-<script type="text/javascript" id="">window.generalPixel = window.generalPixel || [];
-window.generalPixel.push({type: "GPID", id: "10002481"});
-window.generalPixel.push({UserID: "XXX"});
-"ibe.s7.ru" === google_tag_manager["GTM-MWTWZW"].macro(279) && "payment" === google_tag_manager["GTM-MWTWZW"].macro(280) && window.dataLayer.push({event: "mediasniper_loaded"});</script>
-<script src="https://sync.bumlam.com/?src=etg1"></script>
-<script>
-    window[window.TiktokAnalyticsObject].instance("BSMMJPFRH2682FEL6130").track("Browse", {"pixelMethod": "standard"});
-</script>
-<iframe src="https://static.user-red.com/engine/id.html?service=https%3A%2F%2Fsynce.user-red.com&amp;code=4c75ae54-b047-11ec-86e0-002590c0647c_1648658081"
-        style="display: none;"></iframe>
-<iframe src="https://static.bumlam.com/pixel-new.html?ids=WyJhaWRhdGFDTVVSTCIsImFtYmVyZGF0YUNNVVJMIiwiYXBuQ01VUkwiLCJjbGV2ZXJkYXRhQ01VUkwiLCJjbVVSTCIsIm1hZFRlY0NNIiwib25lZmFjdG9yQ01VUkwiLCJ0ZXN0TG9nZXIiLCJ0ZXN0cGl4ZWwiLCJ3ZWJvcmFtYUNNVVJMIl0*&amp;uid=dW5kZWZpbmVk&amp;uid3=NGM3NWFlNTQtYjA0Ny0xMWVjLTg2ZTAtMDAyNTkwYzA2NDdj&amp;extra2=Z3AzLjEwMDAyNDgxLnB4bGVhZHZpc2l0YzkzNDUudjkzNDU*&amp;isAll=true"
-        width="0" height="0" style="display: none;"></iframe>
-<script type="text/javascript" id="">var _ttq = _ttq || [];
-_ttq.push(["_setAccount", "30000017"]);
-_ttq.push(["_setDataSource", "av"]);
-_ttq.push(["_setLevel", "1"]);
-_ttq.push(["_setProduct", "5"]);
-_ttq.push(["_setLanguage", google_tag_manager["GTM-MWTWZW"].macro(498)]);
-_ttq.push(["_track"]);
-(function () {
-    var a = document.createElement("script");
-    a.type = "text/javascript";
-    a.src = ("https:" == document.location.protocol ? "https://" : "http://") + "ads.travelaudience.com/js/ta.js";
-    var b = document.getElementsByTagName("script")[0];
-    b.parentNode.insertBefore(a, b)
-})();</script>
-<script type="text/javascript" id="">var _ttq = _ttq || [];
-_ttq.push(["_setAccount", "30000017"]);
-_ttq.push(["_setDataSource", "av"]);
-_ttq.push(["_setLevel", "1"]);
-_ttq.push(["_setProduct", "5"]);
-_ttq.push(["_setLanguage", google_tag_manager["GTM-MWTWZW"].macro(539)]);
-_ttq.push(["_track"]);
-(function () {
-    var a = document.createElement("script");
-    a.type = "text/javascript";
-    a.src = ("https:" == document.location.protocol ? "https://" : "http://") + "ads.travelaudience.com/js/ta.js";
-    var b = document.getElementsByTagName("script")[0];
-    b.parentNode.insertBefore(a, b)
-})();</script>
-<script type="text/javascript" id="">var _ttq = _ttq || [];
-_ttq.push(["_setAccount", "30000017"]);
-_ttq.push(["_setDataSource", "av"]);
-_ttq.push(["_setLevel", "1"]);
-_ttq.push(["_setProduct", "5"]);
-_ttq.push(["_setLanguage", google_tag_manager["GTM-MWTWZW"].macro(580)]);
-_ttq.push(["_track"]);
-(function () {
-    var a = document.createElement("script");
-    a.type = "text/javascript";
-    a.src = ("https:" == document.location.protocol ? "https://" : "http://") + "ads.travelaudience.com/js/ta.js";
-    var b = document.getElementsByTagName("script")[0];
-    b.parentNode.insertBefore(a, b)
-})();</script>
+    gtag("js", new Date);
+    gtag("config", "DC-9082396");</script>
+    <iframe id="iframe_flock_data_provider" name="iframe_flock_data_provider"
+            src="https://api.flocktory.com/v2/provider/provider.html" width="0" height="0"
+            style="position: absolute; top: -2000px; left: 0px;"></iframe>
+    <script type="text/javascript" id="">window.generalPixel = window.generalPixel || [];
+    window.generalPixel.push({type: "GPID", id: "10002481"});
+    window.generalPixel.push({UserID: "XXX"});
+    "ibe.s7.ru" === google_tag_manager["GTM-MWTWZW"].macro(279) && "payment" === google_tag_manager["GTM-MWTWZW"].macro(280) && window.dataLayer.push({event: "mediasniper_loaded"});</script>
+    <script src="https://sync.bumlam.com/?src=etg1"></script>
+    <script>
+        window[window.TiktokAnalyticsObject].instance("BSMMJPFRH2682FEL6130").track("Browse", {"pixelMethod": "standard"});
+    </script>
+    <iframe src="https://static.user-red.com/engine/id.html?service=https%3A%2F%2Fsynce.user-red.com&amp;code=4c75ae54-b047-11ec-86e0-002590c0647c_1648658081"
+            style="display: none;"></iframe>
+    <iframe src="https://static.bumlam.com/pixel-new.html?ids=WyJhaWRhdGFDTVVSTCIsImFtYmVyZGF0YUNNVVJMIiwiYXBuQ01VUkwiLCJjbGV2ZXJkYXRhQ01VUkwiLCJjbVVSTCIsIm1hZFRlY0NNIiwib25lZmFjdG9yQ01VUkwiLCJ0ZXN0TG9nZXIiLCJ0ZXN0cGl4ZWwiLCJ3ZWJvcmFtYUNNVVJMIl0*&amp;uid=dW5kZWZpbmVk&amp;uid3=NGM3NWFlNTQtYjA0Ny0xMWVjLTg2ZTAtMDAyNTkwYzA2NDdj&amp;extra2=Z3AzLjEwMDAyNDgxLnB4bGVhZHZpc2l0YzkzNDUudjkzNDU*&amp;isAll=true"
+            width="0" height="0" style="display: none;"></iframe>
+    <script type="text/javascript" id="">var _ttq = _ttq || [];
+    _ttq.push(["_setAccount", "30000017"]);
+    _ttq.push(["_setDataSource", "av"]);
+    _ttq.push(["_setLevel", "1"]);
+    _ttq.push(["_setProduct", "5"]);
+    _ttq.push(["_setLanguage", google_tag_manager["GTM-MWTWZW"].macro(498)]);
+    _ttq.push(["_track"]);
+    (function () {
+        var a = document.createElement("script");
+        a.type = "text/javascript";
+        a.src = ("https:" == document.location.protocol ? "https://" : "http://") + "ads.travelaudience.com/js/ta.js";
+        var b = document.getElementsByTagName("script")[0];
+        b.parentNode.insertBefore(a, b)
+    })();</script>
+    <script type="text/javascript" id="">var _ttq = _ttq || [];
+    _ttq.push(["_setAccount", "30000017"]);
+    _ttq.push(["_setDataSource", "av"]);
+    _ttq.push(["_setLevel", "1"]);
+    _ttq.push(["_setProduct", "5"]);
+    _ttq.push(["_setLanguage", google_tag_manager["GTM-MWTWZW"].macro(539)]);
+    _ttq.push(["_track"]);
+    (function () {
+        var a = document.createElement("script");
+        a.type = "text/javascript";
+        a.src = ("https:" == document.location.protocol ? "https://" : "http://") + "ads.travelaudience.com/js/ta.js";
+        var b = document.getElementsByTagName("script")[0];
+        b.parentNode.insertBefore(a, b)
+    })();</script>
+    <script type="text/javascript" id="">var _ttq = _ttq || [];
+    _ttq.push(["_setAccount", "30000017"]);
+    _ttq.push(["_setDataSource", "av"]);
+    _ttq.push(["_setLevel", "1"]);
+    _ttq.push(["_setProduct", "5"]);
+    _ttq.push(["_setLanguage", google_tag_manager["GTM-MWTWZW"].macro(580)]);
+    _ttq.push(["_track"]);
+    (function () {
+        var a = document.createElement("script");
+        a.type = "text/javascript";
+        a.src = ("https:" == document.location.protocol ? "https://" : "http://") + "ads.travelaudience.com/js/ta.js";
+        var b = document.getElementsByTagName("script")[0];
+        b.parentNode.insertBefore(a, b)
+    })();</script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+
+   <!-- <script>
+        $('#editModal').on('show.bs.modal', function () {
+            $(this).find('.modal-body').css({
+                width: 'auto',
+                height: 'auto',
+                'max-height': '100%'
+            })
+        }, function (event) {
+            let button = $(event.relatedTarget);
+            let id = button.data('whatever');
+            showEditModal(id);
+        });
+    </script>-->
 </body>
 </html>

@@ -16,7 +16,6 @@ import javax.persistence.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@AllArgsConstructor
 @Data
 @Entity
 public class Role implements GrantedAuthority {

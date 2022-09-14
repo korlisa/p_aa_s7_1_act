@@ -1,15 +1,23 @@
 package app.config;
 
+
 import app.entities.*;
 import app.repositories.DestinationRepository;
 import app.services.*;
+import app.util.Category;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
+
 import javax.annotation.PostConstruct;
+import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 /**
  * В этом классе инициализируются тестовые данные для базы.
@@ -27,6 +35,7 @@ public class DataInitializer {
     private final FlightService flightService;
     private final PassengerService passengerService;
     private final SeatService seatService;
+    private final SearchResultService searchResultService;
     private final TicketService ticketService;
     private final DestinationRepository destinationRepository;
 
@@ -41,6 +50,8 @@ public class DataInitializer {
         createTestTicket();
 //        createTickets();
 
+
+        //createTestSearch();
 
         System.out.println("DataInitializer сработал!");
     }
@@ -73,7 +84,7 @@ public class DataInitializer {
     /**
      * Метод для создания юзера для SpringSecurity
      */
-    public void createUserForSpringSecurity(){
+    public void createUserForSpringSecurity() {
         User admin = new Admin();
         admin.setEmail("admin@email.com");
         admin.setPassword("admin");
@@ -86,12 +97,11 @@ public class DataInitializer {
         manager.addRoleToCollection(roleService.findRoleByName("ROLE_MANAGER"));
         userService.saveUser(manager);
 
+
     }
 
     /**
      * Create 3 Aircraft in DB
-     *
-     * @author Eugene Kolyshev
      */
 
     public void createAircraft() {
@@ -103,21 +113,92 @@ public class DataInitializer {
     }
 
     public void createFlight() {
-        Flight flight = new Flight();
-        flight.setAircraft(aircraftService.getById(1L));
-        flight.setFrom(destinationService.getDestinationById(1L).get());
-        flight.setTo(destinationService.getDestinationById(2L).get());
-        flight.setDepartureDateTime(LocalDateTime.of(2022, 8, 9, 10, 0));
-        flight.setFlightStatus(Flight.FlightStatus.ON_TIME);
-        flightService.save(flight);
 
         Flight flight1 = new Flight();
-        flight1.setAircraft(aircraftService.getById(2L));
+        flight1.setAircraft(aircraftService.getById(1L));
+        flight1.setDepartureDateTime(LocalDateTime.of(2022, Month.OCTOBER, 30, 11, 30));
+        flight1.setArrivalDateTime(LocalDateTime.of(2022, Month.OCTOBER, 30, 18, 00));
         flight1.setFrom(destinationService.getDestinationById(1L).get());
         flight1.setTo(destinationService.getDestinationById(2L).get());
-        flight1.setDepartureDateTime(LocalDateTime.of(2022, 8, 9, 11, 0));
-        flight1.setFlightStatus(Flight.FlightStatus.DELAY);
+        flight1.setFlightStatus(Flight.FlightStatus.ON_TIME);
+
+        Flight flight2 = new Flight();
+        flight2.setAircraft(aircraftService.getById(2L));
+        flight2.setDepartureDateTime(LocalDateTime.of(2022, Month.OCTOBER, 30, 9, 30));
+        flight2.setArrivalDateTime(LocalDateTime.of(2022, Month.OCTOBER, 30, 16, 20));
+        flight2.setFrom(destinationService.getDestinationById(1L).get());
+        flight2.setTo(destinationService.getDestinationById(2L).get());
+        flight2.setFlightStatus(Flight.FlightStatus.ON_TIME);
+
+        Flight flight3 = new Flight();
+        flight3.setAircraft(aircraftService.getById(3L));
+        flight3.setDepartureDateTime(LocalDateTime.of(2022, Month.OCTOBER, 31, 12, 30));
+        flight3.setArrivalDateTime(LocalDateTime.of(2022, Month.OCTOBER, 31, 16, 20));
+        flight3.setFrom(destinationService.getDestinationById(2L).get());
+        flight3.setTo(destinationService.getDestinationById(3L).get());
+        flight3.setFlightStatus(Flight.FlightStatus.ON_TIME);
+
+        Flight flight4 = new Flight();
+        Aircraft aircraft4 = new Fleet().createEmbraer170();
+        aircraft4.setName("00012BB");
+        aircraftService.save(aircraft4);
+        flight4.setAircraft(aircraftService.findAircraftByName("00012BB"));
+        flight4.setDepartureDateTime(LocalDateTime.of(2022, Month.NOVEMBER, 5, 07, 30));
+        flight4.setArrivalDateTime(LocalDateTime.of(2022, Month.NOVEMBER, 5, 11, 20));
+        flight4.setFrom(destinationService.getDestinationById(3L).get());
+        flight4.setTo(destinationService.getDestinationById(2L).get());
+        flight4.setFlightStatus(Flight.FlightStatus.DELAY);
+
+        Flight flight5 = new Flight();
+        Aircraft aircraft5 = new Fleet().createAirbusA321();
+        aircraft5.setName("00108BB");
+        aircraftService.save(aircraft5);
+        flight5.setAircraft(aircraftService.findAircraftByName("00108BB"));
+        flight5.setDepartureDateTime(LocalDateTime.of(2022, Month.NOVEMBER, 7, 11, 30));
+        flight5.setArrivalDateTime(LocalDateTime.of(2022, Month.NOVEMBER, 7, 18, 00));
+        flight5.setFrom(destinationService.getDestinationById(1L).get());
+        flight5.setTo(destinationService.getDestinationById(2L).get());
+        flight5.setFlightStatus(Flight.FlightStatus.ON_TIME);
+
         flightService.save(flight1);
+        flightService.save(flight2);
+        flightService.save(flight3);
+        flightService.save(flight4);
+        flightService.save(flight5);
+
+/**
+ * Create from 1 to 6 flights for each day of September 2022
+ * with random aircraft and random fare of seats
+ */
+        for (int i = 1; i <= 30; i++) {
+            int rand = 1 + (int) (Math.random() * 5);
+            for (int j = 1; j <= rand; j++) {
+                Flight flight = new Flight();
+                Aircraft aircraft = new Aircraft();
+                if (j < 2) {
+                    aircraft = new Fleet().createAirbusA321();
+                } else if (j <= 3) {
+                    aircraft = new Fleet().createEmbraer170();
+                } else {
+                    aircraft = new Fleet().createBoeing737();
+                }
+                int fare = ((int) (Math.random() * 50)) * 10 + 509;
+                for (Seat s : aircraft.getSeats()) {
+                    s.setFare(fare);
+                }
+                String sideNumber = "00000" + i + j + "RND";
+                aircraft.setName(sideNumber);
+                aircraftService.save(aircraft);
+                flight.setAircraft(aircraftService.findAircraftByName(sideNumber));
+                int hour = (int) (Math.random() * 12);
+                flight.setDepartureDateTime(LocalDateTime.of(2022, Month.SEPTEMBER, i, hour, 20));
+                flight.setArrivalDateTime(LocalDateTime.of(2022, Month.SEPTEMBER, i, hour + 6, 30));
+                flight.setFrom(destinationService.getDestinationById(1L).get());
+                flight.setTo(destinationService.getDestinationById(2L).get());
+                flight.setFlightStatus(Flight.FlightStatus.ON_TIME);
+                flightService.save(flight);
+            }
+        }
     }
 
     public void createTestPassenger() {
@@ -142,4 +223,6 @@ public class DataInitializer {
         ticket.setSeat(seatService.getById(23L));
         ticketService.saveTicket(ticket);
     }
+
+
 }

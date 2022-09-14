@@ -37,13 +37,13 @@ public class Route {
     @NonNull
     LocalDate departureDate;
 
-    @Column
+    /*@Column
     @NonNull
     LocalDate arrivalDate;
 
     @Column
     @NonNull
-    Integer numberOfSeats;
+    Integer numberOfSeats;*/
 
     @Enumerated(EnumType.STRING)
     Category category;
