@@ -1,8 +1,6 @@
 package app.entities;
 
 import app.util.Category;
-import lombok.*;
-import javax.persistence.*;
 
 
 /**
@@ -17,37 +15,7 @@ import javax.persistence.*;
  *
  * @author Eugene Kolyshev
  */
-@Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@RequiredArgsConstructor
-@Table(name = "t_seats")
+
 public class Seat {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
-
-    @Column(name = "seatNumber")
-    @NonNull
-    private String seatNumber;
-
-    @Column(name = "fare")
-    @NonNull
-    private Integer fare = 0;
-
-    @Column(name = "isRegistered")
-    @NonNull
-    private Boolean isRegistered = false;
-
-    @Column(name = "isSold")
-    @NonNull
-    private Boolean isSold = false;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "category")
-    @NonNull
-    private Category category;
 
 }

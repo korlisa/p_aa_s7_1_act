@@ -63,7 +63,7 @@ public class AdminApplicationTests {
     }
 
     /**
-     * создание пользователя Admin
+     * Admin
      * @throws Exception
      */
     @Test
@@ -82,7 +82,7 @@ public class AdminApplicationTests {
     }
 
     /**
-     * создание пользователя AirlineManager
+     *  AirlineManager
      * @throws Exception
      */
     @Test
@@ -101,7 +101,7 @@ public class AdminApplicationTests {
     }
 
     /**
-     * получение пользователя по id
+     * id
      * @throws Exception
      */
     @Test
@@ -116,7 +116,7 @@ public class AdminApplicationTests {
     }
 
     /**
-     * обновление/редактирование пользователя
+     *
      * @throws Exception
      */
     @Test
@@ -133,7 +133,7 @@ public class AdminApplicationTests {
     }
 
     /**
-     * удаление пользователя по id
+     * id
      * @throws Exception
      */
     @Test
@@ -150,7 +150,7 @@ public class AdminApplicationTests {
     }
 
     /**
-     * получение всех пользователей
+     *
      * @throws Exception
      */
     @Test
@@ -173,7 +173,7 @@ public class AdminApplicationTests {
     }
 
     /**
-     * создание роли
+     *
      * @throws Exception
      */
     @Test
@@ -189,7 +189,7 @@ public class AdminApplicationTests {
     }
 
     /**
-     * получение роли по id
+     * id
      * @throws Exception
      */
     @Test
@@ -205,7 +205,7 @@ public class AdminApplicationTests {
     }
 
     /**
-     * удаление роли по id
+     * id
      * @throws Exception
      */
     @Test
@@ -223,7 +223,7 @@ public class AdminApplicationTests {
     }
 
     /**
-     * получение всех ролей
+     *
      * @throws Exception
      */
     @Test

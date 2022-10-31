@@ -6,5 +6,4 @@ package app.services;
 
 public interface TelegramMessageService {
 
-    void sendFlightEventMessage(String message);
 }

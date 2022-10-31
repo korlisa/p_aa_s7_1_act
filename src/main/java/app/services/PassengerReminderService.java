@@ -8,5 +8,4 @@ package app.services;
 
 public interface PassengerReminderService {
 
-    void remindAboutFlight();
 }

@@ -11,16 +11,4 @@ package app.util;
  */
 public enum Category {
 
-    BUSINESS("Business"),
-    ECONOMY ("Economy");
-
-    private final String categoryName;
-
-    Category(String category) {
-        this.categoryName = category;
-    }
-
-    public String toString() {
-        return this.categoryName;
-    }
 }

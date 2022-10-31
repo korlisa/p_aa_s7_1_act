@@ -1,8 +1,5 @@
 package app.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
 /**
  * Сущность AirlineManager является наследником класса User.
  * Менеджер будет управлять авиапарком, рейсами, билетами.
@@ -10,9 +7,6 @@ import javax.persistence.Table;
  * @author Minibaeva Elvira
  */
 
-
-@Entity
-@Table(name = "managers")
-public class AirlineManager extends User{
+public class AirlineManager{
 
 }
