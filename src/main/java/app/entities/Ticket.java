@@ -31,6 +31,7 @@ public class Ticket {
     @Column
     private Flight flight;
 
+    @Enumerated(EnumType.STRING)
     @Column
     private Category subcategory;
 
