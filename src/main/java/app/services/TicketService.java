@@ -5,13 +5,17 @@ import app.entities.Ticket;
 import java.util.List;
 
 public interface TicketService {
-    void createTicket(Ticket ticket);
+    void saveTicket(Ticket ticket);
 
-    List<Ticket> getAllTicket();
+    List<Ticket> getAllTickets();
 
-    Ticket getTicketById(Long id);
+    Ticket getTicket(Long id);
 
     void deleteTicket(Long id);
 
     void editTicket(Ticket ticket);
+
+    void deleteAllTickets();
+
+    List<Ticket> findAllTicketsByFlightId(Long id);
 }

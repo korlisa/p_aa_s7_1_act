@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/tickets")
+@RequestMapping("/api/tickets")
 public class TicketRESTController {
 
     private final TicketService ticketService;
@@ -21,15 +21,15 @@ public class TicketRESTController {
         this.ticketService = ticketService;
     }
 
-    @PostMapping("/new")
+    @PostMapping()
     public ResponseEntity<HttpStatus> createNewTicket(@RequestBody Ticket ticket) {
-        ticketService.createTicket(ticket);
+        ticketService.saveTicket(ticket);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Ticket> getTicketById(@PathVariable Long id) {
-        Ticket ticket = ticketService.getTicketById(id);
+        Ticket ticket = ticketService.getTicket(id);
         return ticket != null
                 ? new ResponseEntity<>(ticket, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -37,15 +37,21 @@ public class TicketRESTController {
 
     @GetMapping()
     public ResponseEntity<List<Ticket>> getListTickets() {
-        List<Ticket> tickets = ticketService.getAllTicket();
+        List<Ticket> tickets = ticketService.getAllTickets();
         return tickets != null
                 ? new ResponseEntity<>(tickets, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> deleteTicketById(@PathVariable Long id) {
         ticketService.deleteTicket(id);
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+    @DeleteMapping()
+    public ResponseEntity<HttpStatus> deleteAllTickets() {
+        ticketService.deleteAllTickets();
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
@@ -53,5 +59,13 @@ public class TicketRESTController {
     public ResponseEntity<HttpStatus> editTicket(@RequestBody Ticket ticket) {
         ticketService.editTicket(ticket);
         return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+    @GetMapping("flight/{id}")
+    public ResponseEntity<List<Ticket>> getAllTicketsByFlightId(@PathVariable Long id) {
+        List<Ticket> tickets = ticketService.findAllTicketsByFlightId(id);
+        return tickets != null
+                ? new ResponseEntity<>(tickets, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }
