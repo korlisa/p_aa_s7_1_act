@@ -1,5 +1,21 @@
 package app.services;
 
-public interface TicketService {
+import app.entities.Ticket;
 
+import java.util.List;
+
+public interface TicketService {
+    void saveTicket(Ticket ticket);
+
+    List<Ticket> getAllTickets();
+
+    Ticket getTicket(Long id);
+
+    void deleteTicket(Long id);
+
+    void editTicket(Ticket ticket);
+
+    void deleteAllTickets();
+
+    List<Ticket> findAllTicketsByFlightId(Long id);
 }
