@@ -7,6 +7,6 @@ package app.entities;
  * @author Minibaeva Elvira
  */
 
-public class AirlineManager{
+public class AirlineManager extends User {
 
 }
