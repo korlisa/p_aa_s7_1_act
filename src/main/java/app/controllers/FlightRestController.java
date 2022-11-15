@@ -56,7 +56,7 @@ public class FlightRestController {
                                                                @PathVariable("to") String to,
                                                                @PathVariable("date") String date) {
         List<Flight> flight = flightService.findFlightByFromToDate(from, to, date);
-        if (flight == null) {
+        if (flight.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return ResponseEntity.ok(flight);
@@ -64,7 +64,7 @@ public class FlightRestController {
     @GetMapping("/allFree")
     public ResponseEntity<List<Seat>> findAllFreeSeatsOnFlight(@RequestBody Flight flight) {
         List<Seat> listSeat = flightService.findAllFreeSeatsOnFlight(flight);
-        if (listSeat == null) {
+        if (listSeat.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return ResponseEntity.ok(listSeat);
@@ -73,7 +73,7 @@ public class FlightRestController {
     @GetMapping("/allFreeEconomy")
     public ResponseEntity<List<Seat>> findAllFreeSeatsOnFlightByEconomy(@RequestBody Flight flight) {
         List<Seat> listSeatByEconomy = flightService.findAllFreeSeatsOnFlightByEconomy(flight);
-        if (listSeatByEconomy == null) {
+        if (listSeatByEconomy.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return ResponseEntity.ok(listSeatByEconomy);
