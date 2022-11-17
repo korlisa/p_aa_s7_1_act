@@ -1,10 +1,14 @@
 package app.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 
 /**
@@ -23,7 +27,8 @@ import javax.persistence.*;
  */
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "seats")
@@ -39,8 +44,37 @@ public class Seat {
     private boolean isRegistered;
     @Column(name = "is_sold")
     private boolean isSold;
-    @Column(name = "category_id")
-    private Category category; //need to be finalized based on Category realization
-    @Column(name = "aircraft_id")
-    private Aircraft aircraft; //need to be finalized based on Aircraft realization
+
+    @Enumerated(value = EnumType.STRING)
+    @Column(name = "category")
+    private CategoryType categoryType;
+    @ManyToOne
+    @JoinColumn(name = "aircraft_id", nullable = false)
+    @JsonBackReference
+    private Aircraft aircraft;
+
+    @Override
+    public String toString() {
+        return new StringBuilder("Seat{")
+                .append("id=").append(id)
+                .append(", seatNumber='").append(seatNumber).append('\'')
+                .append(", fare=").append(fare)
+                .append(", isRegistered=").append(isRegistered)
+                .append(", isSold=").append(isSold)
+                .append(", aircraft=").append(aircraft)
+                .append('}').toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Seat seat = (Seat) o;
+        return getId().equals(seat.getId()) && Objects.equals(getSeatNumber(), seat.getSeatNumber());
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

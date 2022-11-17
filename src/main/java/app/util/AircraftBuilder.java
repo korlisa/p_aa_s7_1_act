@@ -1,7 +1,7 @@
 package app.util;
 
 import app.entities.Aircraft;
-import app.entities.Category;
+import app.entities.CategoryType;
 import app.entities.Seat;
 
 import java.util.*;
@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 
 /**
  * Aircraft builder allows to fluent setting up any field of {@link Aircraft} including {@code Set<Seat>} by configuring
- * each section of interior separately by {@link Category}.<br><br>
+ * each section of interior separately by {@link CategoryType}.<br><br>
  *
  * The builder allows to configure:<br>
  * - id, board number, model, brand, production year and flying range of Aircraft.
@@ -58,7 +58,7 @@ import java.util.regex.Pattern;
  * |_1&nbsp;&nbsp;2&nbsp;&nbsp;3&nbsp;&nbsp;4&nbsp;5&nbsp;6 <- row number.
  */
 public class AircraftBuilder {
-    private static Map<Category, List<String>> interior;
+    private static Map<CategoryType, List<String>> interior;
     private InteriorBuilder interiorBuilder;
     private static Aircraft aircraft;
 
@@ -104,7 +104,7 @@ public class AircraftBuilder {
         return this;
     }
 
-    public InteriorBuilder interior(Category category) {
+    public InteriorBuilder interior(CategoryType category) {
         interiorBuilder = new InteriorBuilder(category);
         List<String> rows = new ArrayList<>();
         rows.add("fare0");
@@ -151,10 +151,10 @@ public class AircraftBuilder {
 
     public class InteriorBuilder {
 
-        private final Category category;
+        private final CategoryType category;
 
 
-        public InteriorBuilder(Category category) {
+        public InteriorBuilder(CategoryType category) {
             this.category = category;
         }
 
