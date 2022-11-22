@@ -1,15 +1,17 @@
 package app.services;
 
-import app.entities.Category;
+import app.entities.CategoryType;
+import app.entities.Flight;
 import app.entities.Seat;
 import app.repositories.SeatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Optional;
-
+import java.util.Set;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -31,17 +33,24 @@ public class SeatServiceImpl implements SeatService {
     }
 
     @Override
-    public List<Seat> findAll() {
-        return seatRepository.findAll();
+    public Set<Seat> findAll() {
+        return new HashSet<>(seatRepository.findAll());
     }
 
     @Override
     public Seat save(Seat seat) {
+        if (seat == null) throw new IllegalArgumentException("Seat must not be null");
+        if (seat.getId() != 0) throw new IllegalArgumentException("Unable to save: id must be = 0.");
         return seatRepository.save(seat);
     }
 
     @Override
     public Seat update(Seat seat) {
+        if (seat == null) throw new IllegalArgumentException("Seat must not be null");
+        if (seat.getId() == 0) throw new IllegalArgumentException("Unable update seat with id = 0");
+        Optional<Seat> seatToUpdate = seatRepository.findById(seat.getId());
+        if (seatToUpdate.isEmpty()) throw new IllegalArgumentException("Seat does not exist");
+        seat.setAircraft(seatToUpdate.get().getAircraft());
         return seatRepository.save(seat);
     }
 
@@ -59,29 +68,50 @@ public class SeatServiceImpl implements SeatService {
         seatRepository.deleteAll();
     }
 
-    //------------------------------ next methods will be finalized when I got flightService & Category-----------------
+
     @Override
-    public List<Seat> findAllByFlightId(Long id) {
-        return null;
+    public Set<Seat> findAllByFlightId(Long id) {
+        Flight flight = flightService.findFlightById(id);
+        if (flight == null) throw new IllegalArgumentException("Not found flight with id = " + id);
+        return flightService.findFlightById(id).getAircraft().getSeats();
     }
 
     @Override
-    public List<Seat> findAllByFlightIdAndCategory(Long id, Category category) {
-        return null;
+    public Set<Seat> findAllByFlightIdAndCategory(Long id, CategoryType categoryType) {
+        return findAllByFlightId(id)
+                .stream()
+                .filter(seat -> seat.getCategoryType().equals(categoryType))
+                .collect(Collectors.toSet());
     }
 
     @Override
-    public int getSoldByFlightId(Long id) {
-        return 0;
+    public int getSoldNumberByFlightId(Long id) {
+        return (int) findAllByFlightId(id)
+                .stream()
+                .filter(Seat::isSold)
+                .count();
     }
 
     @Override
-    public int getUnsoldByFlightId(Long id) {
-        return 0;
+    public int getUnsoldNumberByFlightId(Long id) {
+        return (int) findAllByFlightId(id)
+                .stream()
+                .filter(seat -> !seat.isSold())
+                .count();
     }
 
     @Override
-    public int getRegisteredByFlightId(Long id) {
-        return 0;
+    public int getRegisteredNumberByFlightId(Long id) {
+        return (int) findAllByFlightId(id)
+                .stream()
+                .filter(Seat::isRegistered)
+                .count();
+    }
+
+    @Override
+    public Optional<Seat> findByFlightIdAndSeatNumber(Long id, String seatNumber) {
+        return findAllByFlightId(id).stream()
+                .filter(seat -> seat.getSeatNumber().equals(seatNumber))
+                .findFirst();
     }
 }
