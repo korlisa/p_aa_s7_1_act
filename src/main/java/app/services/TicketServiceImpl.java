@@ -2,6 +2,7 @@ package app.services;
 
 import app.entities.Flight;
 import app.entities.Ticket;
+import app.repositories.FlightRepository;
 import app.repositories.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,8 +24,9 @@ public class TicketServiceImpl implements TicketService {
     private final FlightRepository flightRepository;
 
     @Autowired
-    public TicketServiceImpl(TicketRepository ticketRepository) {
+    public TicketServiceImpl(TicketRepository ticketRepository, FlightRepository flightRepository) {
         this.ticketRepository = ticketRepository;
+        this.flightRepository = flightRepository;
     }
 
     @Override
