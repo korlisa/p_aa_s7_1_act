@@ -26,10 +26,10 @@ public class Flight {
     @Column(name = "id")
     private Long id;
 
-    @Column(name="from")
+    @ManyToOne(fetch = FetchType.LAZY)
     private Destination from;
 
-    @Column(name="to")
+    @ManyToOne(fetch = FetchType.LAZY)
     private Destination to;
 
     @Column(name="departureDateTime")
@@ -38,7 +38,7 @@ public class Flight {
     @Column(name="arrivalDateTime")
     private LocalDateTime arrivalDateTime;
 
-    @Column(name="aircraft")
+    @ManyToOne(fetch = FetchType.LAZY)
     private Aircraft aircraft;
 
     public enum FlightStatus {
