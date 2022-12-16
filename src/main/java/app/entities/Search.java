@@ -19,6 +19,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "searches")
+@NamedEntityGraph(name = "graph.Search.routes", attributeNodes = @NamedAttributeNode("routes"))
 public class Search {
 
     /**
