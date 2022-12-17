@@ -1,242 +1,157 @@
-//package app;
-//
-//import app.entities.*;
-//import app.services.RoleService;
-//import app.services.UserService;
-//import com.fasterxml.jackson.databind.ObjectMapper;
-//import org.junit.jupiter.api.AfterEach;
-//import org.junit.jupiter.api.Test;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-//import org.springframework.boot.test.context.SpringBootTest;
-//import org.springframework.http.MediaType;
-//import org.springframework.security.test.context.support.WithMockUser;
-//import org.springframework.test.web.servlet.MockMvc;
-//import java.util.Arrays;
-//import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-//import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-//import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-//import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-//
-///** Test AdminRestController with MocMVC
-// *
-// * @author Mnibaeva Elvira
-// */
-//
-//
-//@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-//@AutoConfigureMockMvc()
-//@WithMockUser(username ="admin@email.com",password = "pass", roles =  {"ADMIN"})
-//public class AdminApplicationTests {
-//    @Autowired
-//    private ObjectMapper objectMapper;
-//    @Autowired
-//    private MockMvc mockMvc;
-//    @Autowired
-//    RoleService roleService;
-//    @Autowired
-//    UserService userService;
-//
-//
-//    @AfterEach
-//    public void resetDB(){
-//        userService.deleteAll();
-//        roleService.deleteAll();
-//    }
-//
-//    private Admin createTestAdmin(String email) {
-//        Admin admin = new Admin();
-//        admin.setEmail(email);
-//        admin.setPassword("admin");
-//        admin.addRoleToCollection(roleService.findRoleByName("ROLE_ADMIN"));
-//        userService.saveUser(admin);
-//        return admin;
-//    }
-//
-//    private AirlineManager createTestManager(String email) {
-//        AirlineManager manager = new AirlineManager();
-//        manager.setEmail(email);
-//        manager.setPassword("manager");
-//        manager.addRoleToCollection(roleService.findRoleByName("ROLE_MANAGER"));
-//        userService.saveUser(manager);
-//        return manager;
-//    }
-//
-//    /**
-//     * Admin
-//     * @throws Exception
-//     */
-//    @Test
-//    public void givenAdmin_whenAdd_thenStatus201andAdminReturned() throws Exception {
-//        Admin admin = new Admin();
-//        admin.setEmail("admin1@email.com");
-//        admin.setPassword("admin");
-//        admin.addRoleToCollection(roleService.findRoleByName("ROLE_ADMIN"));
-//        mockMvc.perform(
-//                        post("/api/create/admin")
-//                                .content(objectMapper.writeValueAsString(admin))
-//                                .contentType(MediaType.APPLICATION_JSON)
-//                )
-//                .andExpect(status().isCreated())
-//                .andReturn().getResponse().getContentAsString();
-//    }
-//
-//    /**
-//     *  AirlineManager
-//     * @throws Exception
-//     */
-//    @Test
-//    public void givenManager_whenAdd_thenStatus201andManagerReturned() throws Exception {
-//        AirlineManager manager = new AirlineManager();
-//        manager.setEmail("manager1@email.com");
-//        manager.setPassword("manager");
-//        manager.addRoleToCollection(roleService.findRoleByName("ROLE_MANAGER"));
-//        mockMvc.perform(
-//                        post("/api/create/manager")
-//                                .content(objectMapper.writeValueAsString(manager))
-//                                .contentType(MediaType.APPLICATION_JSON)
-//                )
-//                .andExpect(status().isCreated())
-//                .andReturn().getResponse().getContentAsString();;
-//    }
-//
-//    /**
-//     * id
-//     * @throws Exception
-//     */
-//    @Test
-//    public void givenId_whenGetExistingUser_thenStatus200andUserReturned() throws Exception {
-//        AirlineManager manager = createTestManager("manager12@email.com");
-//        long id = manager.getId();
-//        mockMvc.perform(
-//                        get("/api/{id}", id))
-//                .andExpect(status().isOk())
-//                .andExpect(jsonPath("$.id").value(id))
-//                .andExpect(jsonPath("$.email").value("manager12@email.com"));
-//    }
-//
-//    /**
-//     *
-//     * @throws Exception
-//     */
-//    @Test
-//    public void giveUser_whenUpdate_thenStatus200andUpdatedReturns() throws Exception {
-//        Admin admin = createTestAdmin("admin12345@email.com");
-//        long id = admin.getId();
-//        admin.setEmail("new@email.com");
-//        mockMvc.perform(
-//                        put("/api/edit")
-//                                .content(objectMapper.writeValueAsString(admin))
-//                                .contentType(MediaType.APPLICATION_JSON))
-//                .andExpect(status().isOk())
-//                .andReturn().getResponse().getContentAsString();;
-//    }
-//
-//    /**
-//     * id
-//     * @throws Exception
-//     */
-//    @Test
-//    public void givenUser_whenDeleteUser_thenStatus200() throws Exception {
-//        Admin admin = createTestAdmin("admin12345@email.com");
-//        long id = admin.getId();
-//        mockMvc.perform(
-//                        delete("/api/{id}", id)
-//                .content(objectMapper.writeValueAsString(admin))
-//                .contentType(MediaType.APPLICATION_JSON)
-//                )
-//                .andExpect(status().isOk())
-//                .andReturn().getResponse().getContentAsString();;
-//    }
-//
-//    /**
-//     *
-//     * @throws Exception
-//     */
-//    @Test
-//    public void givenUsers_whenGetUsers_thenStatus200() throws Exception {
-//        AirlineManager manager = new AirlineManager();
-//        manager.setEmail("testmanager12@email.com");
-//        manager.setPassword("manager12");
-//        manager.addRoleToCollection(roleService.findRoleByName("ROLE_MANAGER"));
-//        userService.saveUser(manager);
-//        Admin admin = new Admin();
-//        admin.setEmail("testAdmin12@email.com");
-//        admin.setPassword("admin12");
-//        admin.addRoleToCollection(roleService.findRoleByName("ROLE_ADMIN"));
-//        userService.saveUser(admin);
-//
-//        mockMvc.perform(
-//                        get("/api/users"))
-//                .andExpect(status().isOk())
-//                .andReturn().getResponse().getContentAsString();
-//    }
-//
-//    /**
-//     *
-//     * @throws Exception
-//     */
-//    @Test
-//    public void givenRole_whenAdd_thenStatus201andRoleReturned() throws Exception {
-//        Role role = new Role("ROLE_USER");
-//        mockMvc.perform(
-//                        post("/api/roles/create")
-//                                .content(objectMapper.writeValueAsString(role))
-//                                .contentType(MediaType.APPLICATION_JSON)
-//                )
-//                .andExpect(status().isCreated())
-//                .andReturn().getResponse().getContentAsString();;
-//    }
-//
-//    /**
-//     * id
-//     * @throws Exception
-//     */
-//    @Test
-//    public void givenId_whenGetExistingRole_thenStatus200andUserReturned() throws Exception {
-//        Role role = new Role("ROLE_USER");
-//        roleService.saveRole(role);
-//        long id = role.getId();
-//        mockMvc.perform(
-//                        get("/api/roles/{id}", id))
-//                .andExpect(status().isOk())
-//                .andExpect(jsonPath("$.id").value(id))
-//                .andExpect(jsonPath("$.name").value("ROLE_USER"));
-//    }
-//
-//    /**
-//     * id
-//     * @throws Exception
-//     */
-//    @Test
-//    public void givenRole_whenDeleteRole_thenStatus200() throws Exception {
-//        Role role = new Role("ROLE_USER");
-//        roleService.saveRole(role);
-//        long id = role.getId();
-//        mockMvc.perform(
-//                        delete("/api/roles/{id}", id)
-//                                .content(objectMapper.writeValueAsString(role))
-//                                .contentType(MediaType.APPLICATION_JSON)
-//                )
-//                .andExpect(status().isOk())
-//                .andReturn().getResponse().getContentAsString();
-//    }
-//
-//    /**
-//     *
-//     * @throws Exception
-//     */
-//    @Test
-//    public void givenRoles_whenGetRoles_thenStatus200() throws Exception {
-//        Role passenger =new Role("ROLE_PASS");
-//        Role role = new Role("ROLE_USER");
-//        roleService.saveRole(role);
-//        roleService.saveRole(passenger);
-//
-//        mockMvc.perform(
-//                        get("/api/roles"))
-//                .andExpect(status().isOk())
-//                .andExpect(content().json(objectMapper.writeValueAsString(Arrays.asList(passenger,role))));
-//
-//    }
-//}
+package app;
+
+
+import app.entities.*;
+import app.services.RoleService;
+import app.services.UserService;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
+import java.util.Collections;
+import java.util.List;
+
+/** Test AdminRestController with MockMVC
+ *
+ * @author Komarov Rostislav
+ */
+
+@SpringBootTest
+@AutoConfigureMockMvc
+public class AdminApplicationTests {
+
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private RoleService roleService;
+    @Autowired
+    private MockMvc mockMvc;
+
+    private final ObjectMapper mapper = new ObjectMapper();
+
+    @BeforeEach
+    public void addRolesToDatabase() {
+        roleService.saveRole(new Role("ROLE_ADMIN"));
+        roleService.saveRole(new Role("ROLE_MANAGER"));
+        roleService.saveRole(new Role("ROLE_PASSENGER"));
+    }
+
+    @AfterEach
+    public void deleteRolesFromDatabase() {
+        roleService.deleteRoleAll();
+        userService.deleteAll();
+    }
+
+    /**
+     * Method testing getting every user existing in DB,
+     * successful request have to throw 200 OK status with content type application_json and with users themselves
+     * @throws Exception
+     */
+    @Test
+    @WithMockUser(roles = {"ADMIN"})
+    public void givenThreeUsers_whenGettingAllUsers_thenStatus200andUsersReturned() throws Exception {
+        Admin admin = createTestAdminUser_thenAddToDatabase();
+        AirlineManager manager = createTestManagerUser_thenAddToDatabase();
+        Passenger passenger = createTestPassengerUser_thenAddToDatabase();
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/admin/users"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.content().json(mapper.writeValueAsString(List.of(admin, manager, passenger))));
+    }
+
+    /**
+     * Method testing case when fetching users without any existing there.
+     * Have to throw 204 No Content status and "[]" in response body
+     * @throws Exception
+     */
+    @Test
+    @WithMockUser(roles = {"ADMIN"})
+    public void gettingAllUsers_whenNoUserInDatabase_thenStatus204NoContent() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/admin/users"))
+                .andExpect(MockMvcResultMatchers.status().isNoContent())
+                .andExpect(MockMvcResultMatchers.content().json("[]"));
+    }
+
+    @Test
+    @WithMockUser(roles = {"PASSENGER"})
+    public void gettingAllUsers_whenUserIsNotAdmin_thenStatus403forbidden() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/admin/users"))
+                .andExpect(MockMvcResultMatchers.status().isForbidden());
+    }
+
+    @Test
+    public void givenThreeUsers_whenGettingProperUserById_thenStatus200andUserReturned() throws Exception {
+        Passenger passenger = createTestPassengerUser_thenAddToDatabase();
+        Long passengerId = passenger.getId();
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/admin/users/{id}", passengerId))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.content().json(mapper.writeValueAsString(passenger)));
+    }
+
+    @Test
+    public void gettingWrongUser_thenStatus404NotFound() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/admin/users/54"))
+                .andExpect(MockMvcResultMatchers.status().isNotFound());
+    }
+
+    @Test
+    @WithMockUser(roles = {"PASSENGER"})
+    public void givenThreeUsers_gettingUser_whenUserIsNotAdmin_thenStatus403forbidden() throws Exception {
+        Passenger passenger = createTestPassengerUser_thenAddToDatabase();
+        Long passengerId = passenger.getId();
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/admin/users/{id}", passengerId))
+                .andExpect(MockMvcResultMatchers.status().isForbidden());
+    }
+
+    /**
+     * Method creating new Admin instance fetch it into DB and return it
+     * @return {@link app.entities.Admin}
+     */
+    private Admin createTestAdminUser_thenAddToDatabase() {
+        Admin admin = new Admin();
+        admin.setEmail("testAdminEmail@gmail.com");
+        admin.setPassword("adminpassword");
+        admin.addRoleToCollection(roleService.findRoleByName("ROLE_ADMIN"));
+        userService.saveUser(admin);
+        return admin;
+    }
+
+    /**
+     * Method creating new AirlineManager instance fetch it into DB and return it
+     * @return {@link app.entities.AirlineManager}
+     */
+    private AirlineManager createTestManagerUser_thenAddToDatabase() {
+        AirlineManager manager = new AirlineManager();
+        manager.setEmail("testAdminEmail@gmail.com");
+        manager.setPassword("adminpassword");
+        manager.addRoleToCollection(roleService.findRoleByName("ROLE_ADMIN"));
+        userService.saveUser(manager);
+        return manager;
+    }
+
+    /**
+     * Method creating new Passenger instance fetch it into DB and return it
+     * @return {@link app.entities.Passenger}
+     */
+    private Passenger createTestPassengerUser_thenAddToDatabase() {
+        Passenger passenger = new Passenger();
+        passenger.setEmail("testAdminEmail@gmail.com");
+        passenger.setPassword("adminpassword");
+        passenger.addRoleToCollection(roleService.findRoleByName("ROLE_ADMIN"));
+        userService.saveUser(passenger);
+        return passenger;
+    }
+
+}
