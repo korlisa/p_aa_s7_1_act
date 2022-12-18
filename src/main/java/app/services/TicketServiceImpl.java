@@ -80,14 +80,12 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public boolean isPassengerRegistered(Ticket ticket) {
-        boolean isPassengerRegistered = ticket.getSeat().isRegistered();
-        return isPassengerRegistered;
+        return ticket.getSeat().isRegistered();
     }
 
     @Override
     public boolean isFlightCompleted(Ticket ticket) {
-        boolean isFlightCompleted = LocalDateTime.now().isAfter(ticket.getFlight().getArrivalDateTime()) ?
+        return LocalDateTime.now().isAfter(ticket.getFlight().getArrivalDateTime()) ?
                 true : false;
-        return isFlightCompleted;
     }
 }
