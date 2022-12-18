@@ -7,6 +7,7 @@ import app.repositories.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -70,5 +71,23 @@ public class TicketServiceImpl implements TicketService {
 
         Flight flight = flightRepository.getById(id);
         return ticketRepository.findAllTicketByFlight(flight);
+    }
+
+    @Override
+    public List<Ticket> findTicketsByPassengerNotNull() {
+        return ticketRepository.findTicketsByPassengerNotNull();
+    }
+
+    @Override
+    public boolean isPassengerRegistered(Ticket ticket) {
+        boolean isPassengerRegistered = ticket.getSeat().isRegistered();
+        return isPassengerRegistered;
+    }
+
+    @Override
+    public boolean isFlightCompleted(Ticket ticket) {
+        boolean isFlightCompleted = LocalDateTime.now().isAfter(ticket.getFlight().getArrivalDateTime()) ?
+                true : false;
+        return isFlightCompleted;
     }
 }
