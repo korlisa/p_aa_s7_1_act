@@ -41,20 +41,7 @@ public class Flight {
     @ManyToOne(fetch = FetchType.LAZY)
     private Aircraft aircraft;
 
-    public enum FlightStatus {
-        ACCORDING_TO_PLAN("По плану"),
-        DETAINED("Задержан"),
-        CANCELLED("Отменен"),
-        BOARDING("Посадка"),
-        DEPARTED("Улетел"),
-        DELAYED("Задерживается");
+    @Column(name="flightStatus")
+    private FlightStatus flightStatus;
 
-        private String translation;
-        FlightStatus(String translation) {
-            this.translation = translation;
-        }
-        public String getTranslation() {
-            return translation;
-        }
-    }
 }
