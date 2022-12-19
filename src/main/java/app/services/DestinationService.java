@@ -19,7 +19,7 @@ public interface DestinationService {
 
     Destination getDestinationByCity (String city);
 
-    Destination getDestinationByCountry_name (String country_name);
+    Destination getDestinationByCountryName (String countryName);
 
 
 
