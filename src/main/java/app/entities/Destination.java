@@ -1,6 +1,7 @@
 package app.entities;
 
 import com.neovisionaries.i18n.CountryCode;
+import lombok.NoArgsConstructor;
 
 
 import javax.persistence.*;
@@ -14,7 +15,9 @@ import java.util.stream.Collectors;
  */
 
 @Entity
-@Table(name = "Destination")
+@NoArgsConstructor
+
+@Table(name = "destination")
 public class Destination {
 
     @Id
@@ -25,7 +28,7 @@ public class Destination {
     private String city;
 
     @Column
-    private String country_name;
+    private String countryName;
 
     @Column
     private String continent;
@@ -43,20 +46,17 @@ public class Destination {
 
 
 
-    public Destination(Long id, String city, String country_name, String continent) {
+    public Destination(Long id, String city, String countryName, String continent) {
         this.id = id;
         this.city = city;
-        this.country_name = country_name;
+        this.countryName = countryName;
         this.continent = continent;
     }
 
-    public Destination(String city, String country_name, String continent) {
+    public Destination(String city, String countryName, String continent) {
         this.city = city;
-        this.country_name = country_name;
+        this.countryName = countryName;
         this.continent = continent;
-    }
-
-    public Destination() {
     }
 
 
@@ -65,7 +65,7 @@ public class Destination {
         return "Destination{" +
                 "id=" + id +
                 ", city='" + city + '\'' +
-                ", country_name='" + country_name + '\'' +
+                ", country_name='" + countryName + '\'' +
                 ", continent='" + continent + '\'' +
                 '}';
     }
@@ -86,12 +86,12 @@ public class Destination {
         this.city = city;
     }
 
-    public String getCountry_name() {
-        return country_name;
+    public String getCountryName() {
+        return countryName;
     }
 
-    public void setCountry_name(String country_name) {
-        this.country_name = country_name;
+    public void setCountryName(String country_name) {
+        this.countryName = country_name;
     }
 
     public String getContinent() {
@@ -103,19 +103,19 @@ public class Destination {
     }
 
     public CountryCode getCountry_code() {
-        return CountryCode.valueOf(CountryCode.findByName(getCountry_name()).get(0).name());
+        return CountryCode.valueOf(CountryCode.findByName(getCountryName()).get(0).name());
     }
 
 
     public List<AirportName> getAirport_name() {
-        return Arrays.stream(AirportName.values()).filter(airportName -> airportName.countryAndCity.equals(getCountry_name()
+        return Arrays.stream(AirportName.values()).filter(airportName -> airportName.countryAndCity.equals(getCountryName()
                  + "/" + getCity())).collect(Collectors.toList());
     }
 
 
 
     public List<AirportCode> getAirport_code() {
-        return Arrays.stream(AirportCode.values()).filter(airportCode -> airportCode.countryAndCity.equals(getCountry_name()
+        return Arrays.stream(AirportCode.values()).filter(airportCode -> airportCode.countryAndCity.equals(getCountryName()
            + "/" + getCity())).collect(Collectors.toList());
     }
 
