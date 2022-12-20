@@ -15,7 +15,5 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class AirlineApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(AirlineApplication.class, args);
-		System.out.println("___________________");
-		System.out.println("Готово к работе");
 	}
 }

@@ -16,8 +16,6 @@ import java.util.List;
 public interface FlightRepository extends JpaRepository<Flight, Long> {
     Flight findFlightById(long id);
 
-    List<Flight> findAll();
-
     @Query(value = "SELECT f FROM Flight f " +
             "INNER JOIN f.from depart ON depart.city = ?1 " +
             "INNER JOIN f.to arrive ON arrive.city = ?2")
