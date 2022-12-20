@@ -20,10 +20,4 @@ public interface FlightService {
     List<Seat> findAllFreeSeatsOnFlight(Flight flight);
     List<Seat> findAllFreeSeatsOnFlightByEconomy(Flight flight);
     List<Seat> findAllFreeSeatsOnFlightByBusiness(Flight flight);
-
-    List<Flight> findAll();
-
-    void deleteFlight(Long id);
-
-
 }

@@ -29,7 +29,7 @@ private final DestinationRepository destinationRepository;
 
     @Override
     public void updateDestination(Destination destination) {
-        destinationRepository.findDestinationById(destination.getId());
+        destinationRepository.getDestinationById(destination.getId());
         destinationRepository.save(destination);
 
     }
@@ -42,16 +42,16 @@ private final DestinationRepository destinationRepository;
 
     @Override
     public Destination getDestinationById(Long id) {
-        return destinationRepository.findDestinationById(id);
+        return destinationRepository.getDestinationById(id);
     }
 
     @Override
     public Destination getDestinationByCity(String city) {
-        return destinationRepository.findDestinationByCity(city);
+        return destinationRepository.getDestinationByCity(city);
     }
 
     @Override
-    public Destination getDestinationByCountryName(String countryName) {
-        return destinationRepository.findDestinationByCountryName(countryName);
+    public Destination getDestinationByCountry_name(String country_name) {
+        return destinationRepository.getDestinationByCountry_name(country_name);
     }
 }

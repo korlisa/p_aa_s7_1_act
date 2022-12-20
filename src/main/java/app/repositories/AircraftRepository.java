@@ -15,6 +15,4 @@ public interface AircraftRepository extends JpaRepository<Aircraft, Long>, Aircr
     @Query("SELECT a FROM Aircraft a WHERE a.boardNumber = :number")
     Optional<Aircraft> findByBoardNumber(@Param("number") String boardNumber);
 
-
-
 }

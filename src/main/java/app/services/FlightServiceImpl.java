@@ -80,14 +80,4 @@ public class FlightServiceImpl implements FlightService {
         return null;
     }
 
-    @Override
-    public List<Flight> findAll() {
-        return flightRepository.findAll();
-    }
-
-    @Override
-    public void deleteFlight(Long id) {
-        flightRepository.deleteById(id);
-    }
-
 }

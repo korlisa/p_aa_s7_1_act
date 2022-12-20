@@ -18,11 +18,4 @@ public interface TicketService {
     void deleteAllTickets();
 
     List<Ticket> findAllTicketsByFlightId(Long id);
-
-    //проданные билеты
-    List<Ticket> findTicketsByPassengerNotNull();
-
-    boolean isPassengerRegistered(Ticket ticket);
-
-    boolean isFlightCompleted(Ticket ticket);
 }
