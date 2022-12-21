@@ -4,9 +4,9 @@ import app.entities.*;
 import app.services.RoleService;
 import app.services.UserService;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,6 +16,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,22 +34,25 @@ public class AdminApplicationTests {
     @Autowired
     private MockMvc mockMvc;
     private final ObjectMapper mapper = new ObjectMapper();
-    private List<Role> roles;
+    private ArrayList<Role> roles;
 
     @BeforeEach
     public void addRolesToDatabase() {
         Role admin = new Role("ROLE_ADMIN");
         Role manager = new Role("ROLE_MANAGER");
         Role passenger = new Role("ROLE_PASSENGER");
-        roles = List.of(admin, manager, passenger);
+        roles = new ArrayList<Role>();
+        roles.add(admin);
+        roles.add(manager);
+        roles.add(passenger);
         roles.forEach(r -> roleService.saveRole(r));
     }
 
     @AfterEach
     public void deleteRolesFromDatabase() {
-        roles.clear();
-        roleService.deleteRoleAll();
         userService.deleteAll();
+        roleService.deleteRoleAll();
+        roles.clear();
     }
 
     // tests for findAllUsers GET "/users"
@@ -346,7 +350,7 @@ public class AdminApplicationTests {
     @Test
     @WithMockUser(roles = {"ADMIN"})
     public void deletingRole_thenStatus200andDeletedRoleReturned() throws Exception {
-        Role testRole = roleService.findRoleById(1L);
+        Role testRole = roleService.findRoleById(roles.get(1).getId());
         mockMvc.perform(MockMvcRequestBuilders.delete("/api/admin/roles/{id}", testRole.getId()))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
@@ -381,7 +385,6 @@ public class AdminApplicationTests {
      */
     private Admin createTestAdminUser_thenAddToDatabase() {
         Admin admin = new Admin();
-        admin.setEmail("testAdminEmail@gmail.com");
         admin.setPassword("adminpassword");
         admin.addRoleToCollection(roleService.findRoleByName("ROLE_ADMIN"));
         userService.saveUser(admin);
@@ -394,7 +397,6 @@ public class AdminApplicationTests {
      */
     private AirlineManager createTestManagerUser_thenAddToDatabase() {
         AirlineManager manager = new AirlineManager();
-        manager.setEmail("testAdminEmail@gmail.com");
         manager.setPassword("adminpassword");
         manager.addRoleToCollection(roleService.findRoleByName("ROLE_ADMIN"));
         userService.saveUser(manager);
@@ -407,7 +409,6 @@ public class AdminApplicationTests {
      */
     private Passenger createTestPassengerUser_thenAddToDatabase() {
         Passenger passenger = new Passenger();
-        passenger.setEmail("testAdminEmail@gmail.com");
         passenger.setPassword("adminpassword");
         passenger.addRoleToCollection(roleService.findRoleByName("ROLE_ADMIN"));
         userService.saveUser(passenger);

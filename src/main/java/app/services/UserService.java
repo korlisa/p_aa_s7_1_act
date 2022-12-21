@@ -171,4 +171,13 @@ public class UserService implements UserDetailsService {
         return adminsEmails;
     }
 
+    @Override
+    public String toString() {
+        return "UserService{" +
+                "userRepository=" + userRepository +
+                ", roleService=" + roleService +
+                ", passengerRepository=" + passengerRepository +
+                ", passwordEncoder=" + passwordEncoder +
+                '}';
+    }
 }
