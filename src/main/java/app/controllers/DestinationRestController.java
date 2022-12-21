@@ -57,8 +57,8 @@ public class DestinationRestController {
         return new ResponseEntity<>(destinationService.getDestinationByCity(city), HttpStatus.OK);
  }
  @GetMapping("/country")
-    public ResponseEntity<Destination> getDestinationByCountry(@RequestParam(value = "country_name", required = false) String country_name) {
-        return new ResponseEntity<>(destinationService.getDestinationByCountry_name(country_name), HttpStatus.OK);
+    public ResponseEntity<Destination> getDestinationByCountry(@RequestParam(value = "countryName", required = false) String countryName) {
+        return new ResponseEntity<>(destinationService.getDestinationByCountryName(countryName), HttpStatus.OK);
  }
 
     @DeleteMapping
