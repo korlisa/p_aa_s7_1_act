@@ -6,6 +6,7 @@ import app.repositories.FlightRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
@@ -57,6 +58,12 @@ public class FlightServiceImpl implements FlightService {
         return listWithFromTo.stream()
                 .filter(x -> x.getDepartureDateTime().format(formatter).equals(date))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Flight> findFlightByDepartureDateTime(LocalDateTime localDateTime) {
+        return flightRepository.findAllFlightByDepartureDateTime(localDateTime);
     }
 
     //need to be finalized

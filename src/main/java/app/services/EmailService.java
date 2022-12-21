@@ -6,4 +6,6 @@ package app.services;
  */
 public interface EmailService {
 
+    void sendFlightEventEmail(String email, String subject, String message);
+
 }
