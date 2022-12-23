@@ -2,9 +2,9 @@ package app.controllers;
 
 import app.entities.Passenger;
 import app.services.PassengerService;
-import app.services.UserService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.Tag;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,49 +14,52 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/passenger")
-
-
 public class PassengerRESTController {
     private final PassengerService passengerService;
-    private final UserService userService;
 
-    public PassengerRESTController(PassengerService passengerService, UserService userService) {
+    @Autowired
+    public PassengerRESTController(PassengerService passengerService) {
         this.passengerService = passengerService;
-        this.userService = userService;
     }
 
-    @GetMapping("/all")
-    public List<Passenger> showAllPassengers() {
-        List<Passenger> allPassengers = passengerService.getAllPassenger();
-        return allPassengers;
+    @GetMapping()
+    public ResponseEntity<List<Passenger>> getAllPassengers() {
+        return ResponseEntity.ok(passengerService.getAllPassenger());
     }
 
     @GetMapping("/{id}")
-    public Passenger getPassenger(@PathVariable long id) {
-        Passenger passenger = passengerService.getPassenger(id);
-        return passenger;
+    public ResponseEntity<Passenger> getPassenger(@PathVariable long id) {
+        Optional<Passenger> passenger = Optional.ofNullable(passengerService.getPassenger(id));
+
+        return passenger.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @PostMapping("/create")
-    public Passenger addNewPassenger(@RequestBody Passenger passenger) {
+    @PostMapping()
+    public ResponseEntity<Passenger> addNewPassenger(@RequestBody Passenger passenger) {
         passengerService.savePassenger(passenger);
-        return passenger;
+        return ResponseEntity.ok(passenger);
     }
 
-    @PutMapping("/edit")
-    public Passenger edit(@RequestBody Passenger passenger) {
-            return passengerService.update(passenger);
-        }
+    @PutMapping()
+    public ResponseEntity<Passenger> editPassenger(@RequestBody Passenger passenger) {
+            return  ResponseEntity.ok(passengerService.update(passenger));
+    }
 
-    @DeleteMapping("/{id}/delete")
-    public Passenger delete(@PathVariable long id) {
-        Passenger passenger = passengerService.getPassenger(id);
-        passengerService.deletePassenger(id);
-        return passenger;
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Passenger> deletePassenger(@PathVariable long id) {
+        Optional<Passenger> passenger = Optional.ofNullable(passengerService.getPassenger(id));
+
+        if (passenger.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+        } else {
+            passengerService.deletePassenger(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
     }
 }
