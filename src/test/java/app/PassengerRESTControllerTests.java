@@ -28,22 +28,21 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
  *
  * @author Anastasia Budaeva
  */
-@WebMvcTest(PassengerRESTController.class)
+@WebMvcTest(value = PassengerRESTController.class)
 public class PassengerRESTControllerTests {
     @Autowired
     private MockMvc mockMvc;
     @Autowired
     private ObjectMapper objectMapper;
 
-    @MockBean
-    private PassengerService service;
-
-    //тест отказывается работать без этих заглушек, так и не смогла по нормальному это исправить
-    @MockBean
-    private UserService userService;
+    //тест отказывается нормально работать без этих заглушек
     @MockBean
     private LoginSuccessHandler handler;
+    @MockBean
+    private UserService userService;
 
+    @MockBean
+    private PassengerService passengerService;
 
     private final Passenger passenger_1 = new Passenger(1L, "Harry", "Potter", "email@mail.ru", 11, 12);
     private final Passenger passenger_2 = new Passenger(2L, "Green", "Apelsin", "email@mail.ru", 11, 12);
@@ -52,38 +51,38 @@ public class PassengerRESTControllerTests {
     @Test
     void getAllPassengers_Returns200andListOfPassengers() throws Exception {
         final List<Passenger> passengerList = Arrays.asList(passenger_1, passenger_2, passenger_3);
-        when(service.getAllPassenger()).thenReturn(passengerList);
+        when(passengerService.getAllPassenger()).thenReturn(passengerList);
 
         mockMvc.perform(get("/api/passenger/"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().json(objectMapper.writeValueAsString(passengerList)))
                 .andDo(print());
-        verify(service, times(1)).getAllPassenger();
+        verify(passengerService, times(1)).getAllPassenger();
     }
 
     @Test
     void getPassenger_correctID_thenReturns200andPassenger() throws Exception {
         final long id = 1L;
-        when(service.getPassenger(id)).thenReturn(passenger_1);
+        when(passengerService.getPassenger(id)).thenReturn(passenger_1);
 
         mockMvc.perform(get("/api/passenger/{id}", id))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().json(objectMapper.writeValueAsString(passenger_1)))
                 .andDo(print());
-        verify(service, times(1)).getPassenger(id);
+        verify(passengerService, times(1)).getPassenger(id);
     }
 
     @Test
     void getPassenger_invalidID_thenReturns404() throws Exception {
         final long id = 2L;
-        when(service.getPassenger(id)).thenReturn(null);
+        when(passengerService.getPassenger(id)).thenReturn(null);
 
         mockMvc.perform(get("/api/passenger/{id}", id))
                 .andExpect(status().isNotFound())
                 .andDo(print());
-        verify(service, times(1)).getPassenger(id);
+        verify(passengerService, times(1)).getPassenger(id);
     }
 
     @Test
@@ -96,12 +95,12 @@ public class PassengerRESTControllerTests {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().json(objectMapper.writeValueAsString(passenger_1)))
                 .andDo(print());
-        verify(service, times(1)).savePassenger(passenger_1);
+        verify(passengerService, times(1)).savePassenger(passenger_1);
     }
 
     @Test
     void editPassenger_Passenger_Returns200andPassenger() throws Exception {
-        when(service.update(passenger_1)).thenReturn(passenger_1);
+        when(passengerService.update(passenger_1)).thenReturn(passenger_1);
 
         mockMvc.perform(put("/api/passenger/")
                         .content(objectMapper.writeValueAsString(passenger_1))
@@ -111,34 +110,34 @@ public class PassengerRESTControllerTests {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().json(objectMapper.writeValueAsString(passenger_1)))
                 .andDo(print());
-        verify(service, times(1)).update((passenger_1));
+        verify(passengerService, times(1)).update((passenger_1));
     }
 
     @Test
     void deletePassenger_correctID_Returns200() throws Exception {
         long id = 3L;
-        when(service.getPassenger(id)).thenReturn(passenger_3);
+        when(passengerService.getPassenger(id)).thenReturn(passenger_3);
 
         mockMvc.perform(delete("/api/passenger/{id}", id)
                         .contentType(MediaType.APPLICATION_JSON)
                         .with(csrf()))
                 .andExpect(status().isOk())
                 .andDo(print());
-        verify(service, times(1)).getPassenger(id);
-        verify(service, times(1)).deletePassenger(id);
+        verify(passengerService, times(1)).getPassenger(id);
+        verify(passengerService, times(1)).deletePassenger(id);
     }
 
     @Test
     void deletePassenger_InvalidID_Returns304() throws Exception {
         long id = 3L;
-        when(service.getPassenger(id)).thenReturn(null);
+        when(passengerService.getPassenger(id)).thenReturn(null);
 
         mockMvc.perform(delete("/api/passenger/{id}", id)
                         .contentType(MediaType.APPLICATION_JSON)
                         .with(csrf()))
                 .andExpect(status().isNotModified())
                 .andDo(print());
-        verify(service, times(1)).getPassenger(id);
+        verify(passengerService, times(1)).getPassenger(id);
     }
 
 }
