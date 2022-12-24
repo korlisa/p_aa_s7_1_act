@@ -71,7 +71,7 @@ public class Seat {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         Seat seat = (Seat) o;
-        return getId().equals(seat.getId()) && Objects.equals(getSeatNumber(), seat.getSeatNumber());
+        return Objects.equals(id, seat.id) && Objects.equals(getSeatNumber(), seat.getSeatNumber());
     }
 
     @Override
