@@ -17,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
 
 /**
@@ -53,6 +54,8 @@ public class Passenger extends User {
     @NonNull
     @Column(name = "e_mail")
     private String email;
+    @Column(name = "telegram")
+    private long telegram;
     @NonNull
     @Column(name = "LocalDate_date_of_birth")
     private int localDateDateOfBirth;
@@ -60,11 +63,14 @@ public class Passenger extends User {
     @Column(name = "gender_of_the_Passenger")
     private int genderOfThePassenger;
 
-    public Passenger(Long id, @Email @NotEmpty String email, @NotEmpty String password, Collection<Role> roles, @NonNull String firstName, @NonNull String lastName, @NonNull String email1, @NonNull int localDateDateOfBirth, @NonNull int genderOfThePassenger) {
+    public Passenger(Long id, @Email @NotEmpty String email, long telegram, @NotEmpty String password, Collection<Role> roles,
+                     @NonNull String firstName, @NonNull String lastName, @NonNull String email1,
+                     @NonNull int localDateDateOfBirth, @NonNull int genderOfThePassenger) {
         super(id, email, password, roles);
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email1;
+        this.telegram = telegram;
         this.localDateDateOfBirth = localDateDateOfBirth;
         this.genderOfThePassenger = genderOfThePassenger;
     }

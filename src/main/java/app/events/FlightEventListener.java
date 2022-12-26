@@ -62,7 +62,7 @@ public class FlightEventListener {
 
         for (Ticket ticket : ticketList) {
             emailService.sendFlightEventEmail(ticket.getPassenger().getEmail(), "Статус рейса", statusChangeMessage.toString());
-            //telegramMessageService.sendFlightEventMessage(statusChangeMessage.toString());
+            telegramMessageService.sendFlightEventMessage(ticket.getPassenger().getTelegram(), statusChangeMessage.toString());
         }
     }
 
@@ -82,7 +82,7 @@ public class FlightEventListener {
 
         for (Ticket ticket : ticketList) {
             emailService.sendFlightEventEmail(ticket.getPassenger().getEmail(), "Замена самолёта", aircraftReplaceMessage.toString());
-            //telegramMessageService.sendFlightEventMessage(aircraftReplaceMessage.toString());
+            telegramMessageService.sendFlightEventMessage(ticket.getPassenger().getTelegram(), aircraftReplaceMessage.toString());
         }
     }
 
@@ -101,7 +101,7 @@ public class FlightEventListener {
                         String message = buildingMessageAboutFlight(flight);
 
                         emailService.sendFlightEventEmail(ticket.getPassenger().getEmail(), headerFromTo, message);
-                        //telegramMessageService.sendFlightEventMessage(message);
+                        telegramMessageService.sendFlightEventMessage(ticket.getPassenger().getTelegram(), message);
                     }
                 }
             }
