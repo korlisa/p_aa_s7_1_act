@@ -28,6 +28,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @author Anastasia Budaeva
  */
 @WebMvcTest(value = TicketRESTController.class)
+@MockBean(LoginSuccessHandler.class)
+@MockBean(UserService.class)
 public class TicketRESTControllerTests {
 
     @Autowired
@@ -35,19 +37,12 @@ public class TicketRESTControllerTests {
     @Autowired
     private ObjectMapper objectMapper;
 
-    //тест отказывается нормально работать без этих заглушек
-    @MockBean
-    private LoginSuccessHandler handler;
-    @MockBean
-    private UserService userService;
-
     @MockBean
     private TicketService ticketService;
 
     private final Ticket ticket_1 = new Ticket(1L,
             new Passenger(1L, "Harry", "Potter", "email@mail.ru", 11, 12),
-            new Flight(),
-            new Seat(), Ticket.Subcategory.ECONOMY_CLASS ,"RDGT456Y");
+            new Flight(), new Seat(), Ticket.Subcategory.ECONOMY_CLASS ,"RDGT456Y");
     private final Ticket ticket_2 = new Ticket(1L, new Passenger(), new Flight(),
             new Seat(), Ticket.Subcategory.BUSINESS_CLASS ,"GGTT456Y");
 
