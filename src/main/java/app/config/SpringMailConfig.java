@@ -15,15 +15,20 @@ import java.util.Objects;
 @PropertySource("classpath:application.yml")
 public class SpringMailConfig {
 
+
+    private Environment env;
+
     @Autowired
-    Environment env;
+    public SpringMailConfig(Environment env) {
+        this.env = env;
+    }
 
     @Bean
     public JavaMailSender getJavaMailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
 
         mailSender.setHost(env.getProperty("spring:mail:host"));
-        mailSender.setPort(Integer.parseInt(Objects.requireNonNull(env.getProperty("spring:mail:port"))));
+        mailSender.setPort(587);
         mailSender.setUsername(env.getProperty("spring:mail:username"));
         mailSender.setPassword(env.getProperty("spring:mail:password"));
 
