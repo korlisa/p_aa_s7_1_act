@@ -23,23 +23,19 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 /**
- * Class for unit test PassengerRESTController
+ * Class for unit test {@link app.controllers.PassengerRESTController}
  * with MockMVC
  *
  * @author Anastasia Budaeva
  */
 @WebMvcTest(value = PassengerRESTController.class)
+@MockBean(LoginSuccessHandler.class)
+@MockBean(UserService.class)
 public class PassengerRESTControllerTests {
     @Autowired
     private MockMvc mockMvc;
     @Autowired
     private ObjectMapper objectMapper;
-
-    //тест отказывается нормально работать без этих заглушек
-    @MockBean
-    private LoginSuccessHandler handler;
-    @MockBean
-    private UserService userService;
 
     @MockBean
     private PassengerService passengerService;
