@@ -11,7 +11,7 @@ spring:
     active: dev, prod
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/airline_db?useUnicode=yes&characterEncoding=UTF-8&serverTimezone=Europe/Moscow
+    url: jdbc:mysql://localhost:3306/airline_db?useUnicode=yes&characterEncoding=UTF-8&serverTimezone=Europe/Moscow
     username: root
     password: ROOT
     hikari:
