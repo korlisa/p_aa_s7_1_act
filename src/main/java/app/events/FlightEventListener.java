@@ -35,7 +35,7 @@ public class FlightEventListener {
     private final EmailService emailService;
     private final TicketService ticketService;
     private final FlightService flightService;
-    private final TelegramMessageService telegramMessageService;
+//    private final TelegramMessageService telegramMessageService;
 
     /**
      * getting all tickets on flight -> sending a flight status change message
