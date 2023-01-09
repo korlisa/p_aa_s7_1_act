@@ -21,9 +21,4 @@ public interface DestinationService {
 
     Destination getDestinationByCountryName (String countryName);
 
-
-
-
-
-
 }

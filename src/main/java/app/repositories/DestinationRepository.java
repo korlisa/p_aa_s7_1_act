@@ -19,14 +19,4 @@ Destination findDestinationByCity(String city);
 //@Query("select d from Destination d where d.country_name = :country_name")
 Destination findDestinationByCountryName(String countryName);
 
-
-
-
-
-
-
-
-
-
-
 }
