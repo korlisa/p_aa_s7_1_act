@@ -43,6 +43,7 @@ const userFetchService = {
         body: JSON.stringify(admin)
     })
 }
+
 const emailFetchService = {
     head: {
         'Accept': 'application/json',

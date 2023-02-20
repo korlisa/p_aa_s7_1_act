@@ -46,7 +46,7 @@ public class User implements UserDetails{
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-    @Column(name = "email", unique = true)
+    @Column(name = "email", unique = true) //unique -уникальный
     @Email
     @NotEmpty
     private String email;
@@ -113,6 +113,5 @@ public class User implements UserDetails{
     public boolean isEnabled() {
         return true;
     }
-
 
 }

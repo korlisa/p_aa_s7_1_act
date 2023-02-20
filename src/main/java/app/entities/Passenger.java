@@ -8,17 +8,12 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.util.Collection;
+import java.util.List;
+
 
 /**
  * Class Passenger with properties <b>email</b>,
@@ -29,8 +24,7 @@ import java.util.Collection;
  *
  * @author Tamara Ustyan
  */
-@Getter
-@Setter
+
 @ToString
 @Data
 @NoArgsConstructor
@@ -38,7 +32,7 @@ import java.util.Collection;
 @AllArgsConstructor
 @Entity
 @Table(name = "Passenger")
-public class Passenger extends User {
+public class Passenger {
 
     @Id
     @Column(name = "id")
@@ -63,10 +57,47 @@ public class Passenger extends User {
     @Column(name = "gender_of_the_Passenger")
     private int genderOfThePassenger;
 
-    public Passenger(Long id, @Email @NotEmpty String email, long telegram, @NotEmpty String password, Collection<Role> roles,
+    /////////////////////////////////// - добавленное
+    @NonNull
+    @Column(name = "middleName")
+    private String middleName;
+    @NonNull
+    @Column(name = "phoneNumber")
+    private String phoneNumber;
+
+//    @OneToMany(mappedBy = "passenger")
+//    private List<Baggage> baggages;
+
+
+//    @OneToOne (mappedBy = "passenger")
+//    private Passport passport;
+//
+//    @OneToOne
+//    private Ticket ticket;
+
+
+//    @ManyToOne
+//    @JoinColumn(name = "booking_id")
+//    private Booking booking;
+
+    /////
+
+//    @OneToOne(mappedBy = "contactPerson") // нужен ли
+//    private Booking forContact;
+
+//    @OneToOne(mappedBy = "payer")   // нужен ли
+//    private Booking forPayer;
+
+    ////
+
+
+    /////////////////////////////////////////////////////////////////////
+
+    //Collection<Role> roles,
+    public Passenger(Long id, @Email @NotEmpty String email, long telegram, @NotEmpty String password,
                      @NonNull String firstName, @NonNull String lastName, @NonNull String email1,
                      @NonNull int localDateDateOfBirth, @NonNull int genderOfThePassenger) {
-        super(id, email, password, roles);
+//        super(id, email, password, roles);
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email1;

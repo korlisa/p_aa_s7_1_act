@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Сущность Роль
@@ -24,8 +25,15 @@ public class Role implements GrantedAuthority {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique=true, nullable = false)
     private Long id;
+
     @Column(unique = true)
     private String name;
+
+    ///////////////////////////////-добавленное
+    @Transient
+    @ManyToMany(mappedBy = "roles")
+    private Set<User> users;
+    /////////////////////////////////////////////
 
     @Override
     public String getAuthority() {
