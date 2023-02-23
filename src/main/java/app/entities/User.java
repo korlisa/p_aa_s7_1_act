@@ -53,6 +53,9 @@ public class User implements UserDetails{
     @Column(name = "password")
     @NotEmpty
     private String password;
+    @Column(name = "hashPassword")
+    @NotEmpty
+    private String hashPassword;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn( name= "user_id"),
             inverseJoinColumns = @JoinColumn( name= "role_id"))
@@ -84,9 +87,22 @@ public class User implements UserDetails{
         this.roles = roles;
     }
 
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+
     @Override
     public String getPassword() {
         return password;
+    }
+
+    public String getHashPassword() {
+        return hashPassword;
+    }
+
+    public void setHashPassword(String hashPassword) {
+        this.hashPassword = hashPassword;
     }
 
     @Override
@@ -112,6 +128,13 @@ public class User implements UserDetails{
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public void addRoleToUser(Role role) {
+        if (roles == null) {
+            roles = new HashSet<>();
+        }
+        roles.add(role);
     }
 
 }
