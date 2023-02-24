@@ -10,7 +10,6 @@ import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
-@RequiredArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "flights")
@@ -33,4 +32,5 @@ public class Flight {
     private LocalDate arrivalDateTime;
 
 }
+
 

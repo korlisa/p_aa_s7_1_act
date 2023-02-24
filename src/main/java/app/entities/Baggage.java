@@ -20,7 +20,7 @@ public class Baggage {
     @Column(name = "baggage_weight")
     private Double weight;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "baggage_type")
-    private BaggageType type;
+//    @Enumerated(EnumType.STRING)
+//    @Column(name = "baggage_type")
+//    private BaggageType type;
 }
