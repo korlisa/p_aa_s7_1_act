@@ -6,11 +6,11 @@ import javax.persistence.*;
 import java.util.List;
 
 @ToString
-@Data
 @NoArgsConstructor
-@RequiredArgsConstructor
 @AllArgsConstructor
 @Entity
+@Getter
+@Setter
 @Table(name = "destinations")
 public class Destination {
 

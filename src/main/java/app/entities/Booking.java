@@ -15,8 +15,8 @@ public class Booking {
 
     private Long bookingNumber;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "booking")
-    private List<Passenger> passengers;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "booking")
+//    private List<Passenger> passengers;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "contact_person_id", referencedColumnName = "id")
@@ -34,14 +34,14 @@ public class Booking {
     @JoinColumn(name = "payer_id", referencedColumnName = "id")
     private Passenger payer;
 
-    @Enumerated(EnumType.STRING)
-    private BookingStatus status;
+//    @Enumerated(EnumType.STRING)
+//    private BookingStatus status;
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<Baggage> baggage;
 
-    @ElementCollection(fetch = FetchType.LAZY)
-    @Enumerated(EnumType.STRING)
-    private List<AdditionalService> additionalServices;
+//    @ElementCollection(fetch = FetchType.LAZY)
+//    @Enumerated(EnumType.STRING)
+//    private List<AdditionalService> additionalServices;
 
 }
