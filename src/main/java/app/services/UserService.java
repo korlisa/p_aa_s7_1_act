@@ -1,10 +1,8 @@
 package app.services;
 
-import app.entities.Admin;
-import app.entities.AirlineManager;
-import app.entities.Passenger;
-import app.entities.User;
+import app.entities.*;
 import app.repositories.PassengerRepository;
+import app.repositories.RoleRepository;
 import app.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,12 +26,52 @@ import java.util.List;
 public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     private final RoleService roleService;
+    private final RoleRepository roleRepository;
     private final PassengerRepository passengerRepository;
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(12);
 
+
+    //    @Transactional
+//    public void saveAdmin(User user) {
+//        User userFromDB = userRepository.findByEmail(user.getEmail());
+//        if (userFromDB == null) {
+//            user.setPassword(passwordEncoder.encode(user.getHashPassword()));
+//            user.setHashPassword(user.getPassword());
+//            Role role = new Role("ROLE_ADMIN");
+//            Role role1 = new Role("ROLE_USER");
+//            user.addRoleToUser(role);
+//            user.addRoleToUser(role1);
+//            userRepository.save(user);
+//            roleRepository.save(role);
+//            roleRepository.save(role1);
+//        }
+//    }
+    @Transactional
+    public boolean save(User user) {
+        User userFromDB = userRepository.findByEmail(user.getEmail());
+        if (userFromDB != null) {
+            return false;
+        }
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setHashPassword(user.getPassword());
+        user.addRoleToUser(saveRole(new Role("ROLE_USER")));
+        userRepository.save(user);
+        return true;
+    }
+    @Transactional
+    public Role saveRole(Role role) {
+        Role roleDB = roleRepository.findRoleByName(role.getName());
+        if (roleDB == null) {
+            roleRepository.save(role);
+        }
+        return roleRepository.findRoleByName(role.getName());
+    }
+
+
     /**
-     *  Метод сохранения юзера в бд
+     * Метод сохранения юзера в бд
      */
+
     public void saveUser (User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
