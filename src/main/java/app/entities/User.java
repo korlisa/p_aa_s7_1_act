@@ -56,10 +56,13 @@ public class User implements UserDetails{
     @Column(name = "hashPassword")
     @NotEmpty
     private String hashPassword;
-    @ManyToMany(fetch = FetchType.EAGER)
+
+    @Transient
+    private String confirm;
+    @ManyToMany
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn( name= "user_id"),
             inverseJoinColumns = @JoinColumn( name= "role_id"))
-    private Collection<Role> roles = new HashSet<>();
+    private Collection<Role> roles;
 
     /**
      * Метод для добавления роли в коллекцию ролей
@@ -71,7 +74,7 @@ public class User implements UserDetails{
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return roles;
+        return getRoles();
     }
 
     /**
