@@ -1,28 +1,14 @@
 package app.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+
 import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.GenerationType;
-import javax.persistence.Column;
-import javax.persistence.ManyToMany;
-import javax.persistence.FetchType;
-import javax.persistence.JoinTable;
-import javax.persistence.JoinColumn;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.HashSet;
 /**
@@ -32,6 +18,7 @@ import java.util.HashSet;
  *
  * @author Minibaeva Elvira
  */
+
 @Getter
 @Setter
 @ToString
@@ -42,7 +29,7 @@ import java.util.HashSet;
 @Entity
 @Table(name = "users")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class User implements UserDetails{
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
@@ -56,10 +43,18 @@ public class User implements UserDetails{
     @Column(name = "hashPassword")
     @NotEmpty
     private String hashPassword;
-    @ManyToMany(fetch = FetchType.EAGER)
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "passenger_id", referencedColumnName = "id")
+    @JsonManagedReference
+    private Passenger passenger;
+
+    @Transient
+    private String confirm;
+    @ManyToMany
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn( name= "user_id"),
             inverseJoinColumns = @JoinColumn( name= "role_id"))
-    private Collection<Role> roles = new HashSet<>();
+    private Collection<Role> roles;
 
     /**
      * Метод для добавления роли в коллекцию ролей
@@ -71,7 +66,12 @@ public class User implements UserDetails{
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return roles;
+        return getRoles();
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
     }
 
     /**
@@ -81,33 +81,16 @@ public class User implements UserDetails{
      * @param password
      * @param roles
      */
-    public User(String email, String password, Collection<Role> roles) {
+    public User(String email, String password, Collection<Role> roles, Passenger passenger) {
         this.email = email;
         this.password = password;
         this.roles = roles;
+        this.passenger = passenger;
     }
 
     public User(String email, String password) {
         this.email = email;
         this.password = password;
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    public String getHashPassword() {
-        return hashPassword;
-    }
-
-    public void setHashPassword(String hashPassword) {
-        this.hashPassword = hashPassword;
-    }
-
-    @Override
-    public String getUsername() {
-        return email;
     }
 
     @Override
@@ -136,5 +119,4 @@ public class User implements UserDetails{
         }
         roles.add(role);
     }
-
 }

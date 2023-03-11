@@ -14,8 +14,8 @@ const userFetchService = {
         'Referer': null
     },
 
-    getCurrentUser: async () => await fetch('api/passenger/current'),
-    edit: async (passenger) => await fetch('api/passenger/edit', {
+    getCurrentUser: async () => await fetch('api/user'),
+    edit: async (passenger) => await fetch('api/user/edit', {
         method: 'PUT',
         headers: userFetchService.head,
         body: JSON.stringify(passenger)

@@ -1,17 +1,17 @@
 package app.services;
 
 import app.entities.Destination;
-import app.repositories.DestinationRepository;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
 
-@Service
-@AllArgsConstructor
-public class DestinationService {
+import java.util.List;
 
-    private final DestinationRepository destinationRepository;
+public interface DestinationService {
+    void save(Destination destination);
 
-    public Destination getDestinationById(Long id) {
-        return destinationRepository.getById(id);
-    }
+    void update(Destination destination);
+
+    void delete(Long id);
+
+    List<Destination> findAll();
+
+    Destination findById(Long id);
 }

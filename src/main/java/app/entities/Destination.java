@@ -1,5 +1,6 @@
 package app.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -26,12 +27,20 @@ public class Destination {
 
     private Long countryCode;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "from")
     private List<Flight> racesFrom;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "to")
     private List<Flight> racesTo;
 
 
+    public Destination(String city, String countryName, String continent, Long countryCode) {
+        this.city = city;
+        this.countryName = countryName;
+        this.continent = continent;
+        this.countryCode = countryCode;
+    }
 }
 

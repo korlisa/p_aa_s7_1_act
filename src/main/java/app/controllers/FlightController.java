@@ -1,61 +1,55 @@
 package app.controllers;
 
-import app.dto.FlightDto;
-import app.entities.Destination;
 import app.entities.Flight;
+import app.services.AircraftService;
 import app.services.DestinationService;
 import app.services.FlightService;
-import lombok.AllArgsConstructor;
-import org.springframework.http.HttpMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
-@AllArgsConstructor
 @RestController
 @RequestMapping("/api/flight")
 public class FlightController {
-
     private final FlightService flightService;
+
     private final DestinationService destinationService;
 
-    @GetMapping("/get_all")
-    public List<Flight> getAllFlights() {
-        return flightService.getAllFlights();
+    private final AircraftService aircraftService;
+
+    public FlightController(FlightService flightService, DestinationService destinationService, AircraftService aircraftService) {
+        this.flightService = flightService;
+        this.destinationService = destinationService;
+        this.aircraftService = aircraftService;
     }
 
-    @GetMapping("/{id}")
-    public Flight getFlightById(@PathVariable Long id){
-        return flightService.getFlightById(id);
+    @GetMapping
+    public List<Flight> getAll() {
+        return flightService.findAll();
     }
 
-    @PostMapping("/create_flight")
-    public ResponseEntity<HttpStatus> createFlight(@RequestBody FlightDto flightDto) {
-
-        ResponseEntity<HttpStatus> responseEntity = new ResponseEntity<>(HttpStatus.CREATED);
-
-        Destination from = destinationService.getDestinationById(flightDto.getFrom().getId());
-        Destination to = destinationService.getDestinationById(flightDto.getTo().getId());
-
-        Flight flight = new Flight();
-        flight.setFrom(from);
-        flight.setTo(to);
-
+    @PostMapping
+    public ResponseEntity<Flight> create(@RequestBody Flight flight) {
+        flight = new Flight(
+                destinationService.findById(1L),
+                destinationService.findById(2L),
+                "03.11.2010",
+                "03.12.2010",
+                aircraftService.findById(1L)
+        );
         flightService.save(flight);
-
-        return responseEntity;
+        flight = new Flight(
+                destinationService.findById(2L),
+                destinationService.findById(1L),
+                "05.11.2010",
+                "05.12.2010",
+                aircraftService.findById(1L)
+        );
+        flightService.save(flight);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(flight);
     }
-
-    @DeleteMapping("delete_flight/{id}")
-    public ResponseEntity<HttpStatus> deleteFlight(@PathVariable Long id) {
-        ResponseEntity<HttpStatus> responseEntity = new ResponseEntity<>(HttpStatus.OK);
-
-        flightService.deleteFlight(id);
-
-        return responseEntity;
-    }
-
 }

@@ -1,11 +1,11 @@
 package app.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 /**
  * Class Ticket with properties <b>passenger</b>,
@@ -24,39 +24,32 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne (cascade=CascadeType.ALL)
-    @JoinColumn (name="passanger_id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "passenger_id")
     private Passenger passenger;
 
 
-
-//    @OneToOne (cascade=CascadeType.ALL)
-//    @JoinColumn (name="seat_id")
-//    private Seat seat;
-//
-//
-//    @ManyToOne (cascade=CascadeType.ALL)
-//    @JoinColumn (name="seat_id")
-//    private Flight flight;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "seat_id")
+    private Seat seat;
 
 
-
-    private Subcategory subcategory;
-
-    @NotNull
-    private String bookingNumber;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "flight_id")
+    private Flight flight;
 
 
+    @JsonIgnore
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "booking_id")
+    private Booking booking;
 
-    public enum Subcategory {
-        ECONOMY_CLASS("Эконом"),
-        COMFORT_CLASS("Комфорт"),
-        BUSINESS_CLASS("Бизнес")
-        ;
+    private Long bookingNumber;
 
-        private String translation;
-
-        Subcategory(String translation) {this.translation = translation;
-        }
+    public Ticket(Long bookingNumber, Flight flight, Seat seat, Passenger passenger) {
+        this.bookingNumber = bookingNumber;
+        this.flight = flight;
+        this.seat = seat;
+        this.passenger = passenger;
     }
 }

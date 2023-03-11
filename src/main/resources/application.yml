@@ -12,7 +12,7 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/airline_db?useUnicode=yes&characterEncoding=UTF-8&serverTimezone=Europe/Moscow
-    username: user
+    username: root
     password: user
     hikari:
       leak-detection-threshold: 60000

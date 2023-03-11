@@ -1,5 +1,6 @@
 package app.setters;
 
+import app.entities.Passenger;
 import app.entities.User;
 import app.services.UserService;
 import org.springframework.boot.ApplicationArguments;
@@ -19,7 +20,8 @@ public class AdminRoleSetter implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        User admin = new User("123@mail.ru", "123");
+        User admin = new User("123@mail.ru", "123", new HashSet<>(),
+                new Passenger());
         userService.save(admin);
     }
 }

@@ -68,6 +68,9 @@ public class UserService implements UserDetailsService {
     }
 
 
+    public User getUser(Long id) {
+        return userRepository.findById(id).orElse(null);
+    }
     /**
      * Метод сохранения юзера в бд
      */
@@ -111,7 +114,7 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional(readOnly = true)
-    public User findUserByEmail(String email) {
+    public User findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
@@ -133,8 +136,9 @@ public class UserService implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException(String.format("User '%s' not found", email));
         }
-        return new User(user.getUsername(), user.getPassword(),
-                user.getRoles());
+        return user;
+//        return new User(user.getUsername(), user.getPassword(),
+//                user.getRoles());
 
     }
 

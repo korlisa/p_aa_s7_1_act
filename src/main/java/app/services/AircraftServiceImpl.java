@@ -2,78 +2,63 @@ package app.services;
 
 import app.entities.Aircraft;
 import app.repositories.AircraftRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
-
 
 @Service
-@Transactional
 public class AircraftServiceImpl implements AircraftService {
 
     private final AircraftRepository aircraftRepository;
 
-    @Autowired
-    public AircraftServiceImpl(AircraftRepository aircraftRepository) {
+    private final SeatService seatServiceTest;
+
+    public AircraftServiceImpl(AircraftRepository aircraftRepository, SeatService seatServiceTest) {
         this.aircraftRepository = aircraftRepository;
+        this.seatServiceTest = seatServiceTest;
     }
 
     @Override
-    public Optional<Aircraft> findById(Long id) {
-        return aircraftRepository.findById(id);
+    @Transactional
+    public void save(Aircraft aircraft) {
+        int counter = 1;
+        while (counter <= aircraft.getNUMBER_OF_SEATS()) {
+            seatServiceTest.save(aircraft, counter);
+            counter++;
+        }
+        aircraftRepository.save(aircraft);
     }
 
     @Override
-    public Optional<Aircraft> findByBoardNumber(String boardNumber) {
-        return aircraftRepository.findByBoardNumber(boardNumber);
+    @Transactional
+    public void update(Aircraft aircraft) {
+        if (aircraftRepository.existsById(aircraft.getId())) {
+            save(aircraft);
+        }
     }
 
+    @Override
+    @Transactional
+    public void delete(Long id) {
+        aircraftRepository.deleteById(id);
+    }
 
     @Override
+    @Transactional(readOnly = true)
+    public Aircraft findById(Long id) {
+        return aircraftRepository.getById(id);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public List<Aircraft> findAll() {
         return aircraftRepository.findAll();
     }
 
-
     @Override
-    public Aircraft save(Aircraft aircraft) {
-        if (aircraft == null || aircraft.getId() == null || aircraft.getId() != 0) {
-            throw new IllegalArgumentException("Incorrect data: only nonNull aircraft with id=0" +
-                    " can be saved instead of " + aircraft);
-        }
-        return aircraftRepository.save(aircraft);
+    @Transactional(readOnly = true)
+    public Aircraft findByBoardNumber(String boardNumber) {
+        return aircraftRepository.findByBoardNumber(boardNumber);
     }
-
-    @Override
-    public Aircraft update(Aircraft aircraft) {
-        if (aircraft == null) throw new IllegalArgumentException("Incorrect data: aircraft is null");
-        if (aircraft.getId() == null) throw new IllegalArgumentException("Incorrect data: aircraft's id is null");
-        if (!aircraftRepository.existsById(aircraft.getId())) throw new IllegalArgumentException("Incorrect data:" +
-                " only existing aircraft can be updated instead of " + aircraft);
-
-        return aircraftRepository.save(aircraft);
-    }
-
-    @Override
-    public boolean deleteById(Long id) {
-        if (aircraftRepository.existsById(id)) {
-            aircraftRepository.deleteById(id);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public void deleteAll() {
-        aircraftRepository.deleteAll();
-    }
-
-    @Override
-    public List<Aircraft> searchByParams(String brand, String model, Integer productionYear, Integer flyingRange) {
-        return null;
-    }
-
 }

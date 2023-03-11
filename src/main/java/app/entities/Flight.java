@@ -3,10 +3,8 @@ package app.entities;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
@@ -22,15 +20,24 @@ public class Flight {
     @ManyToOne
     @JoinColumn(name = "from_id")
     private Destination from;
-
     @ManyToOne
     @JoinColumn(name = "to_id")
     private Destination to;
 
-    private LocalDate departureDateTime;
+    private String departureDateTime;
 
-    private LocalDate arrivalDateTime;
+    private String arrivalDateTime;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Aircraft aircraft;
+
+    public Flight(Destination from, Destination to, String departureDateTime, String arrivalDateTime, Aircraft aircraft) {
+        this.from = from;
+        this.to = to;
+        this.departureDateTime = departureDateTime;
+        this.arrivalDateTime = arrivalDateTime;
+        this.aircraft = aircraft;
+    }
 }
 
 

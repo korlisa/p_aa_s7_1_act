@@ -1,13 +1,18 @@
 package app.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name = "booking")
+@Table(name = "baggage")
 public class Baggage {
 
     @Id
@@ -19,8 +24,17 @@ public class Baggage {
 
     @Column(name = "baggage_weight")
     private Double weight;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonBackReference
+    private Booking booking;
 
-//    @Enumerated(EnumType.STRING)
+    public Baggage(Long pieces, Double weight, Booking booking) {
+        this.pieces = pieces;
+        this.weight = weight;
+        this.booking = booking;
+    }
+
+    //    @Enumerated(EnumType.STRING)
 //    @Column(name = "baggage_type")
 //    private BaggageType type;
 }

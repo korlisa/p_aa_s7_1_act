@@ -1,18 +1,8 @@
 package app.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-import java.util.Collection;
-import java.util.List;
 
 
 /**
@@ -24,89 +14,59 @@ import java.util.List;
  *
  * @author Tamara Ustyan
  */
-
+@Getter
+@Setter
 @ToString
 @Data
 @NoArgsConstructor
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Passenger")
+@Table(name = "passenger")
 public class Passenger {
+//    @NonNull
+//    @Column(name = "firstName")
+//    private String firstName;
+//    @NonNull
+//    @Column(name = "lastName")
+//    private String lastName;
+//    @NonNull
+//    @Column(name = "middleName")
+//    private String middleName;
+//    @NonNull
+//    @Column(name = "date_of_birth")
+//    private int dateOfBirth;
+//    @NonNull
+//    @Column(name = "gender_of_the_Passenger")
+//    private int genderOfThePassenger;
+
+//    @OneToOne(mappedBy = "passenger")
+//    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+//    @JsonBackReference
+//    private User user;
 
     @Id
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NonNull
-    @Column(name = "firstName")
-    private String firstName;
-    @NonNull
-    @Column(name = "lastName")
-    private String lastName;
-    @NonNull
-    @Column(name = "e_mail")
-    private String email;
-    @Column(name = "telegram")
-    private long telegram;
-    @NonNull
-    @Column(name = "LocalDate_date_of_birth")
-    private int localDateDateOfBirth;
-    @NonNull
-    @Column(name = "gender_of_the_Passenger")
-    private int genderOfThePassenger;
-
-    /////////////////////////////////// - добавленное
-    @NonNull
-    @Column(name = "middleName")
-    private String middleName;
-    @NonNull
     @Column(name = "phoneNumber")
     private String phoneNumber;
 
-//    @OneToMany(mappedBy = "passenger")
-//    private List<Baggage> baggages;
+    @NonNull
+    @Column(name = "email")
+    private String email;
 
 
-//    @OneToOne (mappedBy = "passenger")
-//    private Passport passport;
-//
-//    @OneToOne
-//    private Ticket ticket;
+    @OneToOne(mappedBy = "passenger", cascade = CascadeType.ALL)
+//    @JsonBackReference
+    private Passport passport;
 
-
-//    @ManyToOne
-//    @JoinColumn(name = "booking_id")
-//    private Booking booking;
-
-    /////
-
-//    @OneToOne(mappedBy = "contactPerson") // нужен ли
-//    private Booking forContact;
-
-//    @OneToOne(mappedBy = "payer")   // нужен ли
-//    private Booking forPayer;
-
-    ////
-
-
-    /////////////////////////////////////////////////////////////////////
-
-    //Collection<Role> roles,
-    public Passenger(Long id, @Email @NotEmpty String email, long telegram, @NotEmpty String password,
-                     @NonNull String firstName, @NonNull String lastName, @NonNull String email1,
-                     @NonNull int localDateDateOfBirth, @NonNull int genderOfThePassenger) {
-//        super(id, email, password, roles);
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email1;
-        this.telegram = telegram;
-        this.localDateDateOfBirth = localDateDateOfBirth;
-        this.genderOfThePassenger = genderOfThePassenger;
+    public Passenger(@NonNull String phoneNumber, @NonNull String email, Passport passport) {
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.passport = passport;
     }
-
-
 }
 
 

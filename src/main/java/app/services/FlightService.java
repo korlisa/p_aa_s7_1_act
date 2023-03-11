@@ -1,31 +1,17 @@
 package app.services;
 
 import app.entities.Flight;
-import app.repositories.FlightRepository;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
-@AllArgsConstructor
-public class FlightService {
+public interface FlightService {
+    void save(Flight flight);
 
-    private final FlightRepository flightRepository;
+    void update(Flight flight);
 
-    public List<Flight> getAllFlights(){
-        return flightRepository.findAll();
-    }
+    void delete(Long id);
 
-    public Flight getFlightById(Long id) {
-        return flightRepository.getById(id);
-    }
+    List<Flight> findAll();
 
-    public void save(Flight flight) {
-        flightRepository.save(flight);
-    }
-
-    public void deleteFlight(Long id) {
-        flightRepository.deleteById(id);
-    }
+    Flight findById(Long id);
 }
